@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,9 +70,9 @@ public class PostController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@PostMapping("delete")
+	@DeleteMapping("delete/{post_num}")
 	@ApiOperation(value="게시글 삭제", notes = "게시글 삭제하기 (DB확인)")
-	public ResponseEntity<?> deletePost(int post_num) {
+	public ResponseEntity<?> deletePost(@PathVariable int post_num) {
 		postService.deletePost(post_num);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}	

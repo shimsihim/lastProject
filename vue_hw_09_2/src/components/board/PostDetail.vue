@@ -22,7 +22,7 @@
         this.$store.dispatch("updateUser", this.loginUser);
       },
       deletePost() {
-        this.$store.dispatch("deleteUser", this.loginUser.user_id);
+        this.$store.dispatch("deletePost");
       },
     },
     computed: {
