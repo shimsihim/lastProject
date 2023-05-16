@@ -11,10 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.ssafit.model.dto.Comment;
 import com.ssafy.ssafit.model.dto.Post;
 import com.ssafy.ssafit.model.service.CommentService;
 import com.ssafy.ssafit.model.service.PostService;
@@ -42,7 +42,7 @@ public class PostController {
 	
 	@PostMapping("/regist")
 	@ApiOperation(value="글 등록", notes = "게시글 등록하기 (DB확인)")
-	public ResponseEntity<?> registPost(Post post, @ApiIgnore HttpSession session) {
+	public ResponseEntity<?> registPost(@RequestBody Post post, @ApiIgnore HttpSession session) {
 //		if(session.getAttribute("loginUser") == null) {
 //			return new ResponseEntity<String>("loginUser is null.",HttpStatus.BAD_REQUEST);
 //		}
@@ -64,7 +64,7 @@ public class PostController {
 	
 	@PostMapping("/update")
 	@ApiOperation(value="게시글 수정", notes = "게시글 수정하기 (DB확인)")
-	public ResponseEntity<?> updatePost(Post post) {
+	public ResponseEntity<?> updatePost(@RequestBody Post post) {
 		postService.updatePost(post);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

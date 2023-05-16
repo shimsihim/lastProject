@@ -10,6 +10,7 @@
 
 <script>
 import BoardNav from "@/components/board/BoardNav.vue"
+
 export default {
   name: "Board",
   components : {

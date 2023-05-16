@@ -7,8 +7,9 @@ import UserList from "@/components/user/UserList.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
 import UserDetail from "@/components/user/UserDetail.vue";
 import Board from "../views/Board.vue";
-import PostList from "@/components/board/PostList.vue"
-
+import PostList from "@/components/board/PostList.vue";
+import PostRegist from "@/components/board/PostRegist.vue";
+import PostDetail from "@/components/board/PostDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,7 @@ const routes = [
     name: "Login",
     component: LoginForm,
   },
+
   {
     path: "/board",
     name: "Board",
@@ -32,6 +34,16 @@ const routes = [
         path: "list/:board_id",
         name: "PostList",
         component: PostList,
+      },
+      {
+        path: "regist",
+        name: "PostRegist",
+        component: PostRegist,
+      },
+      {
+        path: "detail/:post_num",
+        name: "PostDetail",
+        component: PostDetail,
       },
     ]
   },

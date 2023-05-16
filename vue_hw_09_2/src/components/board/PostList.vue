@@ -22,7 +22,7 @@
           <tr v-for="(post, index) in posts" :key="index">
             <td>{{ post.post_writer_nickname }}</td>
             <td>
-              <router-link class="user-link" :to="`/${post.post_title}`">{{
+              <router-link :to="`/board/detail/${post.post_num}`">{{
                 post.post_title
               }}</router-link>
             </td>
@@ -33,6 +33,7 @@
       </table>
     </div>
     <div v-else>등록된 게시물이 없습니다.</div>
+    <button @click="registPost">등록하기</button>
   </div>
 </template>
 
@@ -46,6 +47,10 @@ export default {
     change(board_id){
       this.$store.dispatch("setPosts",board_id);
     },
+    registPost(){
+      this.$store.state.post = null;
+      this.$router.push("/board/regist");
+    }
   },
   computed: {
     ...mapState(["posts"]),
@@ -53,9 +58,9 @@ export default {
   },
   
   watch: {
-     $route(to, form) {
-     if (to.path !== form.path) this.change(this.$route.params.board_id);
-   },
+      $route(to, form) {
+      if (to.path !== form.path) this.change(this.$route.params.board_id);
+    },
   },
   created() {
     const pathName = new URL(document.location).pathname.split("/");

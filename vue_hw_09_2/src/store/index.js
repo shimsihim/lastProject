@@ -52,6 +52,12 @@ export default new Vuex.Store({
     SET_POSTS: function (state, posts) {
       state.posts = posts;
     },
+    SET_POST: function (state, post) {
+      state.post = post;
+    },
+    ADD_POST: function (state, post) {
+      state.posts.push(post);
+    },
   },
   actions: {
     createUser: function ({ commit }, user) {
@@ -223,15 +229,24 @@ export default new Vuex.Store({
       return axios({
         url: API_URL,
         method: "POST",
-        data : post
+        data : post,
       })
         .then(() => {
-          commit("SET_POSTS", post);
+          alert("등록되었습니다.");
+          commit("ADD_POST", post);
+          router.push(`/board/list/${post.post_board_id}`)
         })
         .catch((err) => {
           console.log(err);
         });
     },
+  setPost : function ( {commit, state}, post_num) {
+    for(let i = 0;i< state.posts.length; ++i){
+      if(state.posts[i].post_num == post_num){
+        commit("SET_POST", state.posts[i]);
+      }
+    }
   },
+},
   modules: {},
 });
