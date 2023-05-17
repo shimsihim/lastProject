@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
 
 	//본인만 가능하도록 하기
 	@Override
-	public void deletePost(int post_num) {
+	public void deletePost(String post_num) {
 		postDao.deletePost(post_num);		
 	}
 

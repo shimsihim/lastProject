@@ -24,7 +24,7 @@
 	</insert>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="deletePost" parameterType="int">
+	<delete id="deletePost" parameterType="string">
 		DELETE FROM post
 		WHERE post_num = #{post_num}
 	</delete>

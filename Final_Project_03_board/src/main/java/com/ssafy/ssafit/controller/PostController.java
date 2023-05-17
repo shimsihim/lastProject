@@ -72,7 +72,7 @@ public class PostController {
 	
 	@DeleteMapping("delete/{post_num}")
 	@ApiOperation(value="게시글 삭제", notes = "게시글 삭제하기 (DB확인)")
-	public ResponseEntity<?> deletePost(@PathVariable int post_num) {
+	public ResponseEntity<?> deletePost(@PathVariable String post_num) {
 		postService.deletePost(post_num);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}	

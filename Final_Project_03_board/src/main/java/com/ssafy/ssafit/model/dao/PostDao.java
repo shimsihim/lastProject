@@ -1,7 +1,6 @@
 package com.ssafy.ssafit.model.dao;
 
 import java.util.List;
-
 import com.ssafy.ssafit.model.dto.Post;
 
 public interface PostDao {
@@ -17,7 +16,7 @@ public interface PostDao {
 	public void insertPost(Post post);
 
 	// 게시글 삭제
-	public void deletePost(int post_num);
+	public void deletePost(String post_num);
 
 	// 게시글 수정
 	public void updatePost(Post post);
