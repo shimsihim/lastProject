@@ -36,7 +36,7 @@ public class VideoRestController {
 	}
 	
 	@ApiOperation(value="부위별 영상 조회", notes = "part를 입력하면 해당하는 영상을 불러옴")
-	@GetMapping("/partly/{part}")
+	@GetMapping("/partly/{video_part}")
 	public ResponseEntity<?> partlyList(@PathVariable String video_part){
 		List<Video> partlyList = videoService.selectPartly(video_part);
 		
@@ -46,7 +46,7 @@ public class VideoRestController {
 	}
 	
 	@ApiOperation(value="특정 영상 조회", notes = "videoID를 입력하면 해당하는 영상을 불러옴")
-	@GetMapping("/detail/{videoId}")
+	@GetMapping("/detail/{video_id}")
 	public ResponseEntity<?> detail(@PathVariable String video_id){
 		try {
 			Video video = videoService.selectOne(video_id);

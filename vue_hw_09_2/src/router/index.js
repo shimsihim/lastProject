@@ -10,6 +10,7 @@ import Board from "../views/Board.vue";
 import PostList from "@/components/board/PostList.vue";
 import PostRegist from "@/components/board/PostRegist.vue";
 import PostDetail from "@/components/board/PostDetail.vue";
+import Video from "../views/Video.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginForm,
+  },
+  {
+    path: "/video",
+    name: "Video",
+    component: Video,
   },
 
   {

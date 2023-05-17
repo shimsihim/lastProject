@@ -240,12 +240,21 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-  setPost : function ( {commit, state}, post_num) {
-    for(let i = 0;i< state.posts.length; ++i){
-      if(state.posts[i].post_num == post_num){
-        commit("SET_POST", state.posts[i]);
-      }
-    }
+  setPost : function ( {commit}, post_num) {
+    commit;
+    const API_URL = `http://localhost:9999/ssafit/post/read/${post_num}`;
+    axios({
+      method: 'GET',
+      url: API_URL,
+      
+    })
+    .then((res) => {
+      console.log(res);
+      commit("SET_POST", res.data[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   },
 
   deletePost: function ({state}) {
