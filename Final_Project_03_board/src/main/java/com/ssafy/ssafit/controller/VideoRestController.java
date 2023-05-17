@@ -37,8 +37,8 @@ public class VideoRestController {
 	
 	@ApiOperation(value="부위별 영상 조회", notes = "part를 입력하면 해당하는 영상을 불러옴")
 	@GetMapping("/partly/{part}")
-	public ResponseEntity<?> partlyList(@PathVariable String part){
-		List<Video> partlyList = videoService.selectPartly(part);
+	public ResponseEntity<?> partlyList(@PathVariable String video_part){
+		List<Video> partlyList = videoService.selectPartly(video_part);
 		
 		if(partlyList == null || partlyList.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -47,9 +47,9 @@ public class VideoRestController {
 	
 	@ApiOperation(value="특정 영상 조회", notes = "videoID를 입력하면 해당하는 영상을 불러옴")
 	@GetMapping("/detail/{videoId}")
-	public ResponseEntity<?> detail(@PathVariable String videoId){
+	public ResponseEntity<?> detail(@PathVariable String video_id){
 		try {
-			Video video = videoService.selectOne(videoId);
+			Video video = videoService.selectOne(video_id);
 			return new ResponseEntity<Video>(video, HttpStatus.OK);
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -12,7 +12,7 @@
 	<select id="selectPartly" parameterType="String" resultType="Video">
 		SELECT * 
 		FROM video 
-		WHERE part=#{part}
+		WHERE video_part=#{video_part}
 	</select>
 	
 	<select id="searchByCondition" parameterType="SearchCondition"
@@ -30,13 +30,13 @@
 	<select id="selectOne" parameterType="String" resultType="Video">
 		SELECT * 
 		FROM video 
-		WHERE videoId=#{videoId}
+		WHERE video_id=#{video_id}
 	</select>
 	
 	<update id="updateViewCnt" parameterType="String">
 		UPDATE video 
-		SET viewCnt = viewCnt+1 
-		WHERE videoId=#{videoId}
+		SET video_viewCnt = video_viewCnt+1 
+		WHERE video_id=#{video_id}
 	</update>
 	
 

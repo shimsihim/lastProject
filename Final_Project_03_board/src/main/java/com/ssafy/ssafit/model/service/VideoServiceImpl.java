@@ -26,14 +26,14 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public List<Video> selectPartly(String part) {
-		return videoDao.selectPartly(part);
+	public List<Video> selectPartly(String video_part) {
+		return videoDao.selectPartly(video_part);
 	}
 
 	@Override
-	public Video selectOne(String videoId) throws SQLException {
-		videoDao.updateViewCnt(videoId);
-		return videoDao.selectOne(videoId);
+	public Video selectOne(String video_id) throws SQLException {
+		videoDao.updateViewCnt(video_id);
+		return videoDao.selectOne(video_id);
 	}
 	
 	@Override

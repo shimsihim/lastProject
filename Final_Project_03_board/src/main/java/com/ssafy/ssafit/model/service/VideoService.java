@@ -14,10 +14,10 @@ public interface VideoService {
 	public List<Video> selectAll();
 	
 	//파트별 영상 불러오기
-	public List<Video> selectPartly(String part);
+	public List<Video> selectPartly(String video_part);
 	
 	//하나의 영상 상세보기
-	public Video selectOne(String videoId) throws SQLException;
+	public Video selectOne(String video_id) throws SQLException;
 	
 	//검색조건
 	public List<Video> searchByCondition(SearchCondition searchCondition);
