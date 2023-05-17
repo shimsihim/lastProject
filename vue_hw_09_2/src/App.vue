@@ -26,4 +26,11 @@ export default {
 .container {
   margin: 0px 30px;
 }
+body {
+  background-image : url('../public/img/templatemo-wave-banner.jpg'), linear-gradient(#348CD2, #FFFFFF);
+  background-repeat : no-repeat;
+  background-size: 108% 76%;
+  background-position: top;
+  padding-top: 40px;
+}
 </style>
