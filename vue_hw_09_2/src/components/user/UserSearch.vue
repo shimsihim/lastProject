@@ -5,7 +5,7 @@
         class="view"
         type="text"
         v-model="search"
-        placeholder="이름을 입력하세요."
+        placeholder="부위를 입력하세요."
       />
       <button class="btn" @click="searchUser">검색</button>
     </div>

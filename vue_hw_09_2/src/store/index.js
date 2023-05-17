@@ -14,7 +14,7 @@ export default new Vuex.Store({
     randomUser: null,
     posts : [],
     post : {},
-
+    videos:[],
   },
   getters: {
     userCnt: function (state) {
@@ -57,6 +57,9 @@ export default new Vuex.Store({
     },
     ADD_POST: function (state, post) {
       state.posts.push(post);
+    },
+    SET_VIDEO: function (state, videos) {
+      state.videos= videos;
     },
   },
   actions: {
@@ -290,6 +293,24 @@ export default new Vuex.Store({
     .catch((err) => {
       console.log(err);
     });
+  },
+
+  setVideos : function ({commit}, part){
+    console.log(part);
+      let API_URL = `http://localhost:9999/ssafit/video/partly/${part}`;
+      if(part === "전체"){
+        API_URL = `http://localhost:9999/ssafit/video/list`;
+      }
+
+      return axios({
+      url: API_URL,
+      method: "GET",
+    })
+    .then((res)=>{
+      console.log(res)
+      console.log(5346)
+      commit("SET_VIDEO",res.data)
+    })
   },
 
 
