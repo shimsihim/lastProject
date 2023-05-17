@@ -13,6 +13,7 @@ import PostDetail from "@/components/board/PostDetail.vue";
 import Video from "../views/Video.vue";
 import VideoList from "@/components/video/VideoList.vue";
 import VideoDetail from "@/components/video/VideoDetail.vue";
+import VideoCommentRegist from "@/components/video/VideoCommentRegist.vue"
 
 Vue.use(VueRouter);
 
@@ -37,9 +38,12 @@ const routes = [
         name: "VideoDetail",
         component: VideoDetail,
       },
+      {
+        path: "comment/regist",
+        name: "VideoCommentRegist",
+        component: VideoCommentRegist,
+      },
     ]
-    
-    
   },
   {
     path: "/login",

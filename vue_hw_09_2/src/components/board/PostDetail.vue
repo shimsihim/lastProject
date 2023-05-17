@@ -7,8 +7,7 @@
       <div>작성일: {{post.post_created_at }}</div>
       <div>조회수: {{post.post_view_cnt }}</div>
   
-        <!-- <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link> -->
-        <router-link to="/board/regist" class="btn">수정</router-link>
+        <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
         <button class="btn" @click="deletePost">삭제</button>
       
     </div>
@@ -19,9 +18,9 @@
     export default {
     name: "PostDetail",
     methods: {
-      // updatePost() {
-      //   this.$store.dispatch("updateUser", this.loginUser);
-      // },
+      updatePost() {
+        this.$store.dispatch("updateUser", this.loginUser);
+      },
       deletePost() {
         this.$store.dispatch("deletePost");
       },

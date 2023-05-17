@@ -60,12 +60,7 @@ public class VideoRestController {
 			detailPage.add(videoService.selectOne(video_id)); //Post
 			
 			List<VideoComment> com = commentService.selectVideoComment(video_id);
-			for(VideoComment c : com) {
-				System.out.println(c);
-				System.out.println(c);
-				System.out.println(c);
-				System.out.println(c);
-			}
+			
 			detailPage.addAll(commentService.selectVideoComment(video_id)); //Post
 			
 			return new ResponseEntity<List<Object>>(detailPage, HttpStatus.OK);

@@ -2,11 +2,11 @@
   <header>
     <nav class="header-nav">
       <div>
-        <router-link to="/" class="logo">SSAFIT</router-link>
+        <router-link to="/" class="logo">SSAFY USERS</router-link>
       </div>
       <div>
         <router-link to="/board/list/1">게시판</router-link>
-        <router-link to="/video/전체">비디오</router-link>
+        <router-link :to="{name: 'VideoList', params: {video_part : 'all'}}">비디오</router-link>
       </div>
       <div>
         <div v-if="getUser">

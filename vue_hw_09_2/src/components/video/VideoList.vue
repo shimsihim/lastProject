@@ -11,19 +11,19 @@
         </colgroup>
         <thead>
           <tr>
-            <th>작성자</th>
+            <th>영상 번호</th>
             <th>제목</th> 
             <th>조회수</th> 
-            <th>등록일</th> 
+            <th>좋아요</th> 
           </tr>
         </thead>
         <tbody>
           <tr v-for="(video, index) in videos" :key="index">
-            <td>{{ video.video_title }}</td>
+            <td>{{ video.video_id }}</td>
             <td>
-              <router-link :to="`/board/detail/${video.video_id}`">
-                <img  :src = "video.video_img"/> >
-              </router-link>
+              <router-link :to="`/video/detail/${video.video_id}`">{{
+                video.video_title
+              }}</router-link>
             </td>
             <td>{{ video.video_viewCnt }}</td>
             <td>{{ video.video_zzimCnt }}</td>

@@ -15,6 +15,8 @@ export default new Vuex.Store({
     posts : [],
     post : {},
     videos:[],
+    video: {},
+    video_comment: [],
   },
   getters: {
     userCnt: function (state) {
@@ -58,8 +60,14 @@ export default new Vuex.Store({
     ADD_POST: function (state, post) {
       state.posts.push(post);
     },
-    SET_VIDEO: function (state, videos) {
+    SET_VIDEOS: function (state, videos) {
       state.videos= videos;
+    },
+    SET_VIDEO: function (state, video) {
+      state.video = video;
+    },
+    SET_VIDEO_COMMENT:  function (state, video_comment) {
+      state.video_comment = video_comment;
     },
   },
   actions: {
@@ -221,6 +229,7 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
+          console.log(res.data)
           commit("SET_POSTS", res.data);
         })
         .catch((err) => {
@@ -243,27 +252,26 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-  setPost : function ( {commit}, post_num) {
-    commit;
-    const API_URL = `http://localhost:9999/ssafit/post/read/${post_num}`;
-    axios({
-      method: 'GET',
-      url: API_URL,
-      
-    })
-    .then((res) => {
-      console.log(res);
-      commit("SET_POST", res.data[0]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  },
+    setPost : function ( {commit}, post_num) {
+      const API_URL = `http://localhost:9999/ssafit/post/read/${post_num}`;
+      axios({
+        method: 'GET',
+        url: API_URL,
+        
+      })
+      .then((res) => {
+        commit("SET_POST", res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
 
   deletePost: function ({state}) {
     const post_num = state.post.post_num;
-    const board_id = state.post.post_board_id;
     const API_URL = `http://localhost:9999/ssafit/post/delete/${post_num}`;
+    const board_id = state.post.post_board_id;
+    console.log(state.post)
     axios({
       method: 'DELETE',
       url: API_URL,
@@ -271,48 +279,52 @@ export default new Vuex.Store({
     })
     .then(() => {
       alert("삭제 완료!");
+      // let index;
+      // for (let i = 0; i < state.posts.length; i++) {
+      //   if (state.posts[i].post_num == post_num) {
+      //     index = i;
+      //   }
+      // }
+      // state.users.splice(index, 1);
       router.push(`/board/list/${board_id}`);
     })
     .catch((err) => {
       console.log(err);
     });
   },
+  setVideos : function ({commit},part){
+    console.log(part)
+    let API_URL = `http://localhost:9999/ssafit/video/partly/${part}`;
+    if(part === "all"){
+      
+      API_URL = `http://localhost:9999/ssafit/video/list`;
+    }
 
-  updatePost: function ({commit}, post) {
-    commit;
-    const API_URL = `http://localhost:9999/ssafit/post/update`;
-    axios({
+    return axios({
       url: API_URL,
-      method: "POST",
-      data: post,
+      method: "GET",
     })
-    .then(() => {
-      alert("수정 완료!");
-      router.push(`/board/list/${post.post_board_id}`);
+    .then((res)=>{
+      console.log(res.data)
+      commit("SET_VIDEOS",res.data)
+    })
+  },
+  setVideo : function ( {commit}, video_id) {
+    const API_URL = `http://localhost:9999/ssafit/video/detail/${video_id}`;
+    axios({
+      method: 'GET',
+      url: API_URL,
+      
+    })
+    .then((res) => {
+      console.log(res);
+      commit("SET_VIDEO", res.data[0]);
+      commit("SET_VIDEO_COMMENT", res.data[1]);
     })
     .catch((err) => {
       console.log(err);
     });
   },
-
-  setVideos : function ({commit}, part){
-    console.log(part);
-      let API_URL = `http://localhost:9999/ssafit/video/partly/${part}`;
-      if(part === "전체"){
-        API_URL = `http://localhost:9999/ssafit/video/list`;
-      }
-
-      return axios({
-      url: API_URL,
-      method: "GET",
-    })
-    .then((res)=>{
-      console.log(res)
-      console.log(5346)
-      commit("SET_VIDEO",res.data)
-    })
-  },
-
 
 },
   modules: {},
