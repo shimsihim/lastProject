@@ -250,8 +250,8 @@ export default new Vuex.Store({
 
   deletePost: function ({state}) {
     const post_num = state.post.post_num;
+    const board_id = state.post.post_board_id;
     const API_URL = `http://localhost:9999/ssafit/post/delete/${post_num}`;
-    const board_id = state.post.board_id;
     axios({
       method: 'DELETE',
       url: API_URL,
@@ -259,19 +259,30 @@ export default new Vuex.Store({
     })
     .then(() => {
       alert("삭제 완료!");
-      // let index;
-      // for (let i = 0; i < state.posts.length; i++) {
-      //   if (state.posts[i].post_num == post_num) {
-      //     index = i;
-      //   }
-      // }
-      // state.users.splice(index, 1);
       router.push(`/board/list/${board_id}`);
     })
     .catch((err) => {
       console.log(err);
     });
   },
+
+  updatePost: function ({commit}, post) {
+    commit;
+    const API_URL = `http://localhost:9999/ssafit/post/update`;
+    axios({
+      url: API_URL,
+      method: "POST",
+      data: post,
+    })
+    .then(() => {
+      alert("수정 완료!");
+      router.push(`/board/list/${post.post_board_id}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+
 
 },
   modules: {},

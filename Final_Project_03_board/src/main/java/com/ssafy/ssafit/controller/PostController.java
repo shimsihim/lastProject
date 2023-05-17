@@ -66,6 +66,14 @@ public class PostController {
 	@PostMapping("/update")
 	@ApiOperation(value="게시글 수정", notes = "게시글 수정하기 (DB확인)")
 	public ResponseEntity<?> updatePost(@RequestBody Post post) {
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
+		System.out.println(post.getPost_num());
 		postService.updatePost(post);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
