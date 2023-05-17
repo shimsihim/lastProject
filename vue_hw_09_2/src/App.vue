@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="home-body">
     <header-nav />
     <router-view />
   </div>
@@ -26,11 +26,35 @@ export default {
 .container {
   margin: 0px 30px;
 }
+
+/*---------------------------------------
+  CUSTOM PROPERTIES ( VARIABLES )             
+-----------------------------------------*/
+:root {
+  --white-color:                  #ffffff;
+}
+
+/*---------------------------------------
+  CAROUSEL        
+-----------------------------------------*/
 body {
   background-image : url('../public/img/templatemo-wave-banner.jpg'), linear-gradient(#348CD2, #FFFFFF);
   background-repeat : no-repeat;
-  background-size: 108% 76%;
+  background-size: 110% 500px;
   background-position: top;
   padding-top: 40px;
 }
+
+/*---------------------------------------
+  SITE HEADER              
+-----------------------------------------*/
+.site-header {
+  height: 100px;
+  margin-bottom: 50px;
+}
+
+.site-header h2 {
+  color: var(--white-color);
+}
+
 </style>
