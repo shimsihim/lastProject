@@ -12,6 +12,7 @@ import PostRegist from "@/components/board/PostRegist.vue";
 import PostDetail from "@/components/board/PostDetail.vue";
 import Video from "../views/Video.vue";
 import VideoList from "@/components/video/VideoList.vue";
+import VideoDetail from "@/components/video/VideoDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -20,11 +21,6 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: LoginForm,
   },
   {
     path: "/video",
@@ -36,8 +32,21 @@ const routes = [
         name: "VideoList",
         component: VideoList,
       },
+      {
+        path: "detail/:video_id",
+        name: "VideoDetail",
+        component: VideoDetail,
+      },
     ]
+    
+    
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginForm,
+  },
+
   {
     path: "/board",
     name: "Board",
@@ -60,18 +69,7 @@ const routes = [
       },
     ]
   },
-  // {
-  //   path: "/board",
-  //   name: "Board",
-  //   component: Board,
-  //   children:[
-  //     {
-  //       path: "/:board_id",
-  //       name: "BoardList",
-  //       component: BoardList,
-  //     },
-  //   ],
-  // },
+
   {
     path: "/user",
     component: User,
@@ -98,6 +96,7 @@ const routes = [
       },
     ],
   },
+  
 ];
 
 const router = new VueRouter({

@@ -37,6 +37,7 @@ public class PostController {
 	@GetMapping("/board/{board_id}")
 	@ApiOperation(value="게시판별 글 목록", notes = "board_id로 게시판 별 글 전체 불러오기")
 	public ResponseEntity<?> readPostAll(@PathVariable int board_id) {
+		System.out.println(board_id);
 		List<Post> postlist = postService.readPostAll(board_id);
 	return new ResponseEntity<List<Post>>(postlist, HttpStatus.OK);
 	}
