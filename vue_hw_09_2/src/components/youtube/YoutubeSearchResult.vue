@@ -4,7 +4,6 @@
     <ul class="youtube-list">
 
       <!-- <div v-if="videos">
-     
         <tr v-for="(video, index) in videos" :key="index">
           <video-card v-bind:video ="video"></video-card>
         </tr>
@@ -28,12 +27,10 @@
 <script>
 import { mapState } from 'vuex';
 import YoutubeVideoItem from './YoutubeVideoItem.vue';
-//import VideoCard from './VideoCard.vue';
 
 export default {
   components: { 
     YoutubeVideoItem,
-    //VideoCard,
   },
   name: 'YoutubeSearchResult',
   computed: {

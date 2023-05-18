@@ -15,7 +15,7 @@ export default new Vuex.Store({
     posts : [],
     post : {},
     video: {},
-    video_comment: [],
+    videoComment: [],
     search_videos:[],
   },
   getters: {
@@ -66,11 +66,14 @@ export default new Vuex.Store({
     SET_VIDEO: function (state, video) {
       state.video = video;
     },
-    SET_VIDEO_COMMENT:  function (state, video_comment) {
-      state.video_comment = video_comment;
-    },
     SET_SEARCH_VIDEOS: function (state, search_videos){
       state.search_videos = search_videos;
+    },
+    SET_VIDEO_COMMENT: function (state, videoComment){
+      state.videoComment = videoComment;
+    },
+    ADD_VIDEO_COMMENT: function (state, videoComment){
+      state.videoComment.push(videoComment);
     },
 
   },
@@ -332,18 +335,39 @@ export default new Vuex.Store({
       .catch((err) => console.log(err));
   },
 
-      //payload : 비디오 객체가 들어온다.
-      setVideo ({commit, state}, video){
+      setVideo : function ({commit, state}, video){
         for (let i=0; i<state.search_videos.length; i++) {
           if(state.search_videos[i] === video){
             commit("SET_VIDEO", video);
-            //router.push(`/video/detail/${video.id.videoId}`);
           }
         }
       },
 
+    // ==================================
+    // --VIDEOCOMMENT--
+    // ==================================
+
+    registVideoComment : function ({commit}, videoComment){
+    const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
+    axios({
+      method: 'POST',
+      url: API_URL,
+      data : videoComment,
+    })
+    .then(() => {
+      alert("등록 완료!");
+      commit("ADD_VIDEO_COMMENT", videoComment);
+      //router.push(`/video/detail/${videoComment.videocomment_video_id}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    },
+
 
   },
+
+  
 
 
   modules: {
