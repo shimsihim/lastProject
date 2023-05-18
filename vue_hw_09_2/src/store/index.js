@@ -15,7 +15,7 @@ export default new Vuex.Store({
     posts : [],
     post : {},
     video: {},
-    videoComment: [],
+    videoComments: [],
     search_videos:[],
   },
   getters: {
@@ -69,11 +69,11 @@ export default new Vuex.Store({
     SET_SEARCH_VIDEOS: function (state, search_videos){
       state.search_videos = search_videos;
     },
-    SET_VIDEO_COMMENT: function (state, videoComment){
-      state.videoComment = videoComment;
+    SET_VIDEO_COMMENTS: function (state, videoComments){
+      state.videoComments = videoComments;
     },
     ADD_VIDEO_COMMENT: function (state, videoComment){
-      state.videoComment.push(videoComment);
+      state.videoComments.push(videoComment);
     },
 
   },
@@ -346,6 +346,20 @@ export default new Vuex.Store({
     // ==================================
     // --VIDEOCOMMENT--
     // ==================================
+
+    setVideoComments : function ( {commit}, video_id) {
+      const API_URL = `http://localhost:9999/ssafit/videoComment/read/${video_id}`;
+      axios({
+        method: 'GET',
+        url: API_URL,
+    })
+      .then((res) => {
+        commit("SET_VIDEO_COMMENTS", res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
 
     registVideoComment : function ({commit}, videoComment){
     const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
