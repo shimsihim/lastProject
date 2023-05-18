@@ -25,7 +25,7 @@ public class User {
 	public User() {
 	}
 
-	public User(String user_id, String user_pw, String user_name, String user_email,
+	public User(String user_id, String user_pw, String user_name, String user_email, String user_phone,
 			String user_imgFolder, String user_imgFile, String user_nickname, int user_height, int user_weight,
 			int user_point, String user_created_at, String user_deleted_at) {
 		super();
@@ -74,6 +74,7 @@ public class User {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
+
 
 
 	public String getUser_imgFolder() {

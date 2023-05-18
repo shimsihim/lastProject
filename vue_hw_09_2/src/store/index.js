@@ -10,13 +10,15 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    loginUser: null,
+    // loginUser: null,
+    loginToken:null,
     randomUser: null,
     posts : [],
     post : {},
     video: {},
     videoComments: [],
     search_videos:[],
+    idChk: "",
   },
   getters: {
     userCnt: function (state) {
@@ -42,11 +44,14 @@ export default new Vuex.Store({
     SEARCH_NAME: function (state, users) {
       state.searchUsers = users;
     },
-    SET_LOGIN_USER: function (state, user) {
-      state.loginUser = user;
+    // SET_LOGIN_USER: function (state, user) {
+    //   state.loginUser = user;
+    // },
+    SET_LOGIN_TOKEN: function(state, token){
+      state.loginToken = token;
     },
     LOGOUT: function (state) {
-      state.loginUser = null;
+      state.loginToken = null;
     },
     SET_RANDOM_USER: function (state, user) {
       state.randomUser = user;
@@ -189,34 +194,40 @@ export default new Vuex.Store({
           console.log(err);
         });
       },
-    setLoginUser: function ({ commit }, user) {
-      const API_URL = `http://localhost:9999/ssafit/user/login`;
-      axios({
-        url: API_URL,
-        method: "POST",
-        params: {
-          user_id : user.user_id,
-          user_pw : user.user_pw,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        // let resUser = res.data;
-        // if (resUser.id === user.id && resUser.password === user.password) {
-          //   alert("로그인 성공!");
-          //   commit("SET_LOGIN_USER", res.data);
-          //   router.push("/");
-          // } else {
+      setLoginUser: function ({ commit }, user) {
+        const API_URL = `http://localhost:9999/ssafit/user/login`;
+        console.log("setLoginUser")
+        axios({
+          url: API_URL,
+          method: "POST",
+          params: {
+            user_id: user.user_id,
+            user_pw: user.user_pw,
+          },
+        })
+          .then((res) => {
+            // let resUser = res.data;
+            // if (resUser.id === user.id && resUser.password === user.password) {
+            //   alert("로그인 성공!");
+            //   commit("SET_LOGIN_USER", res.data);
+            //   router.push("/");
+            // } else {
             //   alert("로그인 실패");
             // }
-            alert("로그인 성공!");
-            commit("SET_LOGIN_USER", res.data);
-            router.push("/");
+            if (res.status === 202) {
+              alert("로그인 성공!");
+              commit("SET_LOGIN_TOKEN", res.data["access-token"]);
+              router.push("/");
+            }
+            else{
+              alert("로그인 실패!");
+            }
           })
           .catch(() => {
+            console.log("실패!")
             alert("로그인 실패");
           });
-        },
+      },
         setRandomUser: async function ({ commit }) {
       const API_URL = `https://random-data-api.com/api/users/random_user`;
 

@@ -64,9 +64,9 @@ export default {
     },
   },
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState(["loginToken"]),
     getUser() {
-      if (this.loginUser) {
+      if (this.loginToken) {
         return true;
       } else {
         return false;

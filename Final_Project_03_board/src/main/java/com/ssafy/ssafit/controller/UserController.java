@@ -1,6 +1,9 @@
 package com.ssafy.ssafit.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.model.service.UserService;
+import com.ssafy.ssafit.util.JwtUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,16 +35,37 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	private JwtUtil jwtUtil;
 	
+	
+	
+
+//	
 	@PostMapping("/login")
 	@ApiOperation(value="로그인", notes = "이름 반환으로 로그인 유저 확인")
 	public ResponseEntity<?> login(String user_id, String user_pw) { //@ApiIgnore HttpSession session) {
 		User tmpUser = userService.login(user_id,user_pw);
-		if(tmpUser == null) {
-			return new ResponseEntity<String>("Login failed.",HttpStatus.BAD_REQUEST);
+		Map<String,Object> result = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			if(tmpUser!=null) {
+				result.put("access-token",jwtUtil.createToken("id",tmpUser.getUser_id()));
+				result.put("message",tmpUser.getUser_nickname());
+				status = HttpStatus.ACCEPTED;
+			}else {
+				result.put("message","fail");
+				status = HttpStatus.NO_CONTENT;
+			}
 		}
-		//session.setAttribute("loginUser", tmpUser);
-		return new ResponseEntity<User>(tmpUser, HttpStatus.OK);
+		catch(UnsupportedEncodingException e) {
+			result.put("message","fail");
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			
+		}
+		return new ResponseEntity<Map<String,Object>>(result , status);
+		
 	}
 	
 	@GetMapping("/logout")
@@ -58,7 +83,9 @@ public class UserController {
 	@GetMapping("/userDetail/{user_id}")
 	@ApiOperation(value="유저 상세보기", notes = "아이디로 유저 1명의 정보 상세조회,마이페이지에 쓰일 것.")
 	public ResponseEntity<?> userDetail(@PathVariable String user_id, @ApiIgnore HttpSession session) {
+		
 		User user = userService.userDetail(user_id);
+		
  //=> 로그인되어있는 유저 본인만 조회가 가능하도록 하기
 		if(((User)session.getAttribute("loginUser")).getUser_id().equals(user.getUser_id())) {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -66,7 +93,26 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
 		//return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
+	
+	
+	
+	
+	@GetMapping("/idCheck/{user_id}")
+	@ApiOperation(value="유저 상세보기", notes = "아이디로 유저 1명의 정보 상세조회,마이페이지에 쓰일 것.")
+	public ResponseEntity<?> idCheck(@PathVariable String user_id, @ApiIgnore HttpSession session) {
+		
+		User user = userService.userDetail(user_id);
+		
+		//=> 로그인되어있는 유저 본인만 조회가 가능하도록 하기
+		if(user != null){
+			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+		}
+		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+		//return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
 
+	
+	
 	
 	@PostMapping("/signUp")
 	@ApiOperation(value="회원가입", notes = "회원가입 (DB에 추가)")
