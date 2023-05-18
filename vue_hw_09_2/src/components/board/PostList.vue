@@ -48,7 +48,12 @@ export default {
       this.$store.dispatch("setPosts",board_id);
     },
     registPost(){
-      this.$store.state.post = null;
+      this.$store.state.post ={
+        post_writer_id: "",
+        post_board_id: "",
+        post_title: "",
+        post_content: "",
+      };
       this.$router.push("/board/regist");
     }
   },
@@ -62,12 +67,12 @@ export default {
       if (to.path !== form.path) this.change(this.$route.params.board_id);
     },
   },
-  // created() {
-  //   const pathName = new URL(document.location).pathname.split("/");
-  //   console.log(pathName);
-  //   const post_board_id = pathName[pathName.length - 1];
-  //   this.$store.dispatch("setPosts",post_board_id);
-  // },
+  created() {
+    const pathName = new URL(document.location).pathname.split("/");
+    console.log(pathName);
+    const post_board_id = pathName[pathName.length - 1];
+    this.$store.dispatch("setPosts",post_board_id);
+  },
 };
 </script>
 
