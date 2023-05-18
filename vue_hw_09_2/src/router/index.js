@@ -11,8 +11,8 @@ import PostList from "@/components/board/PostList.vue";
 import PostRegist from "@/components/board/PostRegist.vue";
 import PostDetail from "@/components/board/PostDetail.vue";
 import Video from "../views/Video.vue";
-import VideoList from "@/components/video/VideoList.vue";
-import VideoDetail from "@/components/video/VideoDetail.vue";
+import YoutubeVideo from "@/components/video/YoutubeVideo.vue";
+import YoutubeDetail from "@/components/video/YoutubeDetail.vue";
 import VideoCommentRegist from "@/components/video/VideoCommentRegist.vue"
 
 Vue.use(VueRouter);
@@ -29,14 +29,14 @@ const routes = [
     component: Video,
     children:[
       {
-        path: ":video_part",
-        name: "VideoList",
-        component: VideoList,
+        path: "main",
+        name: "YoutubeVideo",
+        component: YoutubeVideo,
       },
       {
         path: "detail/:video_id",
-        name: "VideoDetail",
-        component: VideoDetail,
+        name: "YoutubeDetail",
+        component: YoutubeDetail,
       },
       {
         path: "comment/regist",

@@ -14,9 +14,9 @@ export default new Vuex.Store({
     randomUser: null,
     posts : [],
     post : {},
-    videos:[],
     video: {},
     video_comment: [],
+    search_videos:[],
   },
   getters: {
     userCnt: function (state) {
@@ -69,8 +69,17 @@ export default new Vuex.Store({
     SET_VIDEO_COMMENT:  function (state, video_comment) {
       state.video_comment = video_comment;
     },
+    SET_SEARCH_VIDEOS: function (state, search_videos){
+      state.search_videos = search_videos;
+    },
+
   },
   actions: {
+
+    // ==================================
+    // --USER--
+    // ==================================
+
     createUser: function ({ commit }, user) {
       console.log(user)
       //중복확인 후 추가하기 
@@ -222,6 +231,11 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
+
+    // ==================================
+    // --POST--
+    // ==================================
+
     setPosts: function ({ commit },board_id) {
       const API_URL = `http://localhost:9999/ssafit/post/board/${board_id}`;
       return axios({
@@ -292,40 +306,47 @@ export default new Vuex.Store({
       console.log(err);
     });
   },
-  setVideos : function ({commit},part){
-    console.log(part)
-    let API_URL = `http://localhost:9999/ssafit/video/partly/${part}`;
-    if(part === "all"){
-      
-      API_URL = `http://localhost:9999/ssafit/video/list`;
-    }
 
-    return axios({
-      url: API_URL,
-      method: "GET",
-    })
-    .then((res)=>{
-      console.log(res.data)
-      commit("SET_VIDEOS",res.data)
-    })
-  },
-  setVideo : function ( {commit}, video_id) {
-    const API_URL = `http://localhost:9999/ssafit/video/detail/${video_id}`;
+    // ==================================
+    // --VIDEO--
+    // ==================================
+  searchYoutube : function ({commit}, keyword) {
+    const URL = `https://www.googleapis.com/youtube/v3/search`;
+    const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
     axios({
-      method: 'GET',
-      url: API_URL,
-      
+      url: URL,
+      method: "GET",
+      params: {
+        key: API_KEY,
+        part: "snippet",
+        q: "운동"+ keyword +"운동",
+        regionCode:"KR",
+        type: "video",
+        maxResults: 10,
+      },
     })
-    .then((res) => {
-      console.log(res);
-      commit("SET_VIDEO", res.data[0]);
-      commit("SET_VIDEO_COMMENT", res.data[1]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => {
+        console.log(res);
+        commit("SET_SEARCH_VIDEOS", res.data.items)
+      })
+      .catch((err) => console.log(err));
   },
 
-},
-  modules: {},
+      //payload : 비디오 객체가 들어온다.
+      setVideo ({commit, state}, video){
+        for (let i=0; i<state.search_videos.length; i++) {
+          if(state.search_videos[i] === video){
+            commit("SET_VIDEO", video);
+            //router.push(`/video/detail/${video.id.videoId}`);
+          }
+        }
+      },
+
+
+  },
+
+
+  modules: {
+
+  },
 });

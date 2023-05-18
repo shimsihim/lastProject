@@ -23,7 +23,9 @@
                 :to="{ name: 'PostList', params: { board_id: 4 } }">식단관련정보</router-link></b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown right>
+          <b-nav-item><router-link to="/video/main">영상보기</router-link></b-nav-item>
+
+          <!-- <b-nav-item-dropdown right>
             <template #button-content>
               <router-link :to="{ name: 'VideoList', params: { video_part: 'all' } }">비디오</router-link>
             </template>
@@ -31,7 +33,7 @@
             <b-dropdown-item class="bg-info"><router-link to="/video/상체">상체</router-link></b-dropdown-item>
             <b-dropdown-item class="bg-info"><router-link to="/video/하체">하체</router-link></b-dropdown-item>
             <b-dropdown-item class="bg-info"><router-link to="/video/복부">복부</router-link></b-dropdown-item>
-          </b-nav-item-dropdown>
+          </b-nav-item-dropdown> -->
 
         </b-navbar-nav>
 

@@ -15,17 +15,22 @@
       </header>
     <!-- <video-part-button></video-part-button> -->
     <router-view></router-view>
-    <hr />
+    <!-- <YoutubeSearch></YoutubeSearch>
+    <YoutubeSearchResult></YoutubeSearchResult> -->
   </div>
 </template>
 
 <script>
 //import VideoPartButton from "@/components/video/VideoPartButton.vue"
+// import YoutubeSearch from '../components/video/YoutubeSearch.vue';
+// import YoutubeSearchResult from '../components/video/YoutubeSearchResult.vue';
 
 export default {
   name: "Video",
   components : {
     //VideoPartButton,
+    //YoutubeSearch,
+    //YoutubeSearchResult,
   }
 };
 </script>
