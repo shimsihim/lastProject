@@ -16,22 +16,22 @@
 
     <youtube-comment-regist :video="video"></youtube-comment-regist>
 
-    <!-- <h2>댓글 목록</h2>
+    <h2>댓글 목록</h2>
     <ul class="youtube-comment-list">
-      <youtube-video-item
-        v-for="video in this.search_videos"
-        :key="video.id.videoId"
-        :video="video"
-      ></youtube-video-item>
-    </ul> -->
+      <youtube-video-comment-item
+        v-for="videoComment in this.videoComments"
+        :key="videoComment.videocomment_num"
+        :videoComment="videoComment"
+      ></youtube-video-comment-item>
+    </ul> 
 
-    videoComments
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import YoutubeCommentRegist from "./YoutubeCommentRegist.vue";
+import YoutubeVideoCommentItem from "./YoutubeVideoCommentItem.vue";
 
 export default {
     name: "YoutubeDetail",
@@ -42,6 +42,7 @@ export default {
     },
     components: {
       YoutubeCommentRegist,
+      YoutubeVideoCommentItem,
     },
     computed: {
         ...mapState(["video","videoComments"]),

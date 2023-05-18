@@ -15,6 +15,7 @@ export default new Vuex.Store({
     randomUser: null,
     posts : [],
     post : {},
+    postComments : [],
     video: {},
     videoComments: [],
     search_videos:[],
@@ -61,6 +62,9 @@ export default new Vuex.Store({
     },
     SET_POST: function (state, post) {
       state.post = post;
+    },
+    SET_POST_COMMENTS: function (state, postComments){
+      state.postComments = postComments;
     },
     ADD_POST: function (state, post) {
       state.posts.push(post);
@@ -315,6 +319,20 @@ export default new Vuex.Store({
       // }
       // state.users.splice(index, 1);
       router.push(`/board/list/${board_id}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+
+  setPostComments : function ( {commit}, post_num) {
+    const API_URL = `http://localhost:9999/ssafit/postComment/read/${post_num}`;
+    axios({
+      method: 'GET',
+      url: API_URL,
+  })
+    .then((res) => {
+      commit("SET_POST_COMMENTS", res.data);
     })
     .catch((err) => {
       console.log(err);

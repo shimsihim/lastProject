@@ -6,15 +6,26 @@
       <div>닉네임: {{post.post_writer_nickname }}</div>
       <div>작성일: {{post.post_created_at }}</div>
       <div>조회수: {{post.post_view_cnt }}</div>
-  
-        <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
+
+      <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
         <button class="btn" @click="deletePost">삭제</button>
+
+      <h2>댓글 상세</h2>
+
+      <ul class="post-comment-list">
+        <post-comment-item v-for="postComment in this.postComments"
+          :key="postComment.comment_num"
+          :postComment="postComment"></post-comment-item>
+      </ul> 
+
       
     </div>
 </template>
 
   <script>
     import { mapState } from "vuex";
+    import PostCommentItem from "./PostCommentItem.vue";
+
     export default {
     name: "PostDetail",
     methods: {
@@ -25,13 +36,17 @@
         this.$store.dispatch("deletePost");
       },
     },
+    components: {
+      PostCommentItem,
+    },
     computed: {
-      ...mapState(["post"]),
+      ...mapState(["post", "postComments"]),
       },
     created() {
       const pathName = new URL(document.location).pathname.split("/");
       const post_num = pathName[pathName.length - 1];
       this.$store.dispatch("setPost", post_num);
+      this.$store.dispatch("setPostComments", post_num);
     },
   };
   </script>
