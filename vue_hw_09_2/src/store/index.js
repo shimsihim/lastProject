@@ -45,9 +45,9 @@ export default new Vuex.Store({
     SEARCH_NAME: function (state, users) {
       state.searchUsers = users;
     },
-    // SET_LOGIN_USER: function (state, user) {
-    //   state.loginUser = user;
-    // },
+    SET_LOGIN_USER: function (state, user) {
+      state.loginUser = user;
+    },
     SET_LOGIN_TOKEN: function(state, token){
       state.loginToken = token;
     },
@@ -325,6 +325,7 @@ export default new Vuex.Store({
     });
   },
 
+  // 게시물의 댓글 불러오기
   setPostComments : function ( {commit}, post_num) {
     const API_URL = `http://localhost:9999/ssafit/postComment/read/${post_num}`;
     axios({
@@ -333,6 +334,29 @@ export default new Vuex.Store({
   })
     .then((res) => {
       commit("SET_POST_COMMENTS", res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },
+
+
+  // 게시물의 댓글 등록
+  registPostComment : function ( {dispatch,state}, comment) {
+    console.log("액션 들어감")
+    console.log(state.loginToken)
+    const API_URL = `http://localhost:9999/ssafit/postComment/regist`;
+    axios({
+      method: 'POST',
+      url: API_URL,
+      data:{
+        post_num : comment.post_num,
+        comment_content : comment.comment_content,
+        token : state.loginToken,
+      }
+  })
+    .then(() => {
+      dispatch("setPostComments", comment.post_num);
     })
     .catch((err) => {
       console.log(err);

@@ -9,7 +9,7 @@
 
       <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
         <button class="btn" @click="deletePost">삭제</button>
-
+      <comment-regist :post = "post"></comment-regist>
       <h2>댓글 상세</h2>
 
       <ul class="post-comment-list">
@@ -25,6 +25,7 @@
   <script>
     import { mapState } from "vuex";
     import PostCommentItem from "./PostCommentItem.vue";
+    import CommentRegist from "./CommentRegist.vue";
 
     export default {
     name: "PostDetail",
@@ -38,6 +39,7 @@
     },
     components: {
       PostCommentItem,
+      CommentRegist
     },
     computed: {
       ...mapState(["post", "postComments"]),

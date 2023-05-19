@@ -1,6 +1,7 @@
 package com.ssafy.ssafit.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,18 +11,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ssafit.model.dto.Comment;
-import com.ssafy.ssafit.model.dto.VideoComment;
+import com.ssafy.ssafit.model.service.CommentService;
+import com.ssafy.ssafit.util.JwtUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
-
-import com.ssafy.ssafit.model.service.CommentService;
 
 
 @RestController
@@ -33,6 +34,9 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	private JwtUtil jwtUtil;
+	
 	@GetMapping("/read/{post_num}")
 	@ApiOperation(value="댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
 	public ResponseEntity<?> selectComment(@PathVariable int post_num) {
@@ -41,9 +45,19 @@ public class CommentController {
 	return new ResponseEntity<List<Comment>>(commentlist, HttpStatus.OK);
 	}
 	
-	@GetMapping("/regist")
+	@PostMapping("/regist")
 	@ApiOperation(value="댓글 등록", notes = "댓글 등록하기 (DB추가)")
-	public ResponseEntity<?> registComment(@RequestBody Comment comment) throws IOException {
+	public ResponseEntity<?> registComment(@RequestBody HashMap<String, Object> requestJsonHashMap) throws IOException {
+
+		String user_id = jwtUtil.parse((String) requestJsonHashMap.get("token"));
+		Comment comment = new Comment();
+		comment.setPost_num((int) requestJsonHashMap.get("post_num"));
+		comment.setComment_content((String) requestJsonHashMap.get("comment_content"));
+		comment.setComment_writer_id(user_id);
+		System.out.println(comment);
+		System.out.println(comment);
+		System.out.println(comment);
+		System.out.println(comment);
 		commentService.registComment(comment);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
