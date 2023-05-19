@@ -62,10 +62,22 @@ public class CommentController {
 	}
 	
 	
-	@GetMapping("/delete")
+	@GetMapping("/delete/{comment_num}/{token}")
 	@ApiOperation(value="댓글 삭제", notes = "댓글 삭제하기 (DB삭제)")
-	public ResponseEntity<?> deleteComment(int id, int article, @ApiIgnore HttpServletResponse resp) throws IOException {
-		commentService.deleteComment(id);
+	public ResponseEntity<?> deleteComment(@PathVariable int comment_num,@PathVariable String token, @ApiIgnore HttpServletResponse resp) throws IOException {
+		
+		System.out.println(token);
+		System.out.println(token);
+		System.out.println(token);
+		System.out.println(token);
+		System.out.println(comment_num);
+		System.out.println(comment_num);
+		
+		Comment comment = commentService.selectOne(comment_num);
+		if(!comment.getComment_writer_id().equals(jwtUtil.parse((token)))){
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+		commentService.deleteComment(comment_num);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

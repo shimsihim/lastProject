@@ -26,13 +26,13 @@ export default {
     update() {
 
     },
-    delete() {
-      
+    deleteComment() {
+      this.$store.dispatch("deleteVideoComment",this.videoComment.videocomment_num,this.videoComment.videocomment_video_id);
     },
 
   },
   computed: {
-    ...mapState(["loginToken", "loginUserId"]),
+    ...mapState([ "loginUserId"]),
   },
 };
 </script>

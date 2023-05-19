@@ -35,11 +35,7 @@ import YoutubeVideoCommentItem from "./YoutubeVideoCommentItem.vue";
 
 export default {
     name: "YoutubeDetail",
-    methods: {
-    registComment() {
-      this.$router.push("/video/comment/regist");
-    }
-    },
+    
     components: {
       YoutubeCommentRegist,
       YoutubeVideoCommentItem,

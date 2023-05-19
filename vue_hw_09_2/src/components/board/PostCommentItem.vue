@@ -23,16 +23,16 @@ export default {
     },
   },
   methods: {
-    update() {
-
+    updateComment() {
+      this.$store.dispatch("updateComment",this.postComment)
     },
-    delete() {
-      
+    deleteComment() {
+      this.$store.dispatch("deleteComment",this.postComment.comment_num)
     },
 
   },
   computed: {
-    ...mapState(["loginToken", "loginUserId"]),
+    ...mapState([ "loginUserId"]),
   },
 };
 </script>

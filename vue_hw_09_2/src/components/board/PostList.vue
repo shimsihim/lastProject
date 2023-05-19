@@ -66,7 +66,7 @@ export default {
   
   watch: {
       $route(to, form) {
-      if (to.path !== form.path) this.change(this.$route.params.board_id);
+      if (to.path !== form.path) this.change(this.$route.params.board_id);// 게시판 이동 시 마다 주소값을 확인하여 게시판 종류에 맞는 게시글 나타냄
     },
   },
   created() {

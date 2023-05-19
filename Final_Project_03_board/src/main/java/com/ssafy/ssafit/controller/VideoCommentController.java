@@ -39,7 +39,6 @@ public class VideoCommentController {
 	@GetMapping("/read/{video_id}")
 	@ApiOperation(value="댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
 	public ResponseEntity<?> selectVideoComment(@PathVariable String video_id) {
-		System.out.println(video_id);
 		List<VideoComment> commentlist = videoCommentService.selectVideoComment(video_id);
 	return new ResponseEntity<List<VideoComment>>(commentlist, HttpStatus.OK);
 	}
@@ -59,14 +58,18 @@ public class VideoCommentController {
     }
 	
 	
-	@GetMapping("/delete")
+	@GetMapping("/delete/{videocomment_num}/{token}")
     @ApiOperation(value="댓글 삭제", notes = "댓글 삭제하기 (DB삭제)")
-    public ResponseEntity<?> deleteComment(int videocomment_num, @ApiIgnore HttpServletResponse resp, String token) throws IOException {
+    public ResponseEntity<?> deleteComment(@PathVariable int videocomment_num, @ApiIgnore HttpServletResponse resp,@PathVariable String token) throws IOException {
         
-        if(jwtUtil.parse(token)!=videoCommentService.getVideoCommentWriterId(videocomment_num))
-            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
-
-        
+		System.out.println(videocomment_num);
+		System.out.println(videocomment_num);
+		System.out.println(videocomment_num);
+		System.out.println(token);
+		System.out.println(token);
+        if(!jwtUtil.parse(token).equals(videoCommentService.getVideoCommentWriterId(videocomment_num))) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);}
+       
         videoCommentService.deleteVideoComment(videocomment_num);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

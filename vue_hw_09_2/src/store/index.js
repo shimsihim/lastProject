@@ -10,8 +10,8 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    loginUserId: null,
-    loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSIsImV4cCI6MTY4NDU2NTI4OX0.WP5DPVo5k5mLqhvkLToSDPnG8DLdGmkgIQJPrIlRwJI",
+    loginUserId: "ssafy",
+    loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSIsImV4cCI6MTY4NDYxMTA5Nn0.XyNFoZObukKYzhpMtdT0-_OipzF18MWjb6cTqG3ZSrk",
     randomUser: null,
     posts : [],
     post : {},
@@ -238,7 +238,7 @@ export default new Vuex.Store({
     // ==================================
     // --POST--
     // ==================================
-
+      //게시판에 맞는 게시물 불러오기
     setPosts: function ({ commit },board_id) {
       const API_URL = `http://localhost:9999/ssafit/post/board/${board_id}`;
       return axios({
@@ -253,12 +253,23 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    createPost : function({commit} , post){
-      const API_URL = `http://localhost:9999/ssafit/post/regist`;
+
+
+    //게시글 등록 및 업데이트
+    createPost : function({commit,state} , post){
+      let API_URL = `http://localhost:9999/ssafit/post/regist`;
+      console.log(post.post_num)
+      if(post.post_num) API_URL = `http://localhost:9999/ssafit/post/update`;
       return axios({
         url: API_URL,
         method: "POST",
-        data : post,
+        data : {
+          post_board_id : post.post_board_id,
+          post_title : post.post_title,
+          post_content : post.post_content,
+          post_num : post.post_num,
+          token : state.loginToken
+        }
       })
         .then(() => {
           alert("등록되었습니다.");
@@ -269,6 +280,8 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+
+    //게시물 디테일
     setPost : function ( {commit}, post_num) {
       const API_URL = `http://localhost:9999/ssafit/post/read/${post_num}`;
       axios({
@@ -284,15 +297,17 @@ export default new Vuex.Store({
       });
     },
 
+
+    //게시물 삭제
     deletePost: function ({state}) {
     const post_num = state.post.post_num;
-    const API_URL = `http://localhost:9999/ssafit/post/delete/${post_num}`;
+    const token = state.loginToken;
+    const API_URL = `http://localhost:9999/ssafit/post/delete/${post_num}/${token}`;
     const board_id = state.post.post_board_id;
     console.log(state.post)
     axios({
       method: 'DELETE',
       url: API_URL,
-      data : state.loginToken,
       
     })
     .then(() => {
@@ -349,6 +364,51 @@ export default new Vuex.Store({
     });
   },
 
+
+//게시물의 댓글 수정 // 수정 필요
+// updateComment : function ( {state}, comment) {
+//   console.log("액션 들어감")
+//   console.log(state.loginToken)
+//   const API_URL = `http://localhost:9999/ssafit/postComment/update`;
+//   axios({
+//     method: 'POST',
+//     url: API_URL,
+//     data:{
+//       post_num : comment.post_num,
+//       comment_content : comment.comment_content,
+//       comment_writer_id : comment.comment_writer_id,
+//       token : state.loginToken,
+//     }
+// })
+//   .then(() => {
+//     router.push(`/board/detail/${comment.post_num}`);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// },
+
+
+//게시물의 댓글 삭제
+deleteComment : function ( {dispatch,state}, comment_num) {
+  console.log("액션 들어감")
+  console.log("삭제 들어감")
+  let token = state.loginToken
+  console.log(comment_num)
+  const API_URL = `http://localhost:9999/ssafit/postComment/delete/${comment_num}/${token}`;
+  axios({
+    method: 'GET',
+    url: API_URL,
+   
+})
+  .then(() => {
+    dispatch("setPostComments", state.post.post_num);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+},
+
     // ==================================
     // --VIDEO--
     // ==================================
@@ -400,7 +460,7 @@ export default new Vuex.Store({
       });
     },
 
-    registVideoComment : function ({commit,state}, videoComment){
+    registVideoComment : function ({dispatch,state}, videoComment){
       const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
       console.log(state.loginToken)
       axios({
@@ -414,8 +474,29 @@ export default new Vuex.Store({
       })
     .then(() => {
       alert("등록 완료!");
-      commit("ADD_VIDEO_COMMENT", videoComment);
+      dispatch("setVideoComments", videoComment.videocomment_video_id);
       //router.push(`/video/detail/${videoComment.videocomment_video_id}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    },
+    
+    deleteVideoComment : function ({state}, videocomment_num,videocomment_video_id){
+      const token = state.loginToken
+      console.log(videocomment_num)
+      console.log(videocomment_num)
+      const API_URL = `http://localhost:9999/ssafit/videoComment/delete/${videocomment_num}/${token}`;
+      console.log(state.loginToken)
+      axios({
+        method: 'GET',
+        url: API_URL,
+        
+      })
+    .then(() => {
+      alert("삭제 완료!");
+      this.$store.dispatch("setVideoComments", videocomment_video_id);
+      
     })
     .catch((err) => {
       console.log(err);

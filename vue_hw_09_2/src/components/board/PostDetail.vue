@@ -8,7 +8,8 @@
       <div>조회수: {{post.post_view_cnt }}</div>
 
       <div v-if="loginUserId === post.post_writer_id">
-      <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
+      <router-link to="/board/regist" class="btn">수정</router-link>
+      <!-- 현재 store의 post는 해당 게시글로 저장되어있음 , regist페이지로 넘어가서 그대로 바인딩 시켜 현재의 글 내용 보여줌 -->
         <button class="btn" @click="deletePost">삭제</button>
       </div>
 
@@ -33,9 +34,7 @@
     export default {
     name: "PostDetail",
     methods: {
-      updatePost() {
-        this.$store.dispatch("updatePost", this.loginToken);
-      },
+      
       deletePost() {
         this.$store.dispatch("deletePost");
       },
@@ -45,7 +44,7 @@
       CommentRegist
     },
     computed: {
-      ...mapState(["post", "postComments", "loginUserId", "loginToken"]),
+      ...mapState(["post", "postComments", "loginUserId"]),
       },
     created() {
       const pathName = new URL(document.location).pathname.split("/");
