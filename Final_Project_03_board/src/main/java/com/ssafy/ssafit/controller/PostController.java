@@ -59,8 +59,6 @@ public class PostController {
 	public ResponseEntity<?> readPost(@PathVariable int post_num) {
 		List<Object> detailPage = new ArrayList<>();
 		detailPage.add(postService.readPost(post_num)); //Post
-		detailPage.addAll(commentService.selectComment(post_num)); //Post
-
 		return new ResponseEntity<List<Object>>(detailPage,HttpStatus.OK);
 	}
 	

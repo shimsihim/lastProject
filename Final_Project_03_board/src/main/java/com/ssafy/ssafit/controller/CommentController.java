@@ -1,6 +1,7 @@
 package com.ssafy.ssafit.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ssafit.model.dto.Comment;
+import com.ssafy.ssafit.model.dto.VideoComment;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +25,7 @@ import com.ssafy.ssafit.model.service.CommentService;
 
 
 @RestController
-@RequestMapping("/ssafit/comment")
+@RequestMapping("/ssafit/postComment")
 @Api(tags = "댓글 컨트롤러")
 public class CommentController {
 	
@@ -30,6 +33,13 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	@GetMapping("/read/{post_num}")
+	@ApiOperation(value="댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
+	public ResponseEntity<?> selectComment(@PathVariable int post_num) {
+		System.out.println(post_num);
+		List<Comment> commentlist = commentService.selectComment(post_num);
+	return new ResponseEntity<List<Comment>>(commentlist, HttpStatus.OK);
+	}
 	
 	@GetMapping("/regist")
 	@ApiOperation(value="댓글 등록", notes = "댓글 등록하기 (DB추가)")
