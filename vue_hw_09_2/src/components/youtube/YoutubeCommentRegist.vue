@@ -3,10 +3,17 @@
     <h2>글등록</h2>
     <fieldset class="text-center">
       <label for="videocomment_content">내용</label>
-      <textarea
+      <textarea v-if="loginToken"
         id="videocomment_content"
         v-model="videocomment_content"
         class="view"
+        
+      />
+      <textarea v-else
+        id="videocomment_content"
+        v-model="comment_none"
+        class="view"
+        readonly
       /><br />      
       <button class="btn" @click="regist">등록</button>
     </fieldset>
@@ -20,6 +27,7 @@ export default {
   data() {
     return {
       videocomment_content : "",
+      comment_none : "로그인 해주세요",
     };
   },
   props : {
@@ -48,7 +56,25 @@ export default {
   },
   computed: {
     ...mapState(["loginUser"]),
-    ...mapState(["post"]),
+    ...mapState(["post","loginToken"]),
+    // compVal: {
+    //   get () {
+    //     if (this.selected) {
+    //       return this.videocomment_content
+    //     } else {
+    //       return this.comment_none
+    //     }
+    //   },
+    //   set (val) {
+    //     if (this.selected) {
+    //       this.videocomment_content = val
+    //     } else {
+    //       this.comment_none = val
+    //     }
+    //   }
+    // },
+
+
   },
 };
 </script>

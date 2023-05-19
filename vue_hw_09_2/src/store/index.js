@@ -10,7 +10,7 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    // loginUser: null,
+    loginUser: null,
     loginToken:null,
     randomUser: null,
     posts : [],
@@ -344,14 +344,14 @@ export default new Vuex.Store({
     // ==================================
   searchYoutube : function ({commit}, keyword) {
     const URL = `https://www.googleapis.com/youtube/v3/search`;
-    const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
+    const API_KEY = "AIzaSyBPjASjPEVn2nAnZmot1JBf6Tr8tdr-x-w";
     axios({
       url: URL,
       method: "GET",
       params: {
         key: API_KEY,
         part: "snippet",
-        q: "운동"+ keyword +"운동",
+        q: "운동 "+ keyword +" 운동",
         regionCode:"KR",
         type: "video",
         maxResults: 10,

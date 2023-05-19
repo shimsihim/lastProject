@@ -28,19 +28,19 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("/ssafit/post")
 @Api(tags = "게시글 컨트롤러")
 public class PostController {
-	
-	@Autowired
-	PostService postService;
-	@Autowired
-	CommentService commentService;
-	
-	@GetMapping("/board/{board_id}")
-	@ApiOperation(value="게시판별 글 목록", notes = "board_id로 게시판 별 글 전체 불러오기")
-	public ResponseEntity<?> readPostAll(@PathVariable int board_id) {
-		System.out.println(board_id);
-		List<Post> postlist = postService.readPostAll(board_id);
-	return new ResponseEntity<List<Post>>(postlist, HttpStatus.OK);
-	}
+    
+    @Autowired
+    PostService postService;
+    @Autowired
+    CommentService commentService;
+    
+    @GetMapping("/board/{board_id}")
+    @ApiOperation(value="게시판별 글 목록", notes = "board_id로 게시판 별 글 전체 불러오기")
+    public ResponseEntity<?> readPostAll(@PathVariable int board_id) {
+        System.out.println(board_id);
+        List<Post> postlist = postService.readPostAll(board_id);
+    return new ResponseEntity<List<Post>>(postlist, HttpStatus.OK);
+    }
 	
 	@PostMapping("/regist")
 	@ApiOperation(value="글 등록", notes = "게시글 등록하기 (DB확인)")
