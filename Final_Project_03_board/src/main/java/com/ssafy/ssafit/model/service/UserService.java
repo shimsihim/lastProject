@@ -20,7 +20,7 @@ public interface UserService {
 	
 	//회원가입
 	//public int signUp(User user, MultipartFile file) throws IllegalStateException, IOException;
-	public int signUp(User user, MultipartFile file) throws IllegalStateException, IOException;
+	public int signUp(User user);
 	
 	//회원정보 업데이트
 	//public int updateUserInfo(User user, MultipartFile file) throws IllegalStateException, IOException;

@@ -29,10 +29,12 @@
       <label for="user_nickname">닉네임</label>
       <input type="text" id="user_nickname" v-model="user_nickname" class="view" /><br />
 
-      <label for="user_img">사진 등록</label>
+      <!-- <label for="user_img">사진 등록</label>
       <input class="view" type="file" id="user_img" counter show-size label="File input"
-              outlined dense multiple prepend-icon="mdi-camera" style="width: 400px; margin-left: 100px;"
-              @change="setFile"/>
+              outlined dense prepend-icon="mdi-camera" style="width: 400px; margin-left: 100px;"
+              @change="setFile"/> -->
+
+
       <!-- <label for="age">나이</label>
       <input type="number" id="age" v-model="age" class="view" /><br /> -->
       <button class="btn" @click="regist">등록</button>
@@ -76,11 +78,38 @@ export default {
       
     },
 
-    setFile : function(e) {
-      console.log(e.target.files)//files는 배열로 들어온다.
-      console.log(e.target.files[0])//files는 배열로 들어온다.
-      this.user_img = e.target.files[0];
-    },
+    // setFile : function(e) {
+    //   // console.log(e.target.files)//files는 배열로 들어온다.
+    //   // console.log(e.target.files[0])//files는 배열로 들어온다.
+
+    //   // const user_img_file = new FormData();
+    //   // user_img_file.append("file", e.target.files[0]);
+    //   // this.user_img = user_img_file;
+    // const user_img_file = new FormData();
+    // user_img_file.append("file", e.target.files[0]);
+
+    // const file = e.target.files;
+    // let validation = true;
+    // let message = '';
+
+    // if (file[0].size > 1024 * 1024 * 2) {
+    //     message = `${message}, 파일은 용량은 2MB 이하만 가능합니다.`;
+    //     validation = false;
+    // }
+
+    // if (file[0].type.indexOf('image') < 0) {
+    //     message = `${message}, 이미지 파일만 업로드 가능합니다.`;
+    //     validation = false;
+    // }
+
+    // if (validation) {
+    //     this.user_img = user_img_file;
+    // }else {
+    //     this.user_img = '';
+    //     alert(message);
+    // }
+
+    // },
 
     regist() {
       if (
@@ -105,10 +134,7 @@ export default {
       };
 
 
-      this.$store.dispatch("createUser", { 
-        user,
-        user_img : this.user_img,
-      });
+      this.$store.dispatch("createUser",user);
     },
   },
   computed: {
