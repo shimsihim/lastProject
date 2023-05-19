@@ -92,19 +92,22 @@ export default new Vuex.Store({
     // --USER--
     // ==================================
 
-    createUser: function ({ commit }, user) {
-      console.log(user);
-      console.log(user.user_img);
+    createUser: function ({ commit }, object) {
+      console.log(object);
+      console.log(object.user_img);
       //중복확인 후 추가하기 
       //빈칸있을 때 입력하라고 하기
       const API_URL = `http://localhost:9999/ssafit/user/signUp`;
       axios({
         url: API_URL,
         method: "POST",
-        data: user,
+        data: {
+          User : object.user,
+          file : object.user_img,
+        },
       })
         .then(() => {
-          commit("CREATE_USER", user);
+          commit("CREATE_USER", object.user);
           alert("등록되었습니다.");
           router.push("/user");
         })

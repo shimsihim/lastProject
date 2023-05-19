@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -118,15 +117,18 @@ public class UserController {
 	
 	@PostMapping("/signUp")
 	@ApiOperation(value="회원가입", notes = "회원가입 (DB에 추가)")
-	public ResponseEntity<Void> signUp(@RequestBody User user, @RequestPart(required = false) MultipartFile file){
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
-		System.out.println(file.toString());
+	public ResponseEntity<Void> signUp(@RequestBody User user, MultipartFile file){
+		
+//		User user = (User) map.get("User");
+//		MultipartFile file = (MultipartFile) map.get("file");
+		
+		System.out.println(1234);
+		System.out.println(1234);
+		System.out.println(user);
+		System.out.println(user);
+		System.out.println("파일:"+file.toString());
+		System.out.println("파일:"+file.toString());
+
 		try {
 			userService.signUp(user, file);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);

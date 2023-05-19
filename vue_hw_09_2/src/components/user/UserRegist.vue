@@ -76,10 +76,10 @@ export default {
       
     },
 
-    setFile : function(e, user_img_file) {
+    setFile : function(e) {
       console.log(e.target.files)//files는 배열로 들어온다.
       console.log(e.target.files[0])//files는 배열로 들어온다.
-        this.user_img = user_img_file;
+      this.user_img = e.target.files[0];
     },
 
     regist() {
@@ -105,7 +105,10 @@ export default {
       };
 
 
-      this.$store.dispatch("createUser", user);
+      this.$store.dispatch("createUser", { 
+        user,
+        user_img : this.user_img,
+      });
     },
   },
   computed: {
