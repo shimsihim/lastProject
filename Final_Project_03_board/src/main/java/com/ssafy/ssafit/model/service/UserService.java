@@ -1,6 +1,9 @@
 package com.ssafy.ssafit.model.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.ssafit.model.dto.User;
 
@@ -17,7 +20,7 @@ public interface UserService {
 	
 	//회원가입
 	//public int signUp(User user, MultipartFile file) throws IllegalStateException, IOException;
-	public int signUp(User user);
+	public int signUp(User user, MultipartFile file) throws IllegalStateException, IOException;
 	
 	//회원정보 업데이트
 	//public int updateUserInfo(User user, MultipartFile file) throws IllegalStateException, IOException;

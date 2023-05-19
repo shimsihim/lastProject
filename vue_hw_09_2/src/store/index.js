@@ -93,7 +93,8 @@ export default new Vuex.Store({
     // ==================================
 
     createUser: function ({ commit }, user) {
-      console.log(user)
+      console.log(user);
+      console.log(user.user_img);
       //중복확인 후 추가하기 
       //빈칸있을 때 입력하라고 하기
       const API_URL = `http://localhost:9999/ssafit/user/signUp`;
