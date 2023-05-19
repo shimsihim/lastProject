@@ -11,7 +11,7 @@ export default new Vuex.Store({
     searchUsers: [],
     user: {},
     loginUser: null,
-    loginToken:null,
+    loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSIsImV4cCI6MTY4NDU2NTI4OX0.WP5DPVo5k5mLqhvkLToSDPnG8DLdGmkgIQJPrIlRwJI",
     randomUser: null,
     posts : [],
     post : {},

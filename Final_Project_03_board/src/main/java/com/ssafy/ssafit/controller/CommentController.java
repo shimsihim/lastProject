@@ -54,10 +54,8 @@ public class CommentController {
 		comment.setPost_num((int) requestJsonHashMap.get("post_num"));
 		comment.setComment_content((String) requestJsonHashMap.get("comment_content"));
 		comment.setComment_writer_id(user_id);
-		System.out.println(comment);
-		System.out.println(comment);
-		System.out.println(comment);
-		System.out.println(comment);
+		System.out.println((String) requestJsonHashMap.get("token"));
+		
 		commentService.registComment(comment);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
