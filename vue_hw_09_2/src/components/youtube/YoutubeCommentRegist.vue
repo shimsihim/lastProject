@@ -46,7 +46,6 @@ export default {
       }
 
       let videoComment = {
-        videocomment_writer_id : this.loginUser.user_id,
         videocomment_video_id : this.video.id.videoId,
         videocomment_content: this.videocomment_content,
       };

@@ -10,7 +10,7 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    loginUser: null,
+    loginUserId: null,
     loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSIsImV4cCI6MTY4NDU2NTI4OX0.WP5DPVo5k5mLqhvkLToSDPnG8DLdGmkgIQJPrIlRwJI",
     randomUser: null,
     posts : [],
@@ -45,14 +45,15 @@ export default new Vuex.Store({
     SEARCH_NAME: function (state, users) {
       state.searchUsers = users;
     },
-    SET_LOGIN_USER: function (state, user) {
-      state.loginUser = user;
+    SET_LOGIN_USER_ID: function (state, loginUserId) {
+      state.loginUserId = loginUserId;
     },
     SET_LOGIN_TOKEN: function(state, token){
       state.loginToken = token;
     },
     LOGOUT: function (state) {
       state.loginToken = null;
+      state.loginUserId = null;
     },
     SET_RANDOM_USER: function (state, user) {
       state.randomUser = user;
@@ -221,6 +222,7 @@ export default new Vuex.Store({
             if (res.status === 202) {
               alert("로그인 성공!");
               commit("SET_LOGIN_TOKEN", res.data["access-token"]);
+              commit("SET_LOGIN_USER_ID", user.user_id);
               router.push("/");
             }
             else{
@@ -414,13 +416,18 @@ export default new Vuex.Store({
       });
     },
 
-    registVideoComment : function ({commit}, videoComment){
-    const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
-    axios({
-      method: 'POST',
-      url: API_URL,
-      data : videoComment,
-    })
+    registVideoComment : function ({commit,state}, videoComment){
+      const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
+      console.log(state.loginToken)
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data : {
+          videocomment_video_id : videoComment.videocomment_video_id,
+          videocomment_content : videoComment.videocomment_content,
+          token : state.loginToken,
+        },
+      })
     .then(() => {
       alert("등록 완료!");
       commit("ADD_VIDEO_COMMENT", videoComment);

@@ -7,8 +7,11 @@
       <div>작성일: {{post.post_created_at }}</div>
       <div>조회수: {{post.post_view_cnt }}</div>
 
+      <div v-if="loginUserId === post.post_writer_id">
       <router-link to="/board/regist" class="btn" @click="updatePost">수정</router-link>
         <button class="btn" @click="deletePost">삭제</button>
+      </div>
+
       <comment-regist :post = "post"></comment-regist>
       <h2>댓글 상세</h2>
 
@@ -42,7 +45,7 @@
       CommentRegist
     },
     computed: {
-      ...mapState(["post", "postComments"]),
+      ...mapState(["post", "postComments", "loginUserId"]),
       },
     created() {
       const pathName = new URL(document.location).pathname.split("/");
