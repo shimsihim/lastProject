@@ -34,7 +34,7 @@
     name: "PostDetail",
     methods: {
       updatePost() {
-        this.$store.dispatch("updateUser", this.loginUser);
+        this.$store.dispatch("updatePost", this.loginToken);
       },
       deletePost() {
         this.$store.dispatch("deletePost");
@@ -45,7 +45,7 @@
       CommentRegist
     },
     computed: {
-      ...mapState(["post", "postComments", "loginUserId"]),
+      ...mapState(["post", "postComments", "loginUserId", "loginToken"]),
       },
     created() {
       const pathName = new URL(document.location).pathname.split("/");

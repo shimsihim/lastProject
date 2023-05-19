@@ -234,23 +234,6 @@ export default new Vuex.Store({
             alert("로그인 실패");
           });
       },
-        setRandomUser: async function ({ commit }) {
-      const API_URL = `https://random-data-api.com/api/users/random_user`;
-
-      try {
-        const res = await axios.get(API_URL);
-        let user = {
-          id: res.data.username,
-          password: res.data.password,
-          name: res.data.first_name,
-          email: res.data.email,
-          age: Math.floor(Math.random() * (99 - 20)) + 20,
-        };
-        commit("SET_RANDOM_USER", user);
-      } catch (err) {
-        console.log(err);
-      }
-    },
 
     // ==================================
     // --POST--
@@ -301,7 +284,7 @@ export default new Vuex.Store({
       });
     },
 
-  deletePost: function ({state}) {
+    deletePost: function ({state}) {
     const post_num = state.post.post_num;
     const API_URL = `http://localhost:9999/ssafit/post/delete/${post_num}`;
     const board_id = state.post.post_board_id;
@@ -309,6 +292,7 @@ export default new Vuex.Store({
     axios({
       method: 'DELETE',
       url: API_URL,
+      data : state.loginToken,
       
     })
     .then(() => {

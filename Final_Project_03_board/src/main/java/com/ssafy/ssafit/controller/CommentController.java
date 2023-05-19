@@ -70,11 +70,15 @@ public class CommentController {
 	}
 	
 	@GetMapping("/update")
-	@ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
-	public ResponseEntity<?> updateComment(@RequestBody Comment comment, @ApiIgnore HttpServletResponse resp) throws IOException {
-		commentService.updateComment(comment);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
+    @ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
+    public ResponseEntity<?> updateComment(@RequestBody Comment comment, @ApiIgnore HttpServletResponse resp,String token) throws IOException {
+        
+        if(jwtUtil.parse(token)!=comment.getComment_writer_id())
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+        
+        commentService.updateComment(comment);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 	
 	
 }

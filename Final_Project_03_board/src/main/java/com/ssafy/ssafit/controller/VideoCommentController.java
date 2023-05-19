@@ -60,18 +60,27 @@ public class VideoCommentController {
 	
 	
 	@GetMapping("/delete")
-	@ApiOperation(value="댓글 삭제", notes = "댓글 삭제하기 (DB삭제)")
-	public ResponseEntity<?> deleteComment(int videocomment_num, @ApiIgnore HttpServletResponse resp) throws IOException {
-		videoCommentService.deleteVideoComment(videocomment_num);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-	
-	@GetMapping("/update")
-	@ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
-	public ResponseEntity<?> updateComment(@RequestBody VideoComment videoComment, @ApiIgnore HttpServletResponse resp) throws IOException {
-		videoCommentService.updateVideoComment(videoComment);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
+    @ApiOperation(value="댓글 삭제", notes = "댓글 삭제하기 (DB삭제)")
+    public ResponseEntity<?> deleteComment(int videocomment_num, @ApiIgnore HttpServletResponse resp, String token) throws IOException {
+        
+        if(jwtUtil.parse(token)!=videoCommentService.getVideoCommentWriterId(videocomment_num))
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+
+        
+        videoCommentService.deleteVideoComment(videocomment_num);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+    
+    @GetMapping("/update")
+    @ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
+    public ResponseEntity<?> updateComment(@RequestBody VideoComment videoComment, @ApiIgnore HttpServletResponse resp, String token) throws IOException {
+        
+        if(jwtUtil.parse(token)!=videoComment.getVideocomment_writer_id())
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+        
+        videoCommentService.updateVideoComment(videoComment);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 	
 	
 }
