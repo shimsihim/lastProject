@@ -72,9 +72,7 @@ export default {
     // },
 
     idCheck(){
-      this.$store.dispatch("selectId", this.user_id);
-      window.setTimeout(1000)
-      console.log(this.idChk) // 현재 비동기 처리로 인해서 지금의 콘솔이 먼저 뜸
+      this.$store.dispatch("idDuplicateChk", this.user_id);
       
     },
 
@@ -112,7 +110,12 @@ export default {
     // },
 
     regist() {
-      if (
+      console.log(123213213)
+      if(!this.idChk){//중복확인 하지 않았을 시
+        alert("중복확인 해주세요")
+        return
+      }
+      if ( // 하나라도 공백이 있다면
         this.user_id === "" ||
         this.user_pw === "" ||
         this.user_name === "" ||
@@ -121,6 +124,12 @@ export default {
         alert("모든 내용을 입력해주세요");
         return;
       }
+      if(!this.chk){ // 비밀번호 확인의 값이 틀리다면
+        alert("비밀번호를 정확히 입력해주세요")
+        return
+      }
+      
+
 
       let user = {
         user_id: this.user_id,
