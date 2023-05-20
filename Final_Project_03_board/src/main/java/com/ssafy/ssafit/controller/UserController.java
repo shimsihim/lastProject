@@ -135,6 +135,7 @@ public class UserController {
 	@GetMapping("/selectAll")
 	@ApiOperation(value="전체 조회", notes = "전체 유저리스트 반환")
 	public ResponseEntity<?> selectAll() {
+		
 		List<User> userlist = userService.selectAll();
 		return new ResponseEntity<List<User>>(userlist, HttpStatus.OK);
 	}

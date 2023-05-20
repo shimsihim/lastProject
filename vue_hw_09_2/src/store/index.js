@@ -20,6 +20,7 @@ export default new Vuex.Store({
     videoComments: [],
     search_videos: [],
     idChk: false, // 아이디 중복검사 결과
+    likeChk: false, // 게시물 좋아요 체크
   },
   getters: {
     userCnt: function (state) {
@@ -56,7 +57,7 @@ export default new Vuex.Store({
       state.loginToken = null;
       state.loginUserId = null;
     },
-    ID_DUPLICATE_CHK : function (state,checkRes) {
+    ID_DUPLICATE_CHK: function (state, checkRes) {
       state.idChk = checkRes;
     },
     SET_RANDOM_USER: function (state, user) {
@@ -74,6 +75,13 @@ export default new Vuex.Store({
     ADD_POST: function (state, post) {
       state.posts.push(post);
     },
+    SET_POST_Like: function (state, dat) {
+      state.likeChk = dat;
+    },
+    LIKE_CHK_REVERSE: function (state) {
+      state.likeChk = !state.likeChk;
+    },
+
     SET_VIDEOS: function (state, videos) {
       state.videos = videos;
     },
@@ -250,13 +258,13 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
-          if(res.data){
+          if (res.data) {
             alert("확인 완료")
           }
-          else{
+          else {
             alert("중복된 아이디 입니다.")
           }
-          commit("ID_DUPLICATE_CHK",res.data)
+          commit("ID_DUPLICATE_CHK", res.data)
           // }
         })
         .catch((err) => {
@@ -357,7 +365,51 @@ export default new Vuex.Store({
         });
     },
 
-    // 게시물의 댓글 불러오기 // 동작 확인 완료
+    //게시물 좋아요 여부 불러오기(postLikeChk 정하기)
+    setPostLike: function ({ commit, state }, post_num) {
+      const token = state.loginToken
+      const API_URL = `http://localhost:9999/ssafit/postLike/check/${post_num}/${token}`;
+      axios({
+        method: 'GET',
+        url: API_URL,
+      })
+        .then((res) => {
+
+          commit("SET_POST_Like", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    likeChkReverse: function ({ commit, state }, post_num) {
+      console.log("여기 좋야요 액션")
+      console.log("여기 좋야요 액션")
+      console.log("여기 좋야요 액션")
+      console.log("여기 좋야요 액션")
+      console.log("여기 좋야요 액션")
+      const token = state.loginToken
+      let vari = "insert"
+      if (state.likeChk)
+        vari = "delete"
+
+      let API_URL = `http://localhost:9999/ssafit/postLike/${vari}/${post_num}/${token}`;
+      
+      axios({
+        method: 'GET',
+        url: API_URL,
+      })
+        .then(() => {
+
+          commit("LIKE_CHK_REVERSE");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+
+    // 게시물의 댓글 불러오기
     setPostComments: function ({ commit }, post_num) {
       const API_URL = `http://localhost:9999/ssafit/postComment/read/${post_num}`;
       axios({
