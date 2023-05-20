@@ -26,4 +26,6 @@
 		select * from Comment where comment_num = #{comment_num}
 	</select>
 	
+	
+	
 </mapper>

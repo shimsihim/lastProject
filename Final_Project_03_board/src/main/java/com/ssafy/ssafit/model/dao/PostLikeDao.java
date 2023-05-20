@@ -8,4 +8,6 @@ public interface PostLikeDao {
 	void insertPostLike(PostLike postlike);
 
 	void deletePostLike(PostLike postlike);
+	
+	int countPostLike(int postLike_post_num);
 }
