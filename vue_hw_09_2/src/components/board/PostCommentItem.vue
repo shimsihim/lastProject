@@ -5,7 +5,20 @@
     <p4>내용:{{ postComment.comment_content}}</p4>
 
     <div v-if="loginUserId === postComment.comment_writer_id">
-      <button class="btn" @click="updateComment">수정</button>
+      
+      <div v-if="showUpdateForm">
+      <form>
+      <label for="comment_content">내용</label>
+      <textarea
+        id="comment_content"
+        v-model="comment_content"
+        class="view"
+      ></textarea>
+      <button @click="updateComment">수정완료</button>
+    </form>
+    </div>
+
+    <button class="btn" @click="showForm" >수정</button>
       <button class="btn" @click="deleteComment">삭제</button>
     </div>
     
@@ -16,6 +29,12 @@
 import { mapState } from "vuex";
 export default {
   name: 'PostCommentItem',
+  data() {
+    return{
+      showUpdateForm : false,
+      comment_content : this.postComment.comment_content,
+    };
+  },
   props: {
     postComment: {
       type: Object,
@@ -23,8 +42,13 @@ export default {
     },
   },
   methods: {
+    showForm() {
+      this.showUpdateForm = true;
+    },
     updateComment() {
-      this.$store.dispatch("updateComment",this.postComment)
+      this.postComment.comment_content = this.comment_content;
+      this.$store.dispatch("updateComment",this.postComment);
+      this.showUpdateForm = false;
     },
     deleteComment() {
       this.$store.dispatch("deleteComment",this.postComment.comment_num)

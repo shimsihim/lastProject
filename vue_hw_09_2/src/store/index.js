@@ -357,7 +357,7 @@ export default new Vuex.Store({
         });
     },
 
-    // 게시물의 댓글 불러오기
+    // 게시물의 댓글 불러오기 // 동작 확인 완료
     setPostComments: function ({ commit }, post_num) {
       const API_URL = `http://localhost:9999/ssafit/postComment/read/${post_num}`;
       axios({
@@ -373,10 +373,8 @@ export default new Vuex.Store({
     },
 
 
-    // 게시물의 댓글 등록
+    // 게시물의 댓글 등록 // 동작 확인 완료
     registPostComment: function ({ dispatch, state }, comment) {
-      console.log("액션 들어감")
-      console.log(state.loginToken)
       const API_URL = `http://localhost:9999/ssafit/postComment/regist`;
       axios({
         method: 'POST',
@@ -396,34 +394,41 @@ export default new Vuex.Store({
     },
 
 
-    //게시물의 댓글 수정 // 수정 필요
-    // updateComment : function ( {state}, comment) {
-    //   console.log("액션 들어감")
-    //   console.log(state.loginToken)
-    //   const API_URL = `http://localhost:9999/ssafit/postComment/update`;
-    //   axios({
-    //     method: 'POST',
-    //     url: API_URL,
-    //     data:{
-    //       post_num : comment.post_num,
-    //       comment_content : comment.comment_content,
-    //       comment_writer_id : comment.comment_writer_id,
-    //       token : state.loginToken,
-    //     }
-    // })
-    //   .then(() => {
-    //     router.push(`/board/detail/${comment.post_num}`);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // },
+    //게시물의 댓글 수정 // 동작 확인 완료
+    updateComment : function ( {state}, postComment) {
+      const API_URL = `http://localhost:9999/ssafit/postComment/tokenCheck`;
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data:{
+          token : state.loginToken,
+          comment_writer_id : postComment.comment_writer_id,
+        }
+      })
+      .then(() => {
+            axios({
+              method: 'POST',
+              url: `http://localhost:9999/ssafit/postComment/update`,
+              data:{
+                comment_num : postComment.comment_num,
+                comment_content : postComment.comment_content,
+                comment_writer_id : postComment.comment_writer_id,
+              }
+          }).then(()=> {
+            console.log("수정되었음.");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        })      
+      .catch((err) => {
+        console.log(err);
+      });
+    },
 
 
-    //게시물의 댓글 삭제
+    //게시물의 댓글 삭제 //동작 확인 완료
     deleteComment: function ({ dispatch, state }, comment_num) {
-      console.log("액션 들어감")
-      console.log("삭제 들어감")
       let token = state.loginToken
       console.log(comment_num)
       const API_URL = `http://localhost:9999/ssafit/postComment/delete/${comment_num}/${token}`;
@@ -465,13 +470,14 @@ export default new Vuex.Store({
         .catch((err) => console.log(err));
     },
 
-    setVideo: function ({ commit, state }, video) {
-      for (let i = 0; i < state.search_videos.length; i++) {
-        if (state.search_videos[i] === video) {
-          commit("SET_VIDEO", video);
+
+      setVideo: function ({ commit, state }, video) {
+        for (let i = 0; i < state.search_videos.length; i++) {
+          if (state.search_videos[i] === video) {
+            commit("SET_VIDEO", video);
+          }
         }
-      }
-    },
+      },
 
     // ==================================
     // --VIDEOCOMMENT--
