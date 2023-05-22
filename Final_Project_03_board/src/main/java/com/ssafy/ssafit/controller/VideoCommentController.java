@@ -39,6 +39,14 @@ public class VideoCommentController {
 	@GetMapping("/read/{video_id}")
 	@ApiOperation(value="댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
 	public ResponseEntity<?> selectVideoComment(@PathVariable String video_id) {
+		System.out.println("댓글불러오기");
+		System.out.println("댓글불러오기");
+		System.out.println("댓글불러오기");
+		System.out.println(video_id);
+		System.out.println(video_id);
+		System.out.println(video_id);
+		System.out.println(video_id);
+		System.out.println(video_id);
 		List<VideoComment> commentlist = videoCommentService.selectVideoComment(video_id);
 	return new ResponseEntity<List<VideoComment>>(commentlist, HttpStatus.OK);
 	}

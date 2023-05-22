@@ -44,10 +44,15 @@ export default {
         ...mapState(["video","videoComments"]),
     },
     created() {
+      console.log(213213213123+"생성중")
         const pathName = new URL(document.location).pathname.split("/");
         const video_id = pathName[pathName.length - 1];
         this.$store.dispatch("setVideo", video_id);
-        this.$store.dispatch("setVideoComments", video_id);
+        
     },
+    beforeUpdate(){   
+      
+     
+    }
 };
 </script>
