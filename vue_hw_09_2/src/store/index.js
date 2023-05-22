@@ -735,11 +735,6 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
-          console.log("여기는 챌린지들 받아오는 구간")
-          console.log("여기는 챌린지들 받아오는 구간")
-          console.log("여기는 챌린지들 받아오는 구간")
-          console.log(res)
-          
           let resList = [];
           if (payload.location != "전국") {
             for (let i = 0; i < res.data.length; i++) {
@@ -811,19 +806,20 @@ export default new Vuex.Store({
         });
     },
 
-    addParticipant: function ({ dispatch, state }, [challenge_id, challenge_sort]) {
+    addParticipant: function ({ dispatch, state }, challenge) {
       const API_URL = `http://localhost:9999/ssafit/challenge/add/participant`;
       axios({
         method: 'POST',
         url: API_URL,
         data: {
-          participant_challenge_id: challenge_id,
+          participant_challenge_id: challenge.challenge_id,
           loginToken: state.loginToken,
         },
       })
         .then(() => {
           alert("참가완료.");
-          dispatch("setChallenges", challenge_sort);
+          state.MyChallenges.push(challenge);
+          dispatch("setChallenges", challenge.challenge_sort);
         })
         .catch((err) => {
           console.log(err);

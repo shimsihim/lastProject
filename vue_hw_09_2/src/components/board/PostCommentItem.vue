@@ -1,8 +1,8 @@
 <template>
   <li>
-    <p4>작성자:{{ postComment.comment_writer_id}}</p4>
-    <p4>작성일자:{{ postComment.comment_created_at}}</p4>
-    <p4>내용:{{ postComment.comment_content}}</p4>
+    <p>작성자:{{ postComment.comment_writer_id}}</p>
+    <p>작성일자:{{ postComment.comment_created_at}}</p>
+    <p>내용:{{ postComment.comment_content}}</p>
 
     <div v-if="loginUserId === postComment.comment_writer_id">
       
