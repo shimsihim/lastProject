@@ -61,7 +61,7 @@
         this.$store.dispatch("deleteParticipant",challenge);
       },
       addParticipant(challenge){
-        this.$store.dispatch("addParticipant",[challenge.challenge_id, challenge.challenge_sort]);
+        this.$store.dispatch("addParticipant",challenge);
       },
       checkMember(challenge_id){
         for(let i=0; i<this.MyChallenges.length; i++) {
