@@ -10,8 +10,8 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    loginUserId: "ssafy",
-    loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSIsImV4cCI6MTY4NDYxMTA5Nn0.XyNFoZObukKYzhpMtdT0-_OipzF18MWjb6cTqG3ZSrk",
+    loginUserId: "alsgml",
+    loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhbHNnbWwiLCJleHAiOjE2ODQ3NTE5NzJ9.OWN__vde0vk6tLro5HwcT8tkzu-HBp-_yLVD2ZTM-U4",
     randomUser: null,
     posts: [],
     post: {},
@@ -21,6 +21,8 @@ export default new Vuex.Store({
     search_videos: [],
     idChk: false, // 아이디 중복검사 결과
     likeChk: false, // 게시물 좋아요 체크
+    challenges: [],
+    MyChallenges: [],
   },
   getters: {
     userCnt: function (state) {
@@ -31,6 +33,9 @@ export default new Vuex.Store({
     },
     searchUserCnt: function (state) {
       return state.searchUsers.length > 0 ? state.searchUsers.length : null;
+    },
+    challengeCnt: function (state) {
+      return state.challenges.length;
     },
   },
   mutations: {
@@ -97,8 +102,14 @@ export default new Vuex.Store({
     ADD_VIDEO_COMMENT: function (state, videoComment) {
       state.videoComments.push(videoComment);
     },
-
+    SET_CHALLENGES: function (state, challenges) {
+      state.challenges = challenges;
+    },
+    SET_MY_CHALLENGES: function (state, MyChallenges) {
+      state.MyChallenges = MyChallenges;
+    },
   },
+
   actions: {
 
     // ==================================
@@ -235,6 +246,9 @@ export default new Vuex.Store({
           // }
           if (res.status === 202) {
             alert("로그인 성공!");
+            console.log(res.data["access-token"]);
+            console.log(res.data["access-token"]);
+            console.log(res.data["access-token"]);
             commit("SET_LOGIN_TOKEN", res.data["access-token"]);
             commit("SET_LOGIN_USER_ID", user.user_id);
             router.push("/");
@@ -512,7 +526,7 @@ export default new Vuex.Store({
           q: "운동 " + keyword + " 운동",
           regionCode: "KR",
           type: "video",
-          maxResults: 10,
+          maxResults: 9,
         },
       })
         .then((res) => {
@@ -593,8 +607,127 @@ export default new Vuex.Store({
         });
     },
 
+    // ==================================
+    // --CHALLENGE--
+    // ==================================
 
-  },
+    setChallenges : function ({ commit, dispatch }, payload) {
+      const API_URL = `http://localhost:9999/ssafit/challenge/list/${payload.challenge_sort}`;
+      return axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          let resList = [];
+          if(payload.location != "전국") {
+            for(let i=0; i<res.data.length; i++) {
+              if(res.data[i].challenge_location === payload.location) {
+                resList.push(res.data[i]);
+              }
+            }
+            commit("SET_CHALLENGES", resList);
+          } else {
+            commit("SET_CHALLENGES", res.data);
+          }
+          dispatch("setMyChallenge");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    setMyChallenge:function ({ state, commit }){
+      const token = state.loginToken;
+      const API_URL = `http://localhost:9999/ssafit/challenge/read/MyChallenge/${token}`;
+      axios({
+        method: 'GET',
+        url: API_URL,
+      })
+        .then((res) => {
+          commit("SET_MY_CHALLENGES", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+
+    registChallenge: function ({ dispatch }, challenge) {
+      dispatch;
+      console.log(challenge);
+      const API_URL = `http://localhost:9999/ssafit/challenge/create`;
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: challenge,
+      })
+        .then(() => {
+          alert("등록되었습니다.");
+          dispatch("setChallenges", challenge.challenge_sort);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+
+        deleteChallenge: function ({ state, dispatch }, challenge) {
+          const token = state.loginToken;
+          const sort_num = challenge.challenge_sort;
+          const API_URL = `http://localhost:9999/ssafit/challenge/delete/${challenge.challenge_id}/${token}`;
+          axios({
+            method: 'DELETE',
+            url: API_URL,
+    
+          })
+            .then(() => {
+              alert("삭제 완료!");
+              dispatch("setChallenges", sort_num);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
+
+        addParticipant: function ({ dispatch, state }, [challenge_id,challenge_sort]) {
+          const API_URL = `http://localhost:9999/ssafit/challenge/add/participant`;
+          axios({
+            method: 'POST',
+            url: API_URL,
+            data: {
+              participant_challenge_id: challenge_id,
+              loginToken: state.loginToken,
+            },
+          })
+            .then(() => {
+              alert("참가완료.");
+              dispatch("setChallenges", challenge_sort);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      },
+
+      deleteParticipant: function ({ state, dispatch }, challenge) {
+        const token = state.loginToken;
+        const sort_num = challenge.challenge_sort;
+        const API_URL = `http://localhost:9999/ssafit/challenge/cancle/${challenge.challenge_id}/${token}`;
+        axios({
+          method: 'DELETE',
+          url: API_URL,
+  
+        })
+          .then(() => {
+            alert("취소되었습니다.");
+            dispatch("setChallenges", sort_num);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+
+
+  },//actions
 
 
 

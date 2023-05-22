@@ -9,8 +9,8 @@
         </div> -->
         <!-- Spinner End -->
     <header-nav />
-    <div class="container-xxl position-relative p-0" id="home">
-            <div class="container-xxl bg-primary hero-header">
+    <div class="container-xxl bg-primary position-relative p-0" id="home">
+            <div class="container-xxl hero-header">
                 <div class="container">
                   <router-view />
                 </div>
