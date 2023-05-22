@@ -543,10 +543,13 @@ export default new Vuex.Store({
         .catch((err) => console.log(err));
     },
 
-    setVideo: function ({ commit, state }, video) {
+    setVideo: function ({ commit, state ,dispatch}, video) {
       for (let i = 0; i < state.search_videos.length; i++) {
         if (state.search_videos[i] === video) {
           commit("SET_VIDEO", video);
+          console.log("여기 셋 비디오")
+          console.log(video.id.videoId)
+          dispatch("setVideoComments", video.id.videoId);
         }
       }
     },
@@ -555,13 +558,14 @@ export default new Vuex.Store({
     // --VIDEOCOMMENT--
     // ==================================
 
-    setVideoComments: async function ({ commit }, video_id) {
-      const API_URL = `http://localhost:9999/ssafit/videoComment/read/${video_id}`;
+    setVideoComments: async function ({ commit }, video) {
+      const API_URL = `http://localhost:9999/ssafit/videoComment/read/${video}`;
       await axios({
         method: 'GET',
         url: API_URL,
       })
         .then((res) => {
+          console.log(res.data)
           commit("SET_VIDEO_COMMENTS", res.data);
         })
         .catch((err) => {
@@ -716,6 +720,11 @@ export default new Vuex.Store({
         method: "GET",
       })
         .then((res) => {
+          console.log("여기는 챌린지들 받아오는 구간")
+          console.log("여기는 챌린지들 받아오는 구간")
+          console.log("여기는 챌린지들 받아오는 구간")
+          console.log(res)
+          
           let resList = [];
           if (payload.location != "전국") {
             for (let i = 0; i < res.data.length; i++) {
@@ -808,7 +817,7 @@ export default new Vuex.Store({
 
     deleteParticipant: function ({ state, dispatch }, challenge) {
       const token = state.loginToken;
-      const sort_num = challenge.challenge_sort;
+      dispatch
       const API_URL = `http://localhost:9999/ssafit/challenge/cancle/${challenge.challenge_id}/${token}`;
       axios({
         method: 'DELETE',
@@ -817,7 +826,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("취소되었습니다.");
-          dispatch("setChallenges", sort_num);
+          // dispatch("setChallenges", challenge);  이거 주석 풀면 요청은 제대로 받아오는데 리스트가 이상하게 안뜸
         })
         .catch((err) => {
           console.log(err);
