@@ -3,7 +3,37 @@
     <h2>게시글 목록</h2>
     <h4>등록된 사용자의 수 : {{ postCnt }}</h4>
     <div v-if="postCnt">
-      <table class="user-list">
+      <table class="table post-list text-dark">
+        <colgroup>
+          <col style="width: 10%" />
+          <col style="width: 50%" />
+          <col style="width: 20%" />
+          <col style="width: 20%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col-2">작성자</th>
+            <th scope="col-4">제목</th>
+            <th scope="col-2">조회수</th>
+            <th scope="col-2">등록일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(post, index) in posts" :key="index">
+            <td>{{ post.post_writer_nickname }}</td>
+            <td>
+              <router-link class="link-dark post-list-item" :to="`/board/detail/${post.post_num}`">{{
+                post.post_title
+              }}<br/>{{ post.post_writer_nickname }}</router-link>
+            </td>
+            <td>{{ post.post_view_cnt }}</td>
+            <td>{{ post.post_created_at }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <!-- <table class="table post-list">
         <colgroup>
           <col style="width: 20%" />
           <col style="width: 40%" />
@@ -30,7 +60,7 @@
             <td>{{ post.post_created_at }}</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
     <div v-else>등록된 게시물이 없습니다.</div>
     <button v-if="loginToken"  @click="registPost">등록하기</button>
@@ -78,3 +108,8 @@ export default {
 };
 </script>
 
+<style scoped>
+.post-list-item {
+  text-decoration-line: none;
+}
+</style>

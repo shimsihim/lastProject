@@ -55,25 +55,7 @@ export default {
   },
   computed: {
     ...mapState(["loginUser"]),
-    ...mapState(["post","loginToken"]),
-    // compVal: {
-    //   get () {
-    //     if (this.selected) {
-    //       return this.videocomment_content
-    //     } else {
-    //       return this.comment_none
-    //     }
-    //   },
-    //   set (val) {
-    //     if (this.selected) {
-    //       this.videocomment_content = val
-    //     } else {
-    //       this.comment_none = val
-    //     }
-    //   }
-    // },
-
-
+    ...mapState(["loginToken"]),
   },
 };
 </script>

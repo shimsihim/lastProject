@@ -12,14 +12,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        <a class="nav-item nav-link active"><router-link to="/">홈</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/video/main">영상보기</router-link></a>
+                        <a class="nav-item nav-link"><router-link to="/">홈</router-link></a>
+                        <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/board/list/1">챌린지</router-link></a>
+                        <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/record">임시 캘린더</router-link></a>
-
-
-                        <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
 
                     <a v-if="getUser" class="nav-item nav-link"><router-link to="/mypage">마이페이지</router-link></a>
@@ -54,26 +51,16 @@ export default {
 };
 </script>
 <style>
+a:hover {
+  text-decoration-line: none; 
+}
+
 header {
   line-height: 70px;
 }
-
-header a {
-  margin: 10px;
-  text-decoration-line: none;
-  color: white;
+.no-style-link:hover {
+  text-decoration-line: none; 
+  color: inherit; 
 }
 
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.logo {
-  display: inline-block;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-  margin: 0;
-}
 </style>
