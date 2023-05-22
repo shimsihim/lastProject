@@ -562,7 +562,6 @@ export default new Vuex.Store({
         url: API_URL,
       })
         .then((res) => {
-
           commit("SET_VIDEO_COMMENTS", res.data);
         })
         .catch((err) => {
@@ -592,43 +591,21 @@ export default new Vuex.Store({
         });
     },
 
-    deleteVideoComment: function ({ state }, videocomment_num, videocomment_video_id) {
+    deleteVideoComment: function ({ state, dispatch }, payload) {
       const token = state.loginToken
-      console.log(videocomment_num)
-      console.log(videocomment_num)
-      const API_URL = `http://localhost:9999/ssafit/videoComment/delete/${videocomment_num}/${token}`;
-      console.log(state.loginToken)
+      const API_URL = `http://localhost:9999/ssafit/videoComment/delete/${payload.videocomment_num}/${token}`;
       axios({
         method: 'GET',
         url: API_URL,
 
       })
         .then(() => {
-          alert("삭제 완료!");
-          this.$store.dispatch("setVideoComments", videocomment_video_id);
-
+          dispatch("setVideoComments", payload.videocomment_video_id);
         })
         .catch((err) => {
           console.log(err);
         });
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 캘린더, Record
     getRecods: function ({ state, commit }, date) {
       const token = state.loginToken
