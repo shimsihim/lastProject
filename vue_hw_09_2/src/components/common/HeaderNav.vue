@@ -16,6 +16,7 @@
                         <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
+                        <a class="nav-item nav-link"><router-link to="/record">임시 캘린더</router-link></a>
                     </div>
 
                     <a v-if="getUser" class="nav-item nav-link"><router-link to="/mypage">마이페이지</router-link></a>
