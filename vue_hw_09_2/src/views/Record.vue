@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <header class="site-header d-flex flex-column justify-content-center align-items-center">

@@ -27,7 +27,10 @@ export default {
 
     },
     deleteComment() {
-      this.$store.dispatch("deleteVideoComment",this.videoComment.videocomment_num,this.videoComment.videocomment_video_id);
+      this.$store.dispatch("deleteVideoComment",{
+        videocomment_num : this.videoComment.videocomment_num,
+        videocomment_video_id : this.videoComment.videocomment_video_id,
+      })
     },
 
   },
