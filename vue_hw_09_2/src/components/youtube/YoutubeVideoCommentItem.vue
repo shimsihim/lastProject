@@ -1,8 +1,14 @@
 <template>
   <li>
+<<<<<<< HEAD
     <p>작성자:{{ videoComment.videocomment_writer_id}}</p>
     <p>작성일자:{{ videoComment.videocomment_created_at}}</p>
     <p>내용:{{ videoComment.videocomment_content}}</p>
+=======
+    <span>작성자:{{ videoComment.videocomment_writer_id}}</span>
+    <span>작성일자:{{ videoComment.videocomment_created_at}}</span>
+    <span>내용:{{ videoComment.videocomment_content}}</span>
+>>>>>>> ed769f63a6163a23dec3673c78f7953caec8f57b
   
     <div v-if="loginUserId === videoComment.videocomment_writer_id">
 
@@ -42,6 +48,7 @@ export default {
     },
   },
   methods: {
+
     showForm() {
       this.showUpdateForm = true;
     },
