@@ -771,7 +771,6 @@ export default new Vuex.Store({
 
     registChallenge: function ({ dispatch }, challenge) {
       dispatch;
-      console.log(challenge);
       const API_URL = `http://localhost:9999/ssafit/challenge/create`;
       axios({
         method: 'POST',
@@ -780,7 +779,10 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("등록되었습니다.");
-          dispatch("setChallenges", challenge.challenge_sort);
+          dispatch("setChallenges", {
+            challenge_sort: challenge.challenge_sort,
+            location: "전국",
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -790,7 +792,6 @@ export default new Vuex.Store({
 
     deleteChallenge: function ({ state, dispatch }, challenge) {
       const token = state.loginToken;
-      const sort_num = challenge.challenge_sort;
       const API_URL = `http://localhost:9999/ssafit/challenge/delete/${challenge.challenge_id}/${token}`;
       axios({
         method: 'DELETE',
@@ -799,7 +800,10 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("삭제 완료!");
-          dispatch("setChallenges", sort_num);
+          dispatch("setChallenges", {
+            challenge_sort: challenge.challenge_sort,
+            location: "전국",
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -818,8 +822,10 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("참가완료.");
-          state.MyChallenges.push(challenge);
-          dispatch("setChallenges", challenge.challenge_sort);
+          dispatch("setChallenges", {
+            challenge_sort: challenge.challenge_sort,
+            location: "전국",
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -837,7 +843,10 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("취소되었습니다.");
-          // dispatch("setChallenges", challenge);  이거 주석 풀면 요청은 제대로 받아오는데 리스트가 이상하게 안뜸
+          dispatch("setChallenges", {
+            challenge_sort: challenge.challenge_sort,
+            location: "전국",
+          });  //이거 주석 풀면 요청은 제대로 받아오는데 리스트가 이상하게 안뜸
         })
         .catch((err) => {
           console.log(err);
