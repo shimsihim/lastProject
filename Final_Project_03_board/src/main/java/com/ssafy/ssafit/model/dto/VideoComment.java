@@ -3,6 +3,7 @@ package com.ssafy.ssafit.model.dto;
 import java.sql.Timestamp;
 
 public class VideoComment {
+	private String loginToken;
 	private String videocomment_video_id;
 	private int videocomment_num;
 	private String videocomment_writer_id;
@@ -15,10 +16,12 @@ public class VideoComment {
 		super();
 	}
 
-	public VideoComment(String videocomment_video_id, int videocomment_num, String videocomment_writer_id,
-			String videocomment_content, String videocomment_user_nickname, Timestamp videocomment_created_at,
-			Timestamp videocomment_modified_at) {
+
+	public VideoComment(String loginToken, String videocomment_video_id, int videocomment_num,
+			String videocomment_writer_id, String videocomment_content, String videocomment_user_nickname,
+			Timestamp videocomment_created_at, Timestamp videocomment_modified_at) {
 		super();
+		this.loginToken = loginToken;
 		this.videocomment_video_id = videocomment_video_id;
 		this.videocomment_num = videocomment_num;
 		this.videocomment_writer_id = videocomment_writer_id;
@@ -27,6 +30,18 @@ public class VideoComment {
 		this.videocomment_created_at = videocomment_created_at;
 		this.videocomment_modified_at = videocomment_modified_at;
 	}
+
+
+
+	public String getLoginToken() {
+		return loginToken;
+	}
+
+
+	public void setLoginToken(String loginToken) {
+		this.loginToken = loginToken;
+	}
+
 
 	public String getVideocomment_video_id() {
 		return videocomment_video_id;

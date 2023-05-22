@@ -82,12 +82,14 @@ public class VideoCommentController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
     
-    @GetMapping("/update")
+    @PostMapping("/update")
     @ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
-    public ResponseEntity<?> updateComment(@RequestBody VideoComment videoComment, @ApiIgnore HttpServletResponse resp, String token) throws IOException {
-        
+    public ResponseEntity<?> updateComment(@RequestBody VideoComment videoComment) throws IOException {
+        String token = videoComment.getLoginToken();
+        String user_id = jwtUtil.parse(token);
+        videoComment.setVideocomment_writer_id(user_id);
         if(jwtUtil.parse(token)!=videoComment.getVideocomment_writer_id())
-            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<Void>(HttpStatus.I_AM_A_TEAPOT);
         
         videoCommentService.updateVideoComment(videoComment);
         return new ResponseEntity<Void>(HttpStatus.OK);

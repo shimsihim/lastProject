@@ -523,7 +523,7 @@ export default new Vuex.Store({
     // ==================================
     searchYoutube: function ({ commit }, keyword) {
       const URL = `https://www.googleapis.com/youtube/v3/search`;
-      const API_KEY = "AIzaSyBPjASjPEVn2nAnZmot1JBf6Tr8tdr-x-w";
+      const API_KEY = "AIzaSyCP7xN-lqoG-sSS9dvmCOxybIK3W2aey3A";
       axios({
         url: URL,
         method: "GET",
@@ -589,6 +589,21 @@ export default new Vuex.Store({
           alert("등록 완료!");
           dispatch("setVideoComments", videoComment.videocomment_video_id);
           //router.push(`/video/detail/${videoComment.videocomment_video_id}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    updateVideoComment : function({dispatch}, videoComment){
+      const API_URL = `http://localhost:9999/ssafit/videoComment/update`;
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: videoComment,
+      })
+        .then(() => {
+          dispatch("setVideoComments", videoComment.videocomment_video_id);
         })
         .catch((err) => {
           console.log(err);
