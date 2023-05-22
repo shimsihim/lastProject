@@ -1,13 +1,13 @@
 <template>
   <div>
-    <hr class="my-5">
-    <div class="youtube-list row">
+    <h3>검색 결과</h3>
+    <ul class="youtube-list">
       <youtube-video-item
         v-for="video in this.search_videos"
         :key="video.id.videoId"
         :video="video"
-        ></youtube-video-item>
-    </div>
+      ></youtube-video-item>
+    </ul>
   </div>
 </template>
 
@@ -23,7 +23,6 @@ export default {
   computed: {
     ...mapState(['search_videos']),
   },
-
 };
 </script>
 

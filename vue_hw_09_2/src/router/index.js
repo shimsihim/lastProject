@@ -14,8 +14,8 @@ import Youtube from "../views/Youtube.vue";
 import YoutubeVideo from "@/components/youtube/YoutubeVideo.vue";
 import YoutubeDetail from "@/components/youtube/YoutubeDetail.vue";
 import YoutubeCommentRegist from "@/components/youtube/YoutubeCommentRegist.vue"
-import Challenge from "../views/Challenge.vue";
-import ChallengeList from "@/components/challenge/ChallengeList.vue";
+import CalendarItem from "@/components/calendar/CalendarItem.vue"
+import Record from "@/views/Record.vue"
 
 Vue.use(VueRouter);
 
@@ -25,20 +25,6 @@ const routes = [
     name: "Home",
     component: Home,
   },
-
-  {
-    path: "/challenge",
-    name: "Challenge",
-    component: Challenge,
-    children:[
-      {
-        path: "main/:challenge_sort",
-        name: "ChallengeList",
-        component: ChallengeList,
-      },
-    ]
-  },
-
   {
     path: "/video",
     name: "Youtube",
@@ -58,6 +44,17 @@ const routes = [
         path: "comment/regist",
         name: "YoutubeCommentRegist",
         component: YoutubeCommentRegist,
+      },
+    ]
+  },
+  {
+    path: "/record",
+    component: Record,
+    children: [
+      {
+        path: "",
+        name: "CalendarItem",
+        component: CalendarItem,
       },
     ]
   },
