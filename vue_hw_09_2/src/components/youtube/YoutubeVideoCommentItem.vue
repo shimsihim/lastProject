@@ -1,8 +1,8 @@
 <template>
   <li>
-    <p4>작성자:{{ videoComment.videocomment_writer_id}}</p4>
-    <p4>작성일자:{{ videoComment.videocomment_created_at}}</p4>
-    <p4>내용:{{ videoComment.videocomment_content}}</p4>
+    <span>작성자:{{ videoComment.videocomment_writer_id}}</span>
+    <span>작성일자:{{ videoComment.videocomment_created_at}}</span>
+    <span>내용:{{ videoComment.videocomment_content}}</span>
   
     <div v-if="loginUserId === videoComment.videocomment_writer_id">
 
@@ -42,6 +42,7 @@ export default {
     },
   },
   methods: {
+
     showForm() {
       this.showUpdateForm = true;
     },
