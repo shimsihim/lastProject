@@ -592,8 +592,6 @@ export default new Vuex.Store({
     },
 
     updateVideoComment : function({dispatch}, videoComment){
-      console.log(videoComment.videocomment_video_id);
-      console.log(videoComment.videocomment_content);
       const API_URL = `http://localhost:9999/ssafit/videoComment/update`;
       axios({
         method: 'POST',

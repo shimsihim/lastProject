@@ -50,7 +50,6 @@ export default {
       this.videoComment.loginToken = this.loginToken;
       this.$store.dispatch("updateVideoComment",this.videoComment);
       this.showUpdateForm = false;
-      console.log
     },
     deleteComment() {
       this.$store.dispatch("deleteVideoComment",{
