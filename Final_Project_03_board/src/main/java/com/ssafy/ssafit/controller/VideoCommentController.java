@@ -77,10 +77,24 @@ public class VideoCommentController {
     @PostMapping("/update")
     @ApiOperation(value="댓글 수정", notes = "댓글 수정하기 (DB변경)")
     public ResponseEntity<?> updateComment(@RequestBody VideoComment videoComment) throws IOException {
-        String token = videoComment.getLoginToken();
+
+
+    	String token = videoComment.getLoginToken();
+    	System.out.println(token);
+    	System.out.println(token);
+    	System.out.println(token);
+    	System.out.println(token);
+    	System.out.println(token);
+    	System.out.println(token);
         String user_id = jwtUtil.parse(token);
+    	System.out.println(user_id);
+    	System.out.println(user_id);
+    	System.out.println(user_id);
+    	System.out.println(user_id);
+    	System.out.println(user_id);
+    	System.out.println(user_id);
         videoComment.setVideocomment_writer_id(user_id);
-        if(jwtUtil.parse(token)!=videoComment.getVideocomment_writer_id())
+        if(!jwtUtil.parse(token).equals(videoComment.getVideocomment_writer_id()))
             return new ResponseEntity<Void>(HttpStatus.I_AM_A_TEAPOT);
         
         videoCommentService.updateVideoComment(videoComment);

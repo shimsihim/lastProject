@@ -1,8 +1,8 @@
 <template>
   <li>
-    <p4>작성자:{{ videoComment.videocomment_writer_id}}</p4>
-    <p4>작성일자:{{ videoComment.videocomment_created_at}}</p4>
-    <p4>내용:{{ videoComment.videocomment_content}}</p4>
+    <p>작성자:{{ videoComment.videocomment_writer_id}}</p>
+    <p>작성일자:{{ videoComment.videocomment_created_at}}</p>
+    <p>내용:{{ videoComment.videocomment_content}}</p>
   
     <div v-if="loginUserId === videoComment.videocomment_writer_id">
 
@@ -50,6 +50,7 @@ export default {
       this.videoComment.loginToken = this.loginToken;
       this.$store.dispatch("updateVideoComment",this.videoComment);
       this.showUpdateForm = false;
+      console.log
     },
     deleteComment() {
       this.$store.dispatch("deleteVideoComment",{
