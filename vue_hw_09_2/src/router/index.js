@@ -20,6 +20,8 @@ import Record from "@/views/Record.vue"
 import Challenge from "../views/Challenge.vue";
 import ChallengeList from "@/components/challenge/ChallengeList.vue";
 import MyChallenge from "@/components/challenge/MyChallenge.vue";
+import ChallengeProgress from "@/components/challenge/ChallengeProgress.vue";
+import EventList from "@/components/challenge/EventList.vue";
 
 Vue.use(VueRouter);
 
@@ -43,6 +45,16 @@ const routes = [
         path: "/my",
         name: "MyChallenge",
         component: MyChallenge,
+      },
+      {
+        path: "/EventList",
+        name: "EventList",
+        component: EventList,
+      },
+      {
+        path: "/ChallengeProgress",
+        name: "ChallengeProgress",
+        component: ChallengeProgress,
       },
     ]
   },

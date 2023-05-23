@@ -47,6 +47,33 @@ export default new Vuex.Store({
     challengeCnt: function (state) {
       return state.challenges.length;
     },
+    challenge_groupList: function (state) {
+      const groupList = [];
+      for(let i = 0; i<state.MyChallenges.length; i++) {
+        if(state.MyChallenges[i].challenge_sort == 1) {
+          groupList.push(state.MyChallenges[i]);
+        }
+      }
+      return groupList;
+    },
+    challenge_eventList: function (state) {
+      const eventList = [];
+      for(let i = 0; i<state.MyChallenges.length; i++) {
+        if(state.MyChallenges[i].challenge_sort == 2) {
+          eventList.push(state.MyChallenges[i]);
+        }
+      }
+      return eventList;
+    },
+    challenge_eventList_all : function (state) {
+      const eventList = [];
+      for(let i = 0; i<state.challenges.length; i++) {
+        if(state.challenges[i].challenge_sort == 2) {
+          eventList.push(state.challenges[i]);
+        }
+      }
+      return eventList;
+    },
   },
   mutations: {
     CREATE_USER: function (state, user) {
@@ -665,6 +692,7 @@ export default new Vuex.Store({
     },
 
     setMonthRecord: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
+      console.log("실행여부")
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/record/${token}`;
       
@@ -684,7 +712,6 @@ export default new Vuex.Store({
     },
 
     setMyEvents: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
-      console.log(123)
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/challenge/read/MyEvent/${token}`;
       console.log("setMyEvent")
