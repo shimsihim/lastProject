@@ -678,6 +678,7 @@ export default new Vuex.Store({
     },
 
     setMyEvents: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
+      console.log(123)
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/challenge/read/MyEvent/${token}`;
       console.log("setMyEvent")
