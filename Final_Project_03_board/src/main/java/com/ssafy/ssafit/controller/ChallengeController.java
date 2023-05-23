@@ -57,6 +57,23 @@ public class ChallengeController {
 		}
 	}
     
+    @GetMapping("read/MyEvent/{token}")
+    @ApiOperation(value="이벤트 불러오기", notes = "챌린지 중 내가 참여한 이벤트만")
+    public ResponseEntity<?> readMyEvent(@PathVariable String token) {
+		try {
+			String user_id = jwtUtil.parse(token);
+			List<Challenge> myChallenges = challengeService.readMyEvent(user_id);
+			System.out.println(user_id);
+			System.out.println(user_id);
+			System.out.println(myChallenges);
+			System.out.println(myChallenges);
+			return new ResponseEntity<List<Challenge>>(myChallenges, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.I_AM_A_TEAPOT);
+		}
+	}
+    
 	@PostMapping("create")
 	@ApiOperation(value="챌린지 등록하기", notes = "등록")
 	public ResponseEntity<?> createChallenge (@RequestBody Challenge challenge) {

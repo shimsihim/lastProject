@@ -4,7 +4,7 @@
 <template>
     <div>
         <h1>Demo App</h1>
-        <FullCalendar :options='calendarOptions' />
+        <FullCalendar :options='calendarOptions'   />
         <DayDetailModal ref="eventModal" @selectEvent="convertModal"></DayDetailModal>
         <button @click="addRecord">이벤트 보기</button>
         <AddRecordModal ref="add"></AddRecordModal>
@@ -48,7 +48,9 @@ export default {
                     center: 'title',
                     right: 'dayGridMonth'
                 },
-                eventDisplay: 'list-item'
+                borderColor : "black",
+                eventClick: this.handleEventClick,
+                displayEventTime: false
 
 
 
@@ -58,24 +60,49 @@ export default {
     },
     created() {
 
+        this.$store.dispatch("setMyEvents");
         this.$store.dispatch("setMonthRecord");
-
 
 
 
     },
     methods: {
         handleDateClick: function (arg) { // 날짜 클릭 시 발생 메소드로 ARG에는 해당 날짜의 기록들이 들어있음
-
+            console.log(arg)
             this.$store.dispatch("getRecods", arg.dateStr); // 해당 날짜의 기록 가져옴
             // 모달 표시
             this.$refs.eventModal.showModal = true;
         },
+        handleEventClick(info) { // 특정 이벤트 클릭 시 발생하는 이벤트
+            
+            // console.log(info)
+            // console.log(info.event.id)
+            console.log(this.MonthRecords)
+            var item 
+            for(let i = 0 ; i < this.MonthRecords.length;++i){
+                console.log(this.MonthRecords[i].record_ex_num)
+                if(this.MonthRecords[i].record_ex_num ==info.event.id ){
+                    console.log("같아유")
+                    item = this.MonthRecords[i]
+                    break
+                }
+            }
+            console.log("여기 밑 아이템")
+            console.log(item)
+            this.$refs.update.pro = item
+            var d = new Date(item.record_ex_date) // 날짜 형식으로 변환
+            this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
+           
+            this.$refs.update.updateModal = true
+
+    
+  },
         addRecord() {
             // 기록 추가 표시
             this.$refs.add.addModal = true;
         },
         convertModal(item) {
+           
             this.$refs.eventModal.showModal = false
             this.$refs.update.updateModal = true
             this.$refs.update.pro = item
@@ -85,27 +112,44 @@ export default {
             this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
             
 
-        }
+        },
+      
 
 
     },
     computed: {
+        ...mapState(["MyEvents","MonthRecords"]),
         ...mapState(["Records"]),
-        ...mapState(["MonthRecords"]),
-        check_month_record() { return this.$store.getters.get_month_record } // 전체기록 getter로 가져오기
+        check_month_record() { return this.$store.getters.get_month_record }, // 전체기록 getter로 가져오기
+       
     },
     watch: {
         check_month_record(MonthRecords) { // 전체기록이 변경되면 이를 감시하고 computed의 getter를 통해 가져옴
             this.calendarOptions.events = [];
-            for (var i = 0; i < MonthRecords.length; ++i) {
+            for (let i = 0; i < MonthRecords.length; ++i) {
                 var d = new Date(MonthRecords[i].record_ex_date) // 날짜 형식으로 변환
-                this.calendarOptions.events.push({ title: MonthRecords[i].record_ex_memo, start: d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate()), borderColor: "red", }) // 배열을 초기화한 후 다시 넣어줌
+                this.calendarOptions.events.push({ title: MonthRecords[i].record_ex_memo, start: d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
+                , borderColor: "red",allDay : false, id : MonthRecords[i].record_ex_num  }) // 배열을 초기화한 후 다시 넣어줌
                 //위에서 식이 길어진 이유는 스프링에서 js로 date값을 받을 때 밀리초 단위로 바꿔 받는데
                 //이를 한번에 2000-01-01과 같은 형식으로 바꾸는 법을 못찾겠음
                 //단순하게 바꿔서 자르면 1일 이전의 값이 들어감....
 
             }
-        }
+            for (let i = 0; i < this.MyEvents.length; ++i) {
+                console.log("여기는 이벤트 주입 중")
+                var st = new Date(this.MyEvents[i].challenge_startDate) // 날짜 형식으로 변환
+                var ed = new Date(this.MyEvents[i].challenge_endDate) // 날짜 형식으로 변환
+                this.calendarOptions.events.push({ title: this.MyEvents[i].challenge_title, start: st.getFullYear() + "-" + (((st.getMonth() + 1).toString().length) == 1 ? ("0" + (st.getMonth() + 1)) : st.getMonth() + 1) + "-" + (((st.getDate()).toString().length) == 1 ? ("0" + (st.getDate())) : st.getDate()),
+                                                        end: ed.getFullYear() + "-" + (((ed.getMonth() + 1).toString().length) == 1 ? ("0" + (ed.getMonth() + 1)) : ed.getMonth() + 1) + "-" + (((ed.getDate()).toString().length) == 1 ? ("0" + (ed.getDate())) : ed.getDate()),
+                                                         borderColor: "rgba(255, 243, 82, 0.356)", }) // 배열을 초기화한 후 다시 넣어줌
+                //위에서 식이 길어진 이유는 스프링에서 js로 date값을 받을 때 밀리초 단위로 바꿔 받는데
+                //이를 한번에 2000-01-01과 같은 형식으로 바꾸는 법을 못찾겠음
+                //단순하게 바꿔서 자르면 1일 이전의 값이 들어감....
+
+            }
+            
+        },
+        
     }
 }
 </script>
@@ -134,4 +178,18 @@ export default {
     /* 달력의 배경색, 즉 네모칸의 배경색 */
 
 }
+/*긴줄 이벤트의 높이 설정 */
+.fc-event-title-container{
+    height: 15px  
+    
+}
+
+
+.fc-h-event{
+    text : white;
+    background-color: rgba(255, 243, 82, 0.356) ;  /* 여기가 긴줄 이벤트 배경색*/
+    
+}
+
+
 </style>

@@ -24,6 +24,7 @@ export default new Vuex.Store({
     MyChallenges: [],
     Records: [], // 1일치 기록, 달력 클릭 시 리로드 됨
     MonthRecords: [], // 1달치 기록으로 달력페이지 들어올 시 로딩 됨
+    MyEvents : [], // 달력에 띄우기 위한 용도로, 내가 참여한 이벤트(챌린지 중 이벤트)
   },
   getters: {
     userCnt: function (state) {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     get_month_record: function (state) {
       return state.MonthRecords;
+    },
+    get_my_events: function (state) {
+      return state.MyEvents;
     },
     challengeCnt: function (state) {
       return state.challenges.length;
@@ -111,6 +115,9 @@ export default new Vuex.Store({
     },
     SET_MONTH_RECORD: function (state, myallrecords) {
       state.MonthRecords = myallrecords;
+    },
+    SET_MY_EVENTS: function (state, myEvents) {
+      state.MyEvents = myEvents;
     },
     SET_CHALLENGES: function (state, challenges) {
       state.challenges = challenges;
@@ -649,7 +656,7 @@ export default new Vuex.Store({
     setMonthRecord: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/record/${token}`;
-      console.log(123123)
+      
       axios({
         method: 'GET',
         url: API_URL,
@@ -665,6 +672,24 @@ export default new Vuex.Store({
         });
     },
 
+    setMyEvents: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
+      const token = state.loginToken
+      const API_URL = `http://localhost:9999/ssafit/challenge/read/MyEvent/${token}`;
+      console.log("setMyEvent")
+      axios({
+        method: 'GET',
+        url: API_URL,
+
+      })
+        .then((res) => {
+          console.log(res)
+          commit("SET_MY_EVENTS", res.data)
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
     submitExRecord: function ({ state, dispatch }, recordForm) { // 기록 보내기
 
