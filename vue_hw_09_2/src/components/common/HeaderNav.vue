@@ -16,14 +16,14 @@
                         <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
                         <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/record">임시 캘린더</router-link></a>
+                        <a class="nav-item nav-link"><router-link to="/record">이력관리</router-link></a>
                     </div>
 
                     <a v-if="getUser" class="nav-item nav-link"><router-link to="/mypage">마이페이지</router-link></a>
                     <a v-else class="nav-item nav-link"><router-link :to="{ name: 'Regist' }">회원가입</router-link></a>
                     
-                    <a v-if="getUser" class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block" @click="logout"><router-link to="/">로그아웃</router-link></a>
-                    <a v-else class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block"><router-link to="/login">로그인</router-link></a>
+                    <a v-if="getUser" class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap" @click="logout"><router-link to="/">로그아웃</router-link></a>
+                    <a v-else class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap"><router-link to="/login">로그인</router-link></a>
 
                 </div>
             </nav>

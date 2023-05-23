@@ -3,7 +3,7 @@
 
 <template>
     <div>
-        <h1>Demo App</h1>
+       
         <FullCalendar :options='calendarOptions'   />
         <DayDetailModal ref="eventModal" @selectEvent="convertModal"></DayDetailModal>
         <button @click="addRecord">이벤트 보기</button>
@@ -189,6 +189,9 @@ export default {
     text : white;
     background-color: rgba(255, 243, 82, 0.356) ;  /* 여기가 긴줄 이벤트 배경색*/
     
+}
+.fc-toolbar-title{
+    padding-right: 100PX;
 }
 
 
