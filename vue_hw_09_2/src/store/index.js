@@ -24,6 +24,7 @@ export default new Vuex.Store({
     MyChallenges: [],
     Records: [], // 1일치 기록, 달력 클릭 시 리로드 됨
     MonthRecords: [], // 1달치 기록으로 달력페이지 들어올 시 로딩 됨
+    messages:[],
   },
   getters: {
     userCnt: function (state) {
@@ -117,6 +118,9 @@ export default new Vuex.Store({
     },
     SET_MY_CHALLENGES: function (state, MyChallenges) {
       state.MyChallenges = MyChallenges;
+    },
+    SET_MESSAGES: function (state, messages) {
+      state.messages = messages;
     },
 
   },
@@ -852,7 +856,53 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    
+    // ==================================
+    // --MESSAGES--
+    // ==================================
+    setMessages: function ({ commit }, challenge_id) {
+      console.log(challenge_id)
+      console.log("이게 등록되고 다시 실행되어야지")
+      const API_URL = `http://localhost:9999/ssafit/message/read`;
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: challenge_id,
+      })
+        .then((res) => {
+          console.log("읽어오나요")
+          console.log(res.data)
+          commit("SET_MESSAGES", res.data);  //이거 주석 풀면 요청은 제대로 받아오는데 리스트가 이상하게 안뜸
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
+    registMessage: function ({ dispatch }, message) {
+      console.log("등록하는액션에 왔음")
+      console.log("로그인토큰이있나")
+      console.log(message.message_writer_id);
+      console.log(message.message_content);
+      console.log(message.challenge_id);
+      const API_URL = `http://localhost:9999/ssafit/message/regist`;
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: {
+          challenge_id: message.challenge_id,
+          message_writer_id: message.message_writer_id,
+          message_content: message.message_content,
+        },
+      })
+        .then(() => {
+          console.log("등록됐나요")
+          dispatch("setMessages", message.challenge_id);  //이거 주석 풀면 요청은 제대로 받아오는데 리스트가 이상하게 안뜸
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
   },
 

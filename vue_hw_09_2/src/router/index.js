@@ -18,6 +18,7 @@ import CalendarItem from "@/components/calendar/CalendarItem.vue"
 import Record from "@/views/Record.vue"
 import Challenge from "../views/Challenge.vue";
 import ChallengeList from "@/components/challenge/ChallengeList.vue";
+import MyChallenge from "@/components/challenge/MyChallenge.vue";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
         path: "main/:challenge_sort",
         name: "ChallengeList",
         component: ChallengeList,
+      },
+      {
+        path: "/my",
+        name: "MyChallenge",
+        component: MyChallenge,
       },
     ]
   },
