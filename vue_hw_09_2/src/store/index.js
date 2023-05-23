@@ -27,6 +27,7 @@ export default new Vuex.Store({
     messages:[],
     MyEvents : [], // 달력에 띄우기 위한 용도로, 내가 참여한 이벤트(챌린지 중 이벤트)
     myInformation : {}, // 개인정보 수정 시 임시로 값을 갖는 곳
+    pastChat : [],
   },
   getters: {
     userCnt: function (state) {
@@ -134,6 +135,9 @@ export default new Vuex.Store({
     },
     SET_MESSAGES: function (state, messages) {
       state.messages = messages;
+    },
+    GET_CHAT: function (state, Chat) {
+      state.pastChat = Chat;
     },
 
   },
@@ -981,6 +985,30 @@ export default new Vuex.Store({
         })
         .catch(() => {
           alert("비밀번호를 확인해주세요");
+        });
+
+    },
+
+    getChat: function ({ commit},challenge_id) {
+      const API_URL = `http://localhost:9999/getchat/${challenge_id}`;
+      console.log(challenge_id)
+      console.log(challenge_id)
+      console.log(challenge_id)
+      console.log(challenge_id)
+      console.log(challenge_id)
+      console.log(challenge_id)
+      axios({
+        method: 'GET',
+        url: API_URL,
+        
+      })
+        .then((res) => {
+          // console.log(res.data)
+          commit("GET_CHAT",res.data) 
+
+        })
+        .catch(() => {
+          alert("실패");
         });
 
     },
