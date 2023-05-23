@@ -33,4 +33,8 @@ public interface ChallengeService {
 	List<Challenge> readMyChallenge(String challenge_user_id);
 
 	
+	//내가 참여한 챌린지중 이벤트
+	List<Challenge> readMyEvent(String user_id);
+
+	
 }

@@ -79,6 +79,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 		return challengeDao.readMyChallenge(challenge_user_id);
 	}
 
+	@Override
+	public List<Challenge> readMyEvent(String user_id) {
+		// TODO Auto-generated method stub
+		return challengeDao.readMyEvent(user_id);
+
+	}
+
 
 
 }
