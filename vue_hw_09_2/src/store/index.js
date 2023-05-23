@@ -74,6 +74,13 @@ export default new Vuex.Store({
       }
       return eventList;
     },
+    MonthRecords:function (state) {
+      console.log("먼슬리");
+      console.log(state.MonthRecords);
+      const list = [];
+
+      return list;
+    },
   },
   mutations: {
     CREATE_USER: function (state, user) {
