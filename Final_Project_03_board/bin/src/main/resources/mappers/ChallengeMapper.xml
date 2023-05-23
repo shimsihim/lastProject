@@ -29,6 +29,23 @@
 		ON challenge.challenge_id=participant.participant_challenge_id
 		where participant.participant_user_id = #{user_id};
 	</select>
+
+
+	<!-- 여기는 내가 참여한 챌린지 중 이벤트만 불러옴 -->
+	<select id="readMyEvent" parameterType="string" resultType="Challenge">
+		select challenge.* 
+			from challenge 
+			where 
+				(challenge.challenge_id in 
+					(select participant_challenge_id 
+						from participant 
+						where participant_user_id = #{user_id})) 
+			and 
+				challenge_sort = "2";
+		
+		
+	</select>
+	
 	
 	<insert id="createChallenge" parameterType="Challenge"  useGeneratedKeys="true" keyProperty="challenge_id">
 		insert into challenge (challenge_sort,challenge_location,challenge_title,challenge_content,challenge_cnt,challenge_startDate,challenge_endDate,challenge_makeUser)
@@ -50,6 +67,8 @@
 		delete from participant 
 		where participant_challenge_id = #{participant_challenge_id} and participant_user_id = #{participant_user_id}
 	</delete>
+	
+	
 	
 	
 </mapper>

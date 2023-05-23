@@ -20,10 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ssafy.ssafit.model.dao.UserDao;
 import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.model.service.UserService;
 import com.ssafy.ssafit.util.JwtUtil;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
@@ -97,6 +102,30 @@ public class UserController {
 	}
 	
 	
+	@PostMapping("/myInformation")
+	@ApiOperation(value="유저 상세보기", notes = "아이디로 유저 1명의 정보 상세조회,마이페이지에 쓰일 것.")
+	public ResponseEntity<?> myInformation(@RequestBody Map<String, String> requestData) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+	    String token = requestData.get("token");
+	    
+		String user_id = jwtUtil.parse(token);
+		
+		User user = userService.userDetail(user_id);
+		System.out.println(user);
+		
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+	}
+	
+	@PostMapping("/checkUserReal")
+	@ApiOperation(value="유저 상세보기", notes = "아이디로 유저 1명의 정보 상세조회,마이페이지에 쓰일 것.")
+	public ResponseEntity<?> checkUserReal(@RequestBody User user)  {
+		
+		User newUser = userService.login(user.getUser_id(), user.getUser_pw());
+		if(newUser!=null)
+	    		return new ResponseEntity<User>(newUser,HttpStatus.OK);
+		else return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+
+			
+	}
 	
 	
 	@GetMapping("/idCheck/{user_id}")

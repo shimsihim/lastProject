@@ -3,9 +3,10 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import User from "../views/User.vue";
-import UserList from "@/components/user/UserList.vue";
+// import UserList from "@/components/user/UserList.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
-import UserDetail from "@/components/user/UserDetail.vue";
+import MyPage from "@/components/user/MyPage.vue";
+import UserCheck from "@/components/user/UserCheck.vue";
 import Board from "../views/Board.vue";
 import PostList from "@/components/board/PostList.vue";
 import PostRegist from "@/components/board/PostRegist.vue";
@@ -112,25 +113,30 @@ const routes = [
     component: User,
     children: [
       {
-        path: "/regist",
+        path: "regist",
         name: "Regist",
         component: UserRegist,
       },
+      // {
+      //   path: "",
+      //   name: "List",
+      //   component: UserList,
+      // },
+      // {
+      //   path: "/:id",
+      //   name: "Detail",
+      //   component: UserDetail,
+      // },
       {
-        path: "",
-        name: "List",
-        component: UserList,
+        path: "mypage",
+        name: "MyPage",
+        component: MyPage,
+      },{
+        path: "usercheck",
+        name: "UserCheck",
+        component: UserCheck,
       },
-      {
-        path: "/:id",
-        name: "Detail",
-        component: UserDetail,
-      },
-      {
-        path: "/mypage",
-        name: "UserMyPage",
-        component: UserDetail,
-      },
+      
     ],
   },
   

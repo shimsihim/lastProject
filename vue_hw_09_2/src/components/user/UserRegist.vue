@@ -144,6 +144,7 @@ export default {
 
 
       this.$store.dispatch("createUser",user);
+      
     },
   },
   computed: {

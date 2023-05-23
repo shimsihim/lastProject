@@ -1,32 +1,42 @@
 <template>
+  <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+    <a href="" class="navbar-brand p-0">
+      <h1 class="mt-0"><router-link to="/" class="logo">FIT FRIENDS</router-link></h1>
+      <!-- <img src="img/logo.png" alt="Logo"> -->
+    </a>
+    <button class="navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav mx-auto py-0">
+        <a class="nav-item nav-link"><router-link to="/">홈</router-link></a>
+        <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
+        <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
+        <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
+        <a class="nav-item nav-link"><router-link to="/record">이력관리</router-link></a>
+      </div>
 
+      <b-dropdown v-if="getUser" no-caret>  <!--NO CARET은 드롭다운 사용 시 +모양 표시를 제거  -->
+  <template #button-content >
+    <b-icon-person-circle scale="1.4" > </b-icon-person-circle>
+  </template>
+  <b-dropdown-item>
+    <router-link to="/user/usercheck">마이페이지</router-link>
+  </b-dropdown-item>
+</b-dropdown>
 
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="" class="navbar-brand p-0">
-                    <h1 class="mt-0"><router-link to="/" class="logo">FIT FRIENDS</router-link></h1>
+      <a v-else class="nav-item nav-link">
+        <router-link :to="{ name: 'Regist' }">회원가입</router-link>
+      </a>
 
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto py-0">
-                        <a class="nav-item nav-link"><router-link to="/">홈</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
-                        <a class="nav-item nav-link"><router-link to="/record">이력관리</router-link></a>
-                    </div>
-
-                    <a v-if="getUser" class="nav-item nav-link"><router-link to="/mypage">마이페이지</router-link></a>
-                    <a v-else class="nav-item nav-link"><router-link :to="{ name: 'Regist' }">회원가입</router-link></a>
-                    
-                    <a v-if="getUser" class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap" @click="logout"><router-link to="/">로그아웃</router-link></a>
-                    <a v-else class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap"><router-link to="/login">로그인</router-link></a>
-
-                </div>
-            </nav>
+      <a v-if="getUser" class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap" @click="logout">
+        <router-link to="/">로그아웃</router-link>
+      </a>
+      <a v-else class="btn btn-light rounded-pill py-2 px-2 ms-3 d-none d-lg-block text-nowrap">
+        <router-link to="/login">로그인</router-link>
+      </a>
+    </div>
+  </nav>
 </template>
 <script>
 import { mapState } from "vuex";
@@ -61,6 +71,14 @@ header {
 .no-style-link:hover {
   text-decoration-line: none; 
   color: inherit; 
+}
+.btn.dropdown-toggle.btn-secondary{  /* 드롭다운 css설정 */
+  background-color: #ffffff;
+  color: #77CEEE;
+  border-color: #EDF5FF;
+}
+.row.g-5{
+  margin-top: 0;
 }
 
 </style>
