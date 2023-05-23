@@ -11,9 +11,9 @@
           <div class="row" v-for="(challenge, index) in MyChallenges" :key="index">
             <div class="col-12 p-2">
               <div class="card p-2">
-                <div class="card-body" >
+                <div class="card-body">
                   <h5 class="card-title"> {{challenge.challenge_title}}</h5>
-                  <span class="card-text">모임장 : {{ challenge.challenge_makeUser_nickname }}</span> | 
+                  <span class="card-text">모임장 : {{ challenge.challenge_makeUser_nickname }}</span><br/> | 
                   <span class="card-text">지역 : {{ challenge.challenge_location }}</span> | 
                   <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
                   <a class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id)">메신저</a>
@@ -33,7 +33,18 @@
           <div v-if="showMessenger" class="col-12 p-2">
             메신띄울카드폼
             <div class="card p-2">
-              <h5 class="card-title">일단 띄워봐</h5>
+              <div class="card-body" v-for="(msg, index) in messages" :key="index">
+                <span class="card-title h5"> {{msg.message_content}}</span>
+                <a class="btnmsg btn btn-primary">X</a><br/>
+                <span class="card-text">작성시간 : {{ msg.message_created_at.substring(11,16)}}</span> 
+                <!--               
+                    <div v-if="checkMember(challenge.challenge_id)">
+                    <a class="btnJoin btn btn-primary disabled" @click="addParticipant(challenge)">참여중</a>
+                    <a class="btnJoin btn btn-primary" @click="deleteParticipant(challenge)">참여취소</a>
+                    </div>
+                    <a v-else class="btnJoin btn btn-primary" @click="addParticipant(challenge)">참여하기</a>
+                    <button v-if="loginUserId === challenge.challenge_makeUser" class="btnJoin btn btn-primary" @click="deleteChallenge(challenge)">삭제</button> -->
+              </div>
               <div class="row">
                 <div class="col-9">
                   <input class="form-control border-0 rounded-pill w-60 ps-4 pe-5" type="text" v-model="message_content" placeholder="내용을 입력하세요" style="height: 58px;">
@@ -72,7 +83,7 @@ data() {
 // },
 methods:{
   showForm(challenge_id) {
-    this.showMessenger = !this.showMessenger;
+    this.showMessenger = true;
     this.id_for_callMsg = challenge_id;
   },
   registMsg() {
@@ -82,6 +93,7 @@ methods:{
       message_writer_id : this.loginToken,
     }
       this.$store.dispatch("registMessage",message);
+      this.message_content="";
   },
 //   change(challenge_sort){
 //   this.$store.dispatch("setChallenges",{
@@ -138,7 +150,7 @@ methods:{
 
 
 computed: {
-  ...mapState(["MyChallenges", "loginToken"]),
+  ...mapState(["MyChallenges", "loginToken", "messages"]),
   },
   
 // created() {
@@ -151,5 +163,9 @@ computed: {
 .btnJoin{
   width : 100px;
   height : 40px;
+}
+.btnmsg{
+  width: 30px;
+  height: 30px;
 }
 </style>
