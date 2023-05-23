@@ -54,6 +54,12 @@
       ChallengeCreateForm,
     },
     methods:{
+      change(challenge_sort){
+      this.$store.dispatch("setChallenges",{
+        challenge_sort: challenge_sort,
+        location: this.selectBy,
+      });
+    },
       deleteChallenge(challenge){
         this.$store.dispatch("deleteChallenge",challenge);
       },
@@ -72,6 +78,8 @@
         return false;
       },
     },
+
+    
     watch: {
       selectBy: function(location) {
       const pathName = new URL(document.location).pathname.split("/");
@@ -81,7 +89,21 @@
         location: location,
       })
       },
+
+      $route(to, form) {
+      if (to.path !== form.path) 
+      this.change(this.$route.params.challenge_sort);// 게시판 이동 시 마다 주소값을 확인하여 게시판 종류에 맞는 게시글 나타냄
+      },
     },
+
+  //     watch: {
+  //     $route(to, form) {
+  //     if (to.path !== form.path) 
+  //     this.change(this.$route.params.challenge_sort);// 게시판 이동 시 마다 주소값을 확인하여 게시판 종류에 맞는 게시글 나타냄
+  //   },
+  // },
+
+    
     computed: {
       ...mapState(["challenges", "loginToken", "loginUserId", "MyChallenges"]),
       ...mapGetters(["challengeCnt"]),

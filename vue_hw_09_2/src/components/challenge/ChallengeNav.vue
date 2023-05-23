@@ -9,6 +9,9 @@
           <b-nav-item>    
             <router-link class="link-dark" :to="{name: 'ChallengeList', params: {challenge_sort: 2}}" ><div class="board-header-nav-link">이벤트</div></router-link>
           </b-nav-item>
+          <b-nav-item>    
+            <router-link class="link-dark" :to="{name: 'MyChallenge'}" ><div class="board-header-nav-link">참여중인 모임</div></router-link>
+          </b-nav-item>
         </b-nav>
       </div>
   </header>
