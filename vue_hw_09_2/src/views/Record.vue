@@ -6,7 +6,7 @@
 
                     <div class="col-lg-12 col-12 text-center">
 
-                        <h2 class="mb-0">달력페이지</h2>
+                        <h2 class="mb-0">이력관리</h2>
                     </div>
 
                 </div>
