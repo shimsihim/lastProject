@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.ssafit.model.dao.MessageDao">
+
+	<select id="selectAll" parameterType="int" resultType="Message">
+		select * from message where challenge_id = #{challenge_id}
+	</select>
+	
+	<insert id="registMessage" parameterType="Message">
+		insert into Message (challenge_id,message_writer_id,message_content, message_created_at, is_deleted)
+		values
+		(#{challenge_id},#{message_writer_id},#{message_content},now(), "false")
+	</insert>
+	
+	<update id="deleteMessage" parameterType="int">
+		UPDATE Message 
+		set is_deleted = "true", message_content="삭제된 메시지입니다."
+		where message_num =#{message_num}
+	</update>
+	
+	
+</mapper>

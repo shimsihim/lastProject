@@ -19,6 +19,19 @@ Vue.use(VModal, { dynamic: true })
 
 Vue.config.productionTip = false;
 
+//아래는 사용자가 바로 마이페이지로 접근 시 유저체크를 통하도록 함
+router.beforeEach((to, from, next) => {
+  if (to.path === '/user/mypage') {
+    // 이전 페이지로의 이동을 막음
+    if (from.path !== '/user/usercheck') {
+      next(false);
+      return;
+    }
+  }
+  next(); // 다음 단계로 진행
+});
+
+
 new Vue({
   router,
   store,

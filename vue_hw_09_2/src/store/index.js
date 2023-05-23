@@ -10,7 +10,7 @@ export default new Vuex.Store({
     users: [],
     searchUsers: [],
     user: {},
-    loginUserId: "ssafy",
+    loginUserId:"ssafy",
     loginToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzc2FmeSJ9.yNR-utf7kXExltWHQOq7lKsLRKroezlb2AdP9iAY1mk",
     posts: [],
     post: {},
@@ -26,7 +26,7 @@ export default new Vuex.Store({
     MonthRecords: [], // 1달치 기록으로 달력페이지 들어올 시 로딩 됨
     messages:[],
     MyEvents : [], // 달력에 띄우기 위한 용도로, 내가 참여한 이벤트(챌린지 중 이벤트)
-
+    myInformation : {}, // 개인정보 수정 시 임시로 값을 갖는 곳
   },
   getters: {
     userCnt: function (state) {
@@ -67,6 +67,11 @@ export default new Vuex.Store({
     },
     SET_LOGIN_TOKEN: function (state, token) {
       state.loginToken = token;
+    },
+    SET_MY_INFO: function (state, user) {
+      console.log(user)
+      state.myInformation = user;
+      router.push("/user/mypage");
     },
     LOGOUT: function (state) {
       state.loginToken = null;
@@ -151,7 +156,7 @@ export default new Vuex.Store({
         .then(() => {
           commit("CREATE_USER", user);
           alert("등록되었습니다.");
-          router.push("/user");
+          router.push("/");
         })
         .catch((err) => {
           console.log(err);
@@ -214,6 +219,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    
     //필요없는 액션으로 판단되므로 이후 사용 없을 시 지우기 5/20
     // setUser: function ({ commit }, id) {
     //   const API_URL = `http://localhost:9999/userapi/user/${id}`;
@@ -936,7 +942,48 @@ export default new Vuex.Store({
           console.log(err);
         });
 
-    }
+    },
+
+    getMyInformation: function ({ commit ,state}) {
+      const API_URL = `http://localhost:9999/ssafit/user/myInformation`;
+      console.log(state.loginToken)
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: {token : state.loginToken},
+      })
+        .then((res) => {
+          // console.log(res.data)
+          commit("SET_MY_INFO", res.data); 
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+    },
+
+    checkUserReal: function ({ commit ,state},user_pw) {
+      const API_URL = `http://localhost:9999/ssafit/user/checkUserReal`;
+      console.log(user_pw)
+      axios({
+        method: 'POST',
+        url: API_URL,
+        data: {
+          user_id : state.loginUserId,
+          user_pw : user_pw
+        },
+      })
+        .then((res) => {
+          // console.log(res.data)
+          commit("SET_MY_INFO", res.data); 
+          
+        })
+        .catch(() => {
+          alert("비밀번호를 확인해주세요");
+        });
+
+    },
 
   },
 

@@ -11,7 +11,7 @@
     <!-- 좋아요 표시 아이콘 위치 -->
     <span class="h2 mb-6" @click="changeLike">
       <b-button v-if="likeChk" size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
-        <b-icon icon="heart-fill" aria-hidden="true" style="color: blueviolet;"></b-icon><br> 좋아요
+        <b-icon icon="heart-fill" aria-hidden="true" ></b-icon><br> 좋아요
       </b-button>
       <b-button v-else size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
         <b-icon icon="heart" aria-hidden="true"></b-icon><br> 좋아요
