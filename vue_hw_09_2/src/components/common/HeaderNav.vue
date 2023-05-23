@@ -33,7 +33,7 @@ import { mapState } from "vuex";
 export default {
   name: "HeaderNav",
   methods: {
-    logout() {
+    logout() {     
       this.$store.commit("LOGOUT");
       alert("로그아웃 되었습니다.");
     },
