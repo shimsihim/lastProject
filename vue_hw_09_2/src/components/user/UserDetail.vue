@@ -50,13 +50,14 @@ export default {
   },
   computed: {
     ...mapState(["loginUser"]),
-    //관리자용
-  //   ...mapState(["user"]),
-  // },
-  // created() {
-  //   const pathName = new URL(document.location).pathname.split("/");
-  //   const id = pathName[pathName.length - 1];
-  //   this.setUser(id);
+    // 관리자용
+    ...mapState(["user"]),
+  },
+  created() {
+    console.log(12313213)
+    const pathName = new URL(document.location).pathname.split("/");
+    const id = pathName[pathName.length - 1];
+    this.setUser(id);
    },
 };
 </script>

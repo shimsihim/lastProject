@@ -27,4 +27,8 @@
 		where videocomment_num = #{videocomment_num}
 	</delete>
 	
+	<select id="getVideoCommentWriterId" parameterType="int" resultType="String">
+		select videocomment_writer_id from videocomment where videocomment_num = #{videocomment_num}
+	</select>
+	
 </mapper>
