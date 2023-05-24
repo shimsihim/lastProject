@@ -37,11 +37,7 @@ public class SocketController {
         // 생성자로 반환값을 생성합니다.
         SocketVO result = new SocketVO(userName, content,challenge_id);
         chatDao.insertChat(result);
-        System.out.println(result);
-        System.out.println(result);
-        System.out.println(result);
-        System.out.println(result);
-        System.out.println(result);
+        
         // 반환
         return result;
     }

@@ -110,7 +110,6 @@ public class UserController {
 		String user_id = jwtUtil.parse(token);
 		
 		User user = userService.userDetail(user_id);
-		System.out.println(user);
 		
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}

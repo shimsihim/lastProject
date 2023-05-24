@@ -2,6 +2,7 @@
   <b-modal v-model="showModal" title="이벤트 정보" class="custom-modal">
 
     <b-table striped hover :items="Records" :fields="fields" :labels="labels" @row-clicked="seletOne"></b-table>
+    <a class="btnJoin btn btn-primary" @click="regist">추가 등록</a>
   </b-modal>
 </template>
   
@@ -19,7 +20,13 @@ export default {
   },
   methods: {
     seletOne(item) {
+      console.log("여기는 행 선택")
       this.$emit("selectEvent",item)
+    },
+    regist(){
+      console.log("여기는 버튼 선택")
+
+      this.$emit("registEvent")
     }
   },
 

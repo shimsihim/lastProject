@@ -5,7 +5,7 @@
     <div>
        
         <FullCalendar :options='calendarOptions'   />
-        <DayDetailModal ref="eventModal" @selectEvent="convertModal"></DayDetailModal>
+        <DayDetailModal ref="eventModal" @selectEvent="convertModal" @registEvent = "addRecord"></DayDetailModal>
         <button @click="addRecord">이벤트 보기</button>
         <AddRecordModal ref="add"></AddRecordModal>
         <UpdateRecordModal ref="update"></UpdateRecordModal>
@@ -106,6 +106,7 @@ export default {
         addRecord() {
             // 기록 추가 표시
             this.$refs.add.addModal = true;
+            this.$refs.eventModal.showModal = false;
         },
         convertModal(item) {
            
