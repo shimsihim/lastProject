@@ -21,7 +21,6 @@
                       <span class="card-text">지역 : {{ challenge.challenge_location }}</span> | 
                       <span class="card-text">참여인원 : {{ challenge.challenge_participants.length }} / {{ challenge.challenge_cnt }}</span>
                       <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
-                        
                           <div v-if="checkMember(challenge.challenge_id)">
                           <a class="btnJoin btn btn-primary disabled" @click="addParticipant(challenge)">참여중</a>
                           <a class="btnJoin btn btn-primary" @click="deleteParticipant(challenge)">참여취소</a>

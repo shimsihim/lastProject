@@ -76,7 +76,12 @@ public class ChallengeServiceImpl implements ChallengeService {
 
 	@Override
 	public List<Challenge> readMyChallenge(String challenge_user_id) {
-		return challengeDao.readMyChallenge(challenge_user_id);
+		List<Challenge> list = challengeDao.readMyChallenge(challenge_user_id);
+		for(int i = 0; i<list.size(); i++) {
+			List<User> participants = challengeDao.selectUsers(list.get(i).getChallenge_id());
+			list.get(i).setChallenge_participants(participants);
+		}
+		return list;
 	}
 
 	@Override
