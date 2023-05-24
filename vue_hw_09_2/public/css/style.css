@@ -86,7 +86,7 @@ h6,
 .btn.btn-custom-modify {
     width : 100px;
     height : 40px;
-    background-color:rgba(84, 161, 224, 0.606);;
+    background-color:rgba(84, 161, 224, 0.606);
 }
 .btn.btn-custom-delete {
     width : 100px;
@@ -98,6 +98,10 @@ h6,
     background-color: rgba(84, 161, 224, 0.901);
 }
 
+.btn-login:hover{
+    color: #c7dbf4;
+    background-color: rgba(188, 211, 235, 0.606);
+}
 
 /*** Navbar ***/
 .navbar .dropdown-toggle::after {
