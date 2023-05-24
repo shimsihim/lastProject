@@ -6,7 +6,8 @@
        
         <FullCalendar :options='calendarOptions'   />
         <DayDetailModal ref="eventModal" @selectEvent="convertModal" @registEvent = "addRecord"></DayDetailModal>
-        <button @click="addRecord">이벤트 보기</button>
+        <button  class = "btn btn-secondary text-dark btn-secondary btn-secondary:hover" @click="addRecord">기록하기</button>
+        
         <AddRecordModal ref="add"></AddRecordModal>
         <UpdateRecordModal ref="update"></UpdateRecordModal>
     </div>
@@ -171,11 +172,11 @@ export default {
 .fc-col-header-cell-cushion {
     color: black;
     /* 월화수목금토일 색상 */
-    background-color: #4AC4F3;
+    background-color:#ffffff00;
 }
 
 .fc-scrollgrid-sync-inner {
-    background-color: #4AC4F3;
+    background-color: #ffffff4f;
     /* 달력의 배경색, 즉 네모칸의 배경색 */
 
 }
@@ -184,15 +185,57 @@ export default {
     height: 15px  
     
 }
-
-
+.fc-dayGridMonth-button{
+    background-color: red;
+}
+.fc-button-active{
+    background-color: red;
+}
+.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active{
+   background-color: #2c3e5094;
+    filter: contrast(80%);
+    border-color:  #77c2ee;
+}
+.fc-prev-button.fc-button.fc-button-primary{
+      background-color: #2c3e5094;
+    filter: contrast(80%);
+    border-color:  #77c2ee;
+}
+.fc-next-button.fc-button.fc-button-primary{
+   background-color: #2c3e5094;
+    filter: contrast(80%);
+    border-color:  #77c2ee;
+}
+.fc-today-button.fc-button.fc-button-primary{
+    background-color: #2c3e5094;
+    filter: contrast(80%);
+    border-color:  #77c2ee;
+}
 .fc-h-event{
     text : white;
     background-color: rgba(255, 243, 82, 0.356) ;  /* 여기가 긴줄 이벤트 배경색*/
     
 }
+.fc-event.fc-event-start.fc-event.fc-event-start.fc-daygrid-event.fc-daygrid-block-event
+.fc-daygrid-block-event.fc-h-event{
+margin-bottom: "100px";
+}
+.fc-event fc-event-start.fc-daygrid-event.fc-daygrid-block-event.fc-h-event{
+    margin-bottom: "100px";
+}
+.fc-toolbar-title{
+    color: white;
+    font: 500px;
+}
 .fc-toolbar-title{
     padding-right: 100PX;
+}
+.btn-secondary {
+  width : 100px;
+  background-color: rgb(182, 185, 192);
+}
+.btn-secondary:hover {
+  background-color: rgb(159, 162, 169);
 }
 
 
