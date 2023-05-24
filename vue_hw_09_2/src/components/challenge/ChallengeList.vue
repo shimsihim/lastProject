@@ -77,8 +77,6 @@
         return false;
       },
     },
-
-    
     watch: {
       selectBy: function(location) {
       const pathName = new URL(document.location).pathname.split("/");
