@@ -1,34 +1,4 @@
 <template>
-      <!-- <b-form>
-        <b-form-group label="지역" label-for="name-input">
-          <b-form-input id="name-input" v-model="name"></b-form-input>
-        </b-form-group>
-        <b-form-group label="제목" label-for="challenge_title-input">
-          <b-form-input id="email-challenge_title" v-model="challenge_title"></b-form-input>
-        </b-form-group>
-        <b-form-group label="내용" label-for="challenge_content">
-          <b-form-input id="challenge_content" v-model="challenge_content"></b-form-input>
-        </b-form-group>
-        <b-form-group label="모집인원" label-for="challenge_cnt">
-          <b-form-input type="number" id="challenge_cnt" v-model="challenge_cnt"></b-form-input>
-        </b-form-group>
-        <b-form-group label="시작일" label-for="echallenge_startDate">
-          <b-form-input type="date" id="challenge_startDate" v-model="challenge_startDate"></b-form-input>
-        </b-form-group>
-        <b-form-group label="마감일" label-for="challenge_endDate">
-          <b-form-input type="date" id="challenge_endDate" v-model="challenge_endDate"></b-form-input>
-        </b-form-group>
-
-        <template #modal-footer>
-          <div class="d-flex justify-content-end">
-              <b-button variant="primary" @click="registChallenge">등록</b-button>
-              <b-button variant="secondary" @click="cancelModal">취소</b-button>
-            </div>
-          </template>
-
-      </b-form> -->
-
-
       <div v-if="loginToken">
         <button @click="showForm">등록하기</button>
         <div v-if="showRegistForm">

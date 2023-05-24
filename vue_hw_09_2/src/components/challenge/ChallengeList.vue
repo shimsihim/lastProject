@@ -1,6 +1,5 @@
 <template>
       <div class="container">
-        <h2>챌린지 목록</h2>
         <h4>등록된 챌린지의 수 : {{ challengeCnt }}</h4>
         <div v-if="challengeCnt">
           <select name="selectBy" v-model="selectBy">
@@ -14,17 +13,17 @@
 
               <div class="row">
                 <div class="col-sm-6 p-2" v-for="(challenge, index) in challenges" :key="index">
-                  <div class="card p-2">
-                    <div class="card-body" >
+                    <div class="card p-2 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="card-body advanced-feature-item text-center rounded py-5 px-4" >
                       <h5 class="card-title"> {{challenge.challenge_title}}</h5>
                       <span class="card-text">모임장 : {{ challenge.challenge_makeUser_nickname }}</span> | 
                       <span class="card-text">지역 : {{ challenge.challenge_location }}</span> | 
                       <span class="card-text">참여인원 : {{ challenge.challenge_participants.length }} / {{ challenge.challenge_cnt }}</span>
                       <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
-                          <div v-if="checkMember(challenge.challenge_id)">
+                          <span v-if="checkMember(challenge.challenge_id)">
                           <a class="btnJoin btn btn-primary disabled" @click="addParticipant(challenge)">참여중</a>
                           <a class="btnJoin btn btn-primary" @click="deleteParticipant(challenge)">참여취소</a>
-                          </div>
+                          </span>
                           <a v-else class="btnJoin btn btn-primary" @click="addParticipant(challenge)">참여하기</a>
                           <button v-if="loginUserId === challenge.challenge_makeUser" class="btnJoin btn btn-primary" @click="deleteChallenge(challenge)">삭제</button>
                     </div>
