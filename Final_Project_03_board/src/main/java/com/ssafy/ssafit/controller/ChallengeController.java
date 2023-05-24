@@ -41,6 +41,7 @@ public class ChallengeController {
     @ApiOperation(value="챌린지 불러오기", notes = "모임인지, 챌린지인지 구분해서 불러오기")
     public ResponseEntity<?> selectAll(@PathVariable int challenge_id) {
         List<Challenge> challenges = challengeService.selectAll(challenge_id);
+        
     return new ResponseEntity<List<Challenge>>(challenges, HttpStatus.OK);
     }
     
@@ -63,10 +64,7 @@ public class ChallengeController {
 		try {
 			String user_id = jwtUtil.parse(token);
 			List<Challenge> myChallenges = challengeService.readMyEvent(user_id);
-			System.out.println(user_id);
-			System.out.println(user_id);
-			System.out.println(myChallenges);
-			System.out.println(myChallenges);
+			
 			return new ResponseEntity<List<Challenge>>(myChallenges, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

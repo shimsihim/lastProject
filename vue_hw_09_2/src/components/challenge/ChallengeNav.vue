@@ -1,28 +1,45 @@
 <template>
   <header>
-
-      <div>
-        <b-nav class="challenge-nav" tabs fill>
-          <b-nav-item active>
-            <router-link class="link-dark" :to="{name: 'ChallengeList', params: {challenge_sort: 1}}" ><div class="board-header-nav-link">모임</div></router-link>
-            </b-nav-item>
-          <b-nav-item>    
-            <router-link class="link-dark" :to="{name: 'EventList'}" ><div class="board-header-nav-link">이벤트</div></router-link>
-          </b-nav-item>
-          <b-nav-item>    
-            <router-link class="link-dark" :to="{name: 'MyChallenge'}" ><div class="board-header-nav-link">참여중인 모임</div></router-link>
-          </b-nav-item>
-          <b-nav-item>  
-            <router-link class="link-dark" :to="{name: 'ChallengeProgress'}" ><div class="board-header-nav-link">진행도 확인 탭</div></router-link>
-        </b-nav-item>
-        </b-nav>
-      </div>
+        <div>
+      <b-tabs v-model="activeTab" class="challenge-nav" fill>
+        <b-tab @click="navigateTo('ChallengeList', 1)">
+          <template #title>
+            <div class="board-header-nav-link">모임</div>
+          </template>
+        </b-tab>
+        <b-tab @click="navigateTo('EventList')">
+          <template #title>
+            <div class="board-header-nav-link">이벤트</div>
+          </template>
+        </b-tab>
+        <b-tab @click="navigateTo('MyChallenge')">
+          <template #title>
+            <div class="board-header-nav-link">참여중인 모임</div>
+          </template>
+        </b-tab>
+        <b-tab @click="navigateTo('ChallengeProgress')">
+          <template #title>
+            <div class="board-header-nav-link">진행도 확인 탭</div>
+          </template>
+        </b-tab>
+      </b-tabs>
+    </div>
   </header>
 </template>
 
 <script>
 export default {
   name: "ChallengeNav",
+  data() {
+    return {
+      activeTab: 0
+    }
+  },
+  methods: {
+    navigateTo(routeName, param) {
+      this.$router.push({ name: routeName, params: { challenge_sort: param } });
+    }
+  },
 };
 </script>
 

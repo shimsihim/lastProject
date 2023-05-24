@@ -39,14 +39,7 @@ public class VideoCommentController {
 	@GetMapping("/read/{video_id}")
 	@ApiOperation(value="댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
 	public ResponseEntity<?> selectVideoComment(@PathVariable String video_id) {
-		System.out.println("댓글불러오기");
-		System.out.println("댓글불러오기");
-		System.out.println("댓글불러오기");
-		System.out.println(video_id);
-		System.out.println(video_id);
-		System.out.println(video_id);
-		System.out.println(video_id);
-		System.out.println(video_id);
+		
 		List<VideoComment> commentlist = videoCommentService.selectVideoComment(video_id);
 	return new ResponseEntity<List<VideoComment>>(commentlist, HttpStatus.OK);
 	}
@@ -70,11 +63,7 @@ public class VideoCommentController {
     @ApiOperation(value="댓글 삭제", notes = "댓글 삭제하기 (DB삭제)")
     public ResponseEntity<?> deleteComment(@PathVariable int videocomment_num, @ApiIgnore HttpServletResponse resp,@PathVariable String token) throws IOException {
         
-		System.out.println(videocomment_num);
-		System.out.println(videocomment_num);
-		System.out.println(videocomment_num);
-		System.out.println(token);
-		System.out.println(token);
+		
         if(!jwtUtil.parse(token).equals(videoCommentService.getVideoCommentWriterId(videocomment_num))) {
             return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);}
        
@@ -88,19 +77,9 @@ public class VideoCommentController {
 
 
     	String token = videoComment.getLoginToken();
-    	System.out.println(token);
-    	System.out.println(token);
-    	System.out.println(token);
-    	System.out.println(token);
-    	System.out.println(token);
-    	System.out.println(token);
+    	
         String user_id = jwtUtil.parse(token);
-    	System.out.println(user_id);
-    	System.out.println(user_id);
-    	System.out.println(user_id);
-    	System.out.println(user_id);
-    	System.out.println(user_id);
-    	System.out.println(user_id);
+    	
         videoComment.setVideocomment_writer_id(user_id);
         if(!jwtUtil.parse(token).equals(videoComment.getVideocomment_writer_id()))
             return new ResponseEntity<Void>(HttpStatus.I_AM_A_TEAPOT);

@@ -1,16 +1,21 @@
 <template>
   <!--  this.id  가 들어있는 공간에 현재 선택된 챌린지가 들어가야 함  -->
   <div id="app">
-    <div v-for="(pastChat, idx) in pastChat" :key="idx">
-      <h3>유저이름: {{ pastChat.userName }}</h3>
-      <h3>내용: {{ pastChat.content }}</h3>
+    <div class="card p-2" style="height: 780px">
+      <div class="card-body" style="overflow-y: auto">
+        <div class="d-flex justify-content-flex-end align-items-center"></div>
+        <div v-for="(pastChat, idx) in pastChat" :key="idx">
+          <h3>유저이름: {{ pastChat.userName }}</h3>
+          <h3>내용: {{ pastChat.content }}</h3>
+        </div>
+        <div v-for="(item, idx) in recvList" :key="idx">
+          <h3>유저이름: {{ item.userName }}</h3>
+          <h3>내용: {{ item.content }}</h3>
+        </div>
+      </div>
+      내용: <input v-model="message" type="text" @keyup.enter="send" />
+      <a class="btnJoin btn btn-primary" @click="send">보내기</a>
     </div>
-    <div v-for="(item, idx) in recvList" :key="idx">
-      <h3>유저이름: {{ item.userName }}</h3>
-      <h3>내용: {{ item.content }}</h3>
-    </div>
-    내용: <input v-model="message" type="text" @keyup.enter="send" />
-    <a class="btnJoin btn btn-primary" @click="send">보내기</a>
   </div>
 </template>
 
@@ -59,7 +64,7 @@ export default {
             challenge_id: this.id,
           };
           this.stompClient.send(`/receive/${this.id}`, JSON.stringify(msg), {});
-          this.message = ""
+          this.message = "";
         }
       } else alert("내용을 입력해주세요");
     },
