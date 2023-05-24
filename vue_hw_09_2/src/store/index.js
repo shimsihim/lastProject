@@ -24,6 +24,7 @@ export default new Vuex.Store({
     MyChallenges: [],
     Records: [], // 1일치 기록, 달력 클릭 시 리로드 됨
     MonthRecords: [], // 1달치 기록으로 달력페이지 들어올 시 로딩 됨
+    month:"",
     messages:[],
     MyEvents : [], // 달력에 띄우기 위한 용도로, 내가 참여한 이벤트(챌린지 중 이벤트)
     myInformation : {}, // 개인정보 수정 시 임시로 값을 갖는 곳
@@ -75,11 +76,16 @@ export default new Vuex.Store({
       }
       return eventList;
     },
-    MonthRecords:function (state) {
-      console.log("먼슬리");
+    getMonthRecords:function (state) {
+      console.log("getMonthRecords");
       console.log(state.MonthRecords);
       const list = [];
-
+        for(let i=0; i<state.MonthRecords.length; i++) {
+          console.log(state.MonthRecords[i].record_ex_date.substring(5,7))
+          if(state.MonthRecords[i].record_ex_date.substring(5,7) == state.month){
+            list.push(state.MonthRecords[i]);
+          }
+        }
       return list;
     },
   },
@@ -166,6 +172,9 @@ export default new Vuex.Store({
     },
     SET_MY_CHALLENGES: function (state, MyChallenges) {
       state.MyChallenges = MyChallenges;
+    },
+    SET_MONTH: function (state, month) {
+      state.month = month;
     },
     SET_MESSAGES: function (state, messages) {
       state.messages = messages;
@@ -703,7 +712,7 @@ export default new Vuex.Store({
     },
 
     setMonthRecord: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
-      console.log("실행여부")
+      console.log("setMonthRecord실행여부");
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/record/${token}`;
       
@@ -926,6 +935,10 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
+    },
+
+    setMonth: function ({ commit }, month){
+      commit("SET_MONTH", month);
     },
     
     // ==================================

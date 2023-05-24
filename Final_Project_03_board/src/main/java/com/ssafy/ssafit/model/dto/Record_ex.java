@@ -11,7 +11,7 @@ public class Record_ex {
 	private String record_part;
 	private String record_ex_memo;
 	private int record_ex_time;
-	private Date record_ex_date;
+	private String record_ex_date;
 
 	public Record_ex() {
 		super();
@@ -19,7 +19,7 @@ public class Record_ex {
 	}
 
 	public Record_ex(int record_ex_num, String record_ex_user_id, String record_part, String record_ex_memo,
-			int record_ex_time, Date record_ex_date) {
+			int record_ex_time, String record_ex_date) {
 		super();
 		this.record_ex_num = record_ex_num;
 		this.record_ex_user_id = record_ex_user_id;
@@ -69,11 +69,11 @@ public class Record_ex {
 		this.record_ex_time = record_ex_time;
 	}
 
-	public Date getRecord_ex_date() {
+	public String getRecord_ex_date() {
 		return record_ex_date;
 	}
 
-	public void setRecord_ex_date(Date record_ex_date) {
+	public void setRecord_ex_date(String record_ex_date) {
 		this.record_ex_date = record_ex_date;
 	}
 

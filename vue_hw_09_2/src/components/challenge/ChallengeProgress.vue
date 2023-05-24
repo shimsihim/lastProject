@@ -10,7 +10,7 @@
               <div class="card-body">
                 <h5 class="card-title"> {{challenge.challenge_title}}</h5>
                 <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
-                <a class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id)">진행도확인</a>
+                <a class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id, challenge.challenge_startDate.substring(5,7))">진행도확인</a>
 
                 <!-- ========================== -->
                 <div v-if="showProgressBar">
@@ -43,15 +43,17 @@ data() {
   return{
     showProgressBar: false,
     id_for_call_Bar : "",
+    month_for_SetBar : "",
   };
 },
 components:{
   ProgressBar,
 },
 methods:{
-  showForm(challenge_id) {
+  showForm(challenge_id, month) {
     this.showProgressBar= !this.showProgressBar;
     this.id_for_call_Bar = challenge_id;
+    this.month_for_SetBar = month;
   },
 },
 

@@ -84,6 +84,10 @@ public class ChallengeController {
 			challengeService.createChallenge(challenge);
 			Participant participant = new Participant(challenge.getChallenge_id(), user_id);
 			challengeService.addParticipant(participant);
+			//여기는 날짜확인 완료
+			//여기는 날짜확인 완료
+			//여기는 날짜확인 완료
+			//여기는 날짜확인 완료
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -77,7 +77,7 @@ public class RecordController {
 	public ResponseEntity<?> submitRecord(@RequestBody HashMap<String, Object> map) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException  {
 
 		Record_ex record = new Record_ex();
-		record.setRecord_ex_date(java.sql.Date.valueOf((String) map.get("record_ex_date")));
+		record.setRecord_ex_date((String) map.get("record_ex_date"));
 		record.setRecord_ex_memo((String) map.get("record_ex_memo"));
 		record.setRecord_ex_time(Integer.parseInt((String) map.get("record_ex_time")));
 		record.setRecord_part((String) map.get("record_part"));
@@ -93,7 +93,7 @@ public class RecordController {
 
 		
 		Record_ex record = new Record_ex();
-		record.setRecord_ex_date(java.sql.Date.valueOf((String) map.get("record_ex_date")));
+		record.setRecord_ex_date((String) map.get("record_ex_date"));
 		record.setRecord_ex_memo((String) map.get("record_ex_memo"));
 		record.setRecord_part((String) map.get("record_part"));
 		record.setRecord_ex_time((int) map.get("record_ex_time"));

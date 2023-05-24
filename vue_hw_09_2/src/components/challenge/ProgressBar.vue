@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
   export default {
     name:"ProgressBar",
@@ -32,7 +32,6 @@ import { mapState, mapGetters } from "vuex";
         loadingTime: 0,
         maxLoadingTime: 30,
         recordCnt: "",
-        //recordCnt: this.MonthRecords.length(),
       }
     },
     watch: {
@@ -61,8 +60,8 @@ import { mapState, mapGetters } from "vuex";
     created() {
       this.$_loadingTimeInterval = null;
       this.$store.dispatch("setMonthRecord");
-      console.log(this.MonthRecords.length);
-      this.recordCnt=this.MonthRecords.length;
+      console.log(this.getMonthRecords.length);
+      this.recordCnt=this.getMonthRecords.length;
     },
     mounted() {
       this.startLoading()
@@ -78,8 +77,7 @@ import { mapState, mapGetters } from "vuex";
       }
     },
     computed: {
-      ...mapState(["MonthRecords", "loginToken", "loginUserId"]),
-      ...mapGetters(["challenge_eventList"]),
+      ...mapGetters(["challenge_eventList","getMonthRecords"]),
       },
   
   }

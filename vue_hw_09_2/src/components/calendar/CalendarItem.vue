@@ -91,7 +91,13 @@ export default {
             console.log(item)
             this.$refs.update.pro = item
             var d = new Date(item.record_ex_date) // 날짜 형식으로 변환
-            this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
+            console.log("날짜출력")
+            console.log("날짜출력")
+            console.log("날짜출력")
+            console.log(d);
+            console.log(d);
+            this.$refs.update.pro.record_ex_date=d;
+            //this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().le ngth) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
            
             this.$refs.update.updateModal = true
 
@@ -109,7 +115,8 @@ export default {
 
 
             var d = new Date(item.record_ex_date) // 날짜 형식으로 변환
-            this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
+            this.$refs.update.pro.record_ex_date =d;
+            //this.$refs.update.pro.record_ex_date = d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
             
 
         },
@@ -128,8 +135,10 @@ export default {
             this.calendarOptions.events = [];
             for (let i = 0; i < MonthRecords.length; ++i) {
                 var d = new Date(MonthRecords[i].record_ex_date) // 날짜 형식으로 변환
-                this.calendarOptions.events.push({ title: MonthRecords[i].record_ex_memo, start: d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
-                , borderColor: "red",allDay : false, id : MonthRecords[i].record_ex_num  }) // 배열을 초기화한 후 다시 넣어줌
+                this.calendarOptions.events.push({ title: MonthRecords[i].record_ex_memo, start: d
+                , borderColor: "red",allDay : false, id : MonthRecords[i].record_ex_num  })
+                // this.calendarOptions.events.push({ title: MonthRecords[i].record_ex_memo, start: d.getFullYear() + "-" + (((d.getMonth() + 1).toString().length) == 1 ? ("0" + (d.getMonth() + 1)) : d.getMonth() + 1) + "-" + (((d.getDate()).toString().length) == 1 ? ("0" + (d.getDate())) : d.getDate())
+                // , borderColor: "red",allDay : false, id : MonthRecords[i].record_ex_num  }) // 배열을 초기화한 후 다시 넣어줌
                 //위에서 식이 길어진 이유는 스프링에서 js로 date값을 받을 때 밀리초 단위로 바꿔 받는데
                 //이를 한번에 2000-01-01과 같은 형식으로 바꾸는 법을 못찾겠음
                 //단순하게 바꿔서 자르면 1일 이전의 값이 들어감....
@@ -139,9 +148,12 @@ export default {
                 console.log("여기는 이벤트 주입 중")
                 var st = new Date(this.MyEvents[i].challenge_startDate) // 날짜 형식으로 변환
                 var ed = new Date(this.MyEvents[i].challenge_endDate) // 날짜 형식으로 변환
-                this.calendarOptions.events.push({ title: this.MyEvents[i].challenge_title, start: st.getFullYear() + "-" + (((st.getMonth() + 1).toString().length) == 1 ? ("0" + (st.getMonth() + 1)) : st.getMonth() + 1) + "-" + (((st.getDate()).toString().length) == 1 ? ("0" + (st.getDate())) : st.getDate()),
-                                                        end: ed.getFullYear() + "-" + (((ed.getMonth() + 1).toString().length) == 1 ? ("0" + (ed.getMonth() + 1)) : ed.getMonth() + 1) + "-" + (((ed.getDate()).toString().length) == 1 ? ("0" + (ed.getDate())) : ed.getDate()),
-                                                         borderColor: "rgba(255, 243, 82, 0.356)", }) // 배열을 초기화한 후 다시 넣어줌
+                this.calendarOptions.events.push({ title: this.MyEvents[i].challenge_title, start: st,
+                                                        end: ed,
+                                                         borderColor: "rgba(255, 243, 82, 0.356)", })
+                // this.calendarOptions.events.push({ title: this.MyEvents[i].challenge_title, start: st.getFullYear() + "-" + (((st.getMonth() + 1).toString().length) == 1 ? ("0" + (st.getMonth() + 1)) : st.getMonth() + 1) + "-" + (((st.getDate()).toString().length) == 1 ? ("0" + (st.getDate())) : st.getDate()),
+                //                                         end: ed.getFullYear() + "-" + (((ed.getMonth() + 1).toString().length) == 1 ? ("0" + (ed.getMonth() + 1)) : ed.getMonth() + 1) + "-" + (((ed.getDate()).toString().length) == 1 ? ("0" + (ed.getDate())) : ed.getDate()),
+                //                                          borderColor: "rgba(255, 243, 82, 0.356)", }) // 배열을 초기화한 후 다시 넣어줌
                 //위에서 식이 길어진 이유는 스프링에서 js로 date값을 받을 때 밀리초 단위로 바꿔 받는데
                 //이를 한번에 2000-01-01과 같은 형식으로 바꾸는 법을 못찾겠음
                 //단순하게 바꿔서 자르면 1일 이전의 값이 들어감....
