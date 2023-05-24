@@ -1,24 +1,29 @@
 <template>
   <div class="container">
-    <h2>글등록</h2>
-    <fieldset class="text-center">
-      <label for="comment_content">내용</label>
-      <textarea v-if="loginToken"
-        id="comment_content"
-        v-model="comment_content"
-        class="view"
-        
-      />
-      <textarea v-else
-        id="comment_content"
-        v-model="comment_none"
-        class="view"
-        readonly
-      /><br />      
-      <button class="btn" @click="regist">등록</button>
-    </fieldset>
-    
-  </div>
+    <h2 class="mt-5">댓글등록</h2>
+    <div class="row">
+      <div class="col-10">
+        //바꿀거..//
+                                  <fieldset class="text-center">
+                                      <textarea v-if="loginToken"
+                                        id="comment_content"
+                                        v-model="comment_content"
+                                        class="view"
+                                        
+                                      />
+                                      <textarea v-else
+                                        id="comment_content"
+                                        v-model="comment_none"
+                                        class="view"
+                                        readonly
+                                      />
+                                    </fieldset>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-secondary text-dark" @click="regist">등록</button>
+        </div>
+      </div>
+    </div>
 </template>
 <script>
 import { mapState } from "vuex";
@@ -53,24 +58,18 @@ export default {
   computed: {
     ...mapState(["loginUser"]),
     ...mapState(["post","loginToken"]),
-    // compVal: {
-    //   get () {
-    //     if (this.selected) {
-    //       return this.videocomment_content
-    //     } else {
-    //       return this.comment_none
-    //     }
-    //   },
-    //   set (val) {
-    //     if (this.selected) {
-    //       this.videocomment_content = val
-    //     } else {
-    //       this.comment_none = val
-    //     }
-    //   }
-    // },
-
 
   },
 };
 </script>
+
+<style>
+.btn-secondary {
+  width : 100px;
+  height : 80px;
+  background-color: rgba(255, 255, 255, 0.388);
+}
+.btn-secondary:hover {
+  background-color: rgba(84, 161, 224, 0.606);
+}
+</style>

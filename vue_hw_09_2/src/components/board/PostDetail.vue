@@ -1,14 +1,34 @@
 <template>
   <div class="container">
-    <h2>글 상세</h2>
-    <div>제목: {{ post.post_title }}</div>
-    <div>내용: {{ post.post_content }}</div>
-    <div>닉네임: {{ post.post_writer_nickname }}</div>
-    <div>작성일: {{ post.post_created_at }}</div>
-    <div>조회수: {{ post.post_view_cnt }}</div>
+    <!-- <h2 class="my-4 text-center">게시글 상세 보기</h2> -->
+    <div class="card mt-5 p-4 board-detail-card">
+      <h2>{{ post.post_title }}</h2>
+      <div>작성자: {{ post.post_writer_nickname }}</div>
+      <hr />
+      <div style="height:200px">{{ post.post_content }}</div>
+      <hr />
 
+      <div class="row">
+        <div class="col-10">
+          <div>작성일: {{ post.post_created_at.substring(0,16) }}</div>
+          <div>조회수: {{ post.post_view_cnt }}</div>
+        </div>
+        <div class="col-2">
+          <!-- 좋아요 표시 아이콘 위치 -->
+          <span class="h2 mb-6" @click="changeLike">
+            <b-button v-if="likeChk" size="md" style="width: 80px;color: black; background-color: transparent; " variant="outline-info" >
+              <i style="font-size: 1.23rem;" class="bi bi-heart-fill custom-icon"></i><br/>좋아요
+              <!-- <b-icon icon="heart-fill" style="color:red" aria-hidden="true" ></b-icon><br> 좋아요 -->
+            </b-button>
+            <b-button v-else size="md" style=" width: 80px; color: black; background-color: transparent; " variant="outline-info" >
+              <i class="bi bi-heart" style="font-size: 1.23rem;" aria-hidden="true"></i><br> 좋아요
+            </b-button>
+          </span>
+        </div>
+      </div>
+    </div>
 
-    <!-- 좋아요 표시 아이콘 위치 -->
+    <!-- 좋아요 표시 아이콘 위치
     <span class="h2 mb-6" @click="changeLike">
       <b-button v-if="likeChk" size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
         <b-icon icon="heart-fill" aria-hidden="true" ></b-icon><br> 좋아요
@@ -16,13 +36,15 @@
       <b-button v-else size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
         <b-icon icon="heart" aria-hidden="true"></b-icon><br> 좋아요
       </b-button>
-    </span>
+    </span> -->
 
     <!-- 작성자면 수정 삭제버튼 보이게 해줌 -->
-    <div v-if="loginUserId === post.post_writer_id">
-      <router-link to="/board/regist" class="btn">수정</router-link>
-      <!-- 현재 store의 post는 해당 게시글로 저장되어있음 , regist페이지로 넘어가서 그대로 바인딩 시켜 현재의 글 내용 보여줌 -->
-      <button class="btn" @click="deletePost">삭제</button>
+    <div class="d-flex justify-content-center m-2">
+      <div v-if="loginUserId === post.post_writer_id">
+        <router-link to="/board/regist" class="btn btn-secondary text-dark">수정</router-link>
+        <!-- 현재 store의 post는 해당 게시글로 저장되어있음 , regist페이지로 넘어가서 그대로 바인딩 시켜 현재의 글 내용 보여줌 -->
+        <button class="btn btn-secondary text-dark" @click="deletePost">삭제</button>
+      </div>
     </div>
 
     <comment-regist :post="post"></comment-regist>
@@ -32,6 +54,7 @@
       <post-comment-item v-for="postComment in this.postComments" :key="postComment.comment_num"
         :postComment="postComment"></post-comment-item>
     </ul>
+    
 
 
   </div>
@@ -74,3 +97,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.board-detail-card {
+  background-color: #EDF5FF;
+}
+.custom-icon {
+  color: red; /* 원하는 색상으로 변경 */
+}
+.btn-secondary {
+  width : 100px;
+  height : 40px;
+  background-color:#EDF5FF;
+}
+.btn-secondary:hover {
+  background-color: rgba(84, 161, 224, 0.606);
+}
+</style>

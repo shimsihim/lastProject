@@ -17,8 +17,6 @@
                     <progress-bar></progress-bar>
                 </div>
                 <!-- ========================== -->
-
-
               </div>
             </div>
           </div>

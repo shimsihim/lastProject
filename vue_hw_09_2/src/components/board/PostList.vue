@@ -1,69 +1,45 @@
 <template>
-  <div class="container">
-    <h2>게시글 목록</h2>
-    <h4>등록된 사용자의 수 : {{ postCnt }}</h4>
+  <div class="container text-center mt-5">
+    <h2>{{boardTitle[boardIdx-1]}}</h2>
+    <h4 class="mb-3">등록된 게시글 : {{ postCnt }}개</h4>
+    <div class="d-flex justify-content-end mb-2">
+      <button v-if="loginToken" class="btn btn-secondary text-dark" @click="registPost">등록하기</button>
+      </div>
     <div v-if="postCnt">
-      <table class="table post-list text-dark">
+      
+      <table class="table table-striped table-hover post-list text-dark">
         <colgroup>
           <col style="width: 10%" />
-          <col style="width: 50%" />
-          <col style="width: 20%" />
+          <col style="width: 40%" />
+          <col style="width: 15%" />
+          <col style="width: 15%" />
           <col style="width: 20%" />
         </colgroup>
         <thead>
-          <tr>
-            <th scope="col-2">작성자</th>
+          <tr class="text-center">
+            <th scope="col-2">글번호</th>
             <th scope="col-4">제목</th>
+            <th scope="col-4">작성자</th>
             <th scope="col-2">조회수</th>
             <th scope="col-2">등록일</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(post, index) in posts" :key="index">
-            <td>{{ post.post_writer_nickname }}</td>
+            <td>{{ index+1 }}</td>
             <td>
               <router-link class="link-dark post-list-item" :to="`/board/detail/${post.post_num}`">{{
                 post.post_title
-              }}<br/>{{ post.post_writer_nickname }}</router-link>
+              }}</router-link>
             </td>
+            <td>{{ post.post_writer_nickname }}</td>
             <td>{{ post.post_view_cnt }}</td>
-            <td>{{ post.post_created_at }}</td>
+            <td>{{ post.post_created_at.substring(0,10) }}</td>
           </tr>
         </tbody>
       </table>
-
-
-      <!-- <table class="table post-list">
-        <colgroup>
-          <col style="width: 20%" />
-          <col style="width: 40%" />
-          <col style="width: 20%" />
-          <col style="width: 20%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>작성자</th>
-            <th>제목</th> 
-            <th>조회수</th> 
-            <th>등록일</th> 
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(post, index) in posts" :key="index">
-            <td>{{ post.post_writer_nickname }}</td>
-            <td>
-              <router-link :to="`/board/detail/${post.post_num}`">{{
-                post.post_title
-              }}</router-link>
-            </td>
-            <td>{{ post.post_view_cnt }}</td>
-            <td>{{ post.post_created_at }}</td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
     <div v-else>등록된 게시물이 없습니다.</div>
-    <button v-if="loginToken"  @click="registPost">등록하기</button>
   </div>
 </template>
 
@@ -73,6 +49,12 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "PostList",
+  data(){
+    return{
+    boardTitle:["공지사항","자유게시판","운동정보","식단정보"],
+    boardIdx:0,
+  }
+  },
   methods: {
     change(board_id){
       this.$store.dispatch("setPosts",board_id);
@@ -85,7 +67,7 @@ export default {
         post_content: "",
       };
       this.$router.push("/board/regist");
-    }
+    },
   },
   computed: {
     ...mapState(["posts"]),
@@ -96,7 +78,10 @@ export default {
   
   watch: {
       $route(to, form) {
-      if (to.path !== form.path) this.change(this.$route.params.board_id);// 게시판 이동 시 마다 주소값을 확인하여 게시판 종류에 맞는 게시글 나타냄
+      if (to.path !== form.path) {
+      this.change(this.$route.params.board_id);// 게시판 이동 시 마다 주소값을 확인하여 게시판 종류에 맞는 게시글 나타냄
+      this.boardIdx = this.$route.params.board_id;
+      }
     },
   },
   created() {
@@ -104,6 +89,7 @@ export default {
     console.log(pathName);
     const post_board_id = pathName[pathName.length - 1];
     this.$store.dispatch("setPosts",post_board_id);
+    this.boardIdx = post_board_id;
   },
 };
 </script>
@@ -112,4 +98,13 @@ export default {
 .post-list-item {
   text-decoration-line: none;
 }
+.btn-secondary {
+  width : 100px;
+  height : 40px;
+  background-color: rgba(255, 255, 255, 0.388);
+}
+.btn-secondary:hover {
+  background-color: rgba(84, 161, 224, 0.606);
+}
+
 </style>
