@@ -106,18 +106,5 @@ export default {
 .custom-icon {
   color: red; /* 원하는 색상으로 변경 */
 }
-.btn-custom-modify {
-  width : 100px;
-  height : 40px;
-  background-color:rgba(84, 161, 224, 0.606);;
-}
-.btn-custom-delete {
-  width : 100px;
-  height : 40px;
-  background-color:#EDF5FF;
-}
-.btn-custom-modify:hover,
-.btn-custom-delete:hover {
-  background-color: rgba(84, 161, 224, 0.901);
-}
+
 </style>

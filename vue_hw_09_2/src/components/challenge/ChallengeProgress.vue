@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    참여중인 챌린지 : {{this.challenge_eventList.length}}
+    <h4 class="text-center m-5">참여중인 챌린지 : {{this.challenge_eventList.length}}</h4>
     
     <div class="container">
       <div class="row">
@@ -10,7 +10,7 @@
               <div class="card-body">
                 <h5 class="card-title"> {{challenge.challenge_title}}</h5>
                 <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
-                <a class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id, challenge.challenge_startDate.substring(5,7), index)">진행도확인</a>
+                <a style="width:120px;" class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id, challenge.challenge_startDate.substring(5,7), index)">참여도확인</a>
 
                 <!-- ========================== -->
                 <div v-if="showProgressBar && index==idx_for_show_bar">

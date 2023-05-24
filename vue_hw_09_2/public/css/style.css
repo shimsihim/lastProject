@@ -75,31 +75,27 @@ h6,
 .btn.btn-light {
     color: var(--primary);
 }
-
-.btn-square {
-    width: 38px;
-    height: 38px;
+.btn.btn-custom-regist {
+    width : 100px;
+    height : 40px;
+    background-color: rgba(91, 167, 229, 0.615);;
 }
-
-.btn-sm-square {
-    width: 32px;
-    height: 32px;
+.btn.btn-custom-regist:hover {
+    background-color:  rgba(84, 161, 224, 0.901);
 }
-
-.btn-lg-square {
-    width: 48px;
-    height: 48px;
+.btn.btn-custom-modify {
+    width : 100px;
+    height : 40px;
+    background-color:rgba(84, 161, 224, 0.606);;
 }
-
-.btn-square,
-.btn-sm-square,
-.btn-lg-square {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-    border-radius: 50px;
+.btn.btn-custom-delete {
+    width : 100px;
+    height : 40px;
+    background-color:#EDF5FF;
+}
+.btn.btn-custom-modify:hover,
+.btn.btn-custom-delete:hover {
+    background-color: rgba(84, 161, 224, 0.901);
 }
 
 

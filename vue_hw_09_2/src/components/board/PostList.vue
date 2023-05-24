@@ -3,8 +3,8 @@
     <!-- <h2>{{boardTitle[boardIdx-1]}}</h2>
     <h4 class="mb-3">등록된 게시글 : {{ postCnt }}개</h4> -->
     <div class="d-flex justify-content-end mb-2">
-      <button v-if="loginToken" class="btn btn-secondary text-dark" @click="registPost">등록하기</button>
-      </div>
+      <button v-if="loginToken" class="btn btn-custom-regist text-dark" @click="registPost">등록하기</button>
+    </div>
     <div v-if="postCnt">
       
       <table class="table table-striped table-hover post-list text-dark">
@@ -98,13 +98,4 @@ export default {
 .post-list-item {
   text-decoration-line: none;
 }
-.btn-secondary {
-  width : 100px;
-  height : 40px;
-  background-color: rgba(255, 255, 255, 0.388);
-}
-.btn-secondary:hover {
-  background-color: rgba(84, 161, 224, 0.606);
-}
-
 </style>

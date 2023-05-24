@@ -1,13 +1,15 @@
 <template>
       <div class="container">
-        <h4>등록된 챌린지의 수 : {{ challengeCnt }}</h4>
         <div v-if="challengeCnt">
-          <select name="selectBy" v-model="selectBy">
-            <option>전국</option>
-            <option>서울</option>
-            <option>경기</option>
-            <option>강원</option>
-          </select><br />
+          <!-- <div class="d-flex justify-content-end mb-3"> -->
+            <select class="col-12 mt-5 form-select" name="selectBy" v-model="selectBy">
+              <option>전국</option>
+              <option>서울</option>
+              <option>경기</option>
+              <option>강원</option>
+            </select><br />
+            <h4>등록된 챌린지의 수 : {{ challengeCnt }}</h4>
+          <!-- </div> -->
           
           <challenge-create-form></challenge-create-form>
 
@@ -120,4 +122,5 @@
       width: 100px;
       height: 30px;
     }
+
 </style>

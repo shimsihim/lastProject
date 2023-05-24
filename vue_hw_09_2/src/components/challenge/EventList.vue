@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    참여중인 챌린지 : {{this.challenge_eventList_all.length}}
+    <h4 class="text-center m-5">진행중인 이벤트 : {{this.challenge_eventList_all.length}}개</h4>
     
     <div class="container">
       <div class="row">
