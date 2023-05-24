@@ -45,12 +45,8 @@ public class MessageController {
 	public ResponseEntity<?> registMessage(@RequestBody Message message) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException{
 
 		String user_id = jwtUtil.parse(message.getMessage_writer_id());
-		System.out.println("user_id");
 		message.setMessage_writer_id(user_id);
-		System.out.println(message.getMessage_writer_id());
 		MessageService.registMessage(message);
-		System.out.println(message.getMessage_writer_id());
-		System.out.println();
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
@@ -58,7 +54,6 @@ public class MessageController {
 	@PostMapping("/delete")
 	@ApiOperation(value = "메시지 삭제", notes = "is_deleted를 true로 바꿔서 삭제할거임(DB변경)")
 	public ResponseEntity<?> deleteMessage(@RequestBody Message message) {
-		System.out.println("delete왔어여");
 		MessageService.deleteMessage(message.getMessage_num());
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

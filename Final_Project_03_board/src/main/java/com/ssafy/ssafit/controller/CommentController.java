@@ -39,7 +39,6 @@ public class CommentController {
 	@GetMapping("/read/{post_num}")
 	@ApiOperation(value = "댓글 목록 불러오기", notes = "video_id로 해당 영상 댓글 불러오기")
 	public ResponseEntity<?> selectComment(@PathVariable int post_num) {
-		System.out.println(post_num);
 		List<Comment> commentlist = commentService.selectComment(post_num);
 		return new ResponseEntity<List<Comment>>(commentlist, HttpStatus.OK);
 	}
@@ -53,7 +52,6 @@ public class CommentController {
 		comment.setPost_num((int) requestJsonHashMap.get("post_num"));
 		comment.setComment_content((String) requestJsonHashMap.get("comment_content"));
 		comment.setComment_writer_id(user_id);
-		System.out.println((String) requestJsonHashMap.get("token"));
 
 		commentService.registComment(comment);
 		return new ResponseEntity<Void>(HttpStatus.OK);

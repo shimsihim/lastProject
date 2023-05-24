@@ -68,7 +68,6 @@ public class RecordController {
 		String user_id = jwtUtil.parse(token);
 		
 		List<Record_ex> list = recordService.getMyAllRecords(user_id);
-		System.out.println(list.get(0).getRecord_ex_date());
 		
 		return new ResponseEntity<List<Record_ex>>(recordService.getMyAllRecords(user_id),HttpStatus.OK);
 	}

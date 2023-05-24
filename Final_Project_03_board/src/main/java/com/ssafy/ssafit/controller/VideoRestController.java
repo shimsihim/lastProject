@@ -44,7 +44,6 @@ public class VideoRestController {
 	@GetMapping("/partly/{video_part}")
 	public ResponseEntity<?> partlyList(@PathVariable String video_part){
 		List<Video> partlyList = videoService.selectPartly(video_part);
-		System.out.println(partlyList);
 		
 		if(partlyList == null || partlyList.size() == 0)
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
