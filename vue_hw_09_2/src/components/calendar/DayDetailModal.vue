@@ -2,7 +2,17 @@
   <b-modal v-model="showModal" title="이벤트 정보" class="custom-modal">
 
     <b-table striped hover :items="Records" :fields="fields" :labels="labels" @row-clicked="seletOne"></b-table>
-    <a class="btnJoin btn btn-primary" @click="regist">추가 등록</a>
+    <div class="row justify-content-center">
+      <div class="col">
+        <a class="btnJoin btn btn-primary text-nowrap col-6 offset-3 " @click="regist">추가 등록</a>
+      </div>
+    </div>
+    <template #modal-footer>
+      <div class="w-20">
+<!-- 하단에 버튼이 필요없음 -->
+       
+      </div>
+    </template>
   </b-modal>
 </template>
   
