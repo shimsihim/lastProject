@@ -22,16 +22,12 @@ import ChallengeList from "@/components/challenge/ChallengeList.vue";
 import MyChallenge from "@/components/challenge/MyChallenge.vue";
 import ChallengeProgress from "@/components/challenge/ChallengeProgress.vue";
 import EventList from "@/components/challenge/EventList.vue";
-import Socket from "@/views/Socket.vue"
+
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/Socket",
-    name: "Socket",
-    component: Socket,
-  },
+
   {
     path: "/",
     name: "Home",

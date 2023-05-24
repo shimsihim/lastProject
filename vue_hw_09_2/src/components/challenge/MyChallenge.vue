@@ -23,10 +23,10 @@
           <div v-if="showMessenger" class="col-12 p-2">
             <div class="card p-2" style="height: 700px;">
               <div class="card-body" style="overflow-y: auto;">
-                <div class="d-flex justify-content-flex-end align-items-center" v-for="(msg, index) in messages" :key="index">
-                  <a v-if="msg.message_writer_id===loginUserId && msg.message_content!='삭제된 메시지입니다.'" class="btnmsg btn btn-primary text-end" @click="deleteMsg(msg)">X</a>
-                  <span class="card-text mx-2">{{ msg.message_created_at.substring(11,16)}}</span>
-                  <span class="card-title h5"> {{msg.message_content}}</span>
+                <div class="d-flex justify-content-flex-end align-items-center">
+                  <!--  -->
+                  <challenge-chatting :id="parseInt(id_for_callMsg)"></challenge-chatting>
+                  
                 </div>
               </div>
               <div class="row">
@@ -52,14 +52,18 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import ChallengeChatting from "./ChallengeChatting.vue";
 
 
 export default {
 name: "MyChallenge",
+components:{
+  ChallengeChatting
+},
 data() {
   return{
     showMessenger: false,
-    id_for_callMsg : "",
+    id_for_callMsg : 0,
     message_content:"",
   };
 },
@@ -68,6 +72,7 @@ methods:{
   showForm(challenge_id) {
     this.showMessenger = true;
     this.id_for_callMsg = challenge_id;
+    //  this.$refs.change.id = challenge_id;
   },
   registMsg() {
     if (
@@ -87,13 +92,16 @@ methods:{
   },
   deleteMsg(msg) {
     this.$store.dispatch("deleteMessage",msg);
-  }
+  },
+ 
+
 },
 
 
  watch: {
   id_for_callMsg:function(val){
     this.$store.dispatch("setMessages", val)
+ 
   }
 },
 
