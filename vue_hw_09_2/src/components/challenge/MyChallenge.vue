@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    참여중인 챌린지 : {{this.MyChallenges.length}}
-
+    참여중인 챌린지 : {{this.challenge_groupList.length}}
+    
     <div class="container">
       <div class="row">
         <div class="col-4">
-          <div class="row" v-for="(challenge, index) in MyChallenges" :key="index">
+          <div class="row" v-for="(challenge, index) in challenge_groupList" :key="index">
             <div class="col-12 p-2">
               <div class="card p-2">
                 <div class="card-body">
@@ -14,14 +14,6 @@
                   <span class="card-text">지역 : {{ challenge.challenge_location }}</span> | 
                   <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>
                   <a class="btnJoin btn btn-primary" @click="showForm(challenge.challenge_id)">대화하기</a>
-
-                  <!--               
-                      <div v-if="checkMember(challenge.challenge_id)">
-                      <a class="btnJoin btn btn-primary disabled" @click="addParticipant(challenge)">참여중</a>
-                      <a class="btnJoin btn btn-primary" @click="deleteParticipant(challenge)">참여취소</a>
-                      </div>
-                      <a v-else class="btnJoin btn btn-primary" @click="addParticipant(challenge)">참여하기</a>
-                      <button v-if="loginUserId === challenge.challenge_makeUser" class="btnJoin btn btn-primary" @click="deleteChallenge(challenge)">삭제</button> -->
                 </div>
               </div>
             </div>
@@ -32,9 +24,9 @@
             <div class="card p-2" style="height: 700px;">
               <div class="card-body" style="overflow-y: auto;">
                 <div class="d-flex justify-content-flex-end align-items-center" v-for="(msg, index) in messages" :key="index">
-                <a v-if="msg.message_writer_id===loginUserId && msg.message_content!='삭제된 메시지입니다.'" class="btnmsg btn btn-primary text-end" @click="deleteMsg(msg)">X</a>
-                <span class="card-text mx-2">{{ msg.message_created_at.substring(11,16)}}</span>
-                <span class="card-title h5"> {{msg.message_content}}</span>
+                  <a v-if="msg.message_writer_id===loginUserId && msg.message_content!='삭제된 메시지입니다.'" class="btnmsg btn btn-primary text-end" @click="deleteMsg(msg)">X</a>
+                  <span class="card-text mx-2">{{ msg.message_created_at.substring(11,16)}}</span>
+                  <span class="card-title h5"> {{msg.message_content}}</span>
                 </div>
               </div>
               <div class="row">
@@ -59,7 +51,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 
 export default {
@@ -108,11 +100,9 @@ methods:{
 
 computed: {
   ...mapState(["MyChallenges", "loginToken", "messages", "loginUserId"]),
+  ...mapGetters(["challenge_groupList"]),
   },
   
-// created() {
-//   this.$store.dispatch("setMyChallenge");
-// },
 };
 </script>
 
