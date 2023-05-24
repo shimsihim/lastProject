@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="d-flex align-items-center mb-3">
       <b-progress class="w-100" :max="maxLoadingTime" height="1.5rem">
         <b-progress-bar :value="loadingTime" :label="`${((loadingTime / maxLoadingTime) * 100).toFixed(2)}%`"></b-progress-bar>
@@ -8,17 +7,6 @@
       <b-button class="ml-3" @click="startLoading()">Reload</b-button>
     </div>
 
-    <!-- <b-skeleton-wrapper :loading="loading">
-      <template #loading>
-        <b-card>
-          <b-skeleton width="85%"></b-skeleton>
-          <b-skeleton width="55%"></b-skeleton>
-          <b-skeleton width="70%"></b-skeleton>
-        </b-card>
-      </template>
-    </b-skeleton-wrapper> -->
-    
-  </div>
 </template>
 
 <script>
@@ -60,7 +48,6 @@ import { mapGetters } from "vuex";
     created() {
       this.$_loadingTimeInterval = null;
       this.$store.dispatch("setMonthRecord");
-      console.log(this.getMonthRecords.length);
       this.recordCnt=this.getMonthRecords.length;
     },
     mounted() {

@@ -77,11 +77,8 @@ export default new Vuex.Store({
       return eventList;
     },
     getMonthRecords:function (state) {
-      console.log("getMonthRecords");
-      console.log(state.MonthRecords);
       const list = [];
         for(let i=0; i<state.MonthRecords.length; i++) {
-          console.log(state.MonthRecords[i].record_ex_date.substring(5,7))
           if(state.MonthRecords[i].record_ex_date.substring(5,7) == state.month){
             list.push(state.MonthRecords[i]);
           }
@@ -267,20 +264,6 @@ export default new Vuex.Store({
         });
     },
     
-    //필요없는 액션으로 판단되므로 이후 사용 없을 시 지우기 5/20
-    // setUser: function ({ commit }, id) {
-    //   const API_URL = `http://localhost:9999/userapi/user/${id}`;
-    //   axios({
-    //     url: API_URL,
-    //     method: "GET",
-    //   })
-    //   .then((res) => {
-    //       commit("SET_USER", res.data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    //   },
     searchName: function ({ commit }, name) {
       const API_URL = `http://localhost:9999/userapi/user/search`;
       axios({
@@ -312,14 +295,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          // let resUser = res.data;
-          // if (resUser.id === user.id && resUser.password === user.password) {
-          //   alert("로그인 성공!");
-          //   commit("SET_LOGIN_USER", res.data);
-          //   router.push("/");
-          // } else {
-          //   alert("로그인 실패");
-          // }
           if (res.status === 202) {
             alert("로그인 성공!");
             commit("SET_LOGIN_TOKEN", res.data["access-token"]);
@@ -438,13 +413,6 @@ export default new Vuex.Store({
       })
         .then(() => {
           alert("삭제 완료!");
-          // let index;
-          // for (let i = 0; i < state.posts.length; i++) {
-          //   if (state.posts[i].post_num == post_num) {
-          //     index = i;
-          //   }
-          // }
-          // state.users.splice(index, 1);
           router.push(`/board/list/${board_id}`);
         })
         .catch((err) => {
@@ -483,7 +451,6 @@ export default new Vuex.Store({
         url: API_URL,
       })
         .then(() => {
-
           commit("LIKE_CHK_REVERSE");
         })
         .catch((err) => {
@@ -602,7 +569,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-
           commit("SET_SEARCH_VIDEOS", res.data.items)
         })
         .catch((err) => console.log(err));
@@ -612,8 +578,6 @@ export default new Vuex.Store({
       for (let i = 0; i < state.search_videos.length; i++) {
         if (state.search_videos[i] === video) {
           commit("SET_VIDEO", video);
-          console.log("여기 셋 비디오")
-          console.log(video.id.videoId)
           dispatch("setVideoComments", video.id.videoId);
         }
       }
@@ -630,7 +594,6 @@ export default new Vuex.Store({
         url: API_URL,
       })
         .then((res) => {
-          console.log(res.data)
           commit("SET_VIDEO_COMMENTS", res.data);
         })
         .catch((err) => {
@@ -640,7 +603,6 @@ export default new Vuex.Store({
 
     registVideoComment: function ({ dispatch, state }, videoComment) {
       const API_URL = `http://localhost:9999/ssafit/videoComment/regist`;
-      console.log(state.loginToken)
       axios({
         method: 'POST',
         url: API_URL,
@@ -693,8 +655,6 @@ export default new Vuex.Store({
     // 캘린더, Record
     getRecods: function ({ state, commit }, date) {
       const token = state.loginToken
-      console.log(date)
-      console.log(date)
       const API_URL = `http://localhost:9999/ssafit/record/${date}/${token}`;
       axios({
         method: 'GET',
@@ -702,7 +662,6 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
           commit("GET_RECORD", res.data)
 
         })
@@ -712,7 +671,6 @@ export default new Vuex.Store({
     },
 
     setMonthRecord: function ({ state, commit }) { // 1년치를 가져와야 할지?//그냥 내꺼 다가져오자
-      console.log("setMonthRecord실행여부");
       const token = state.loginToken
       const API_URL = `http://localhost:9999/ssafit/record/${token}`;
       
@@ -722,7 +680,6 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
           commit("SET_MONTH_RECORD", res.data)
 
         })
@@ -741,7 +698,6 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
           commit("SET_MY_EVENTS", res.data)
 
         })
@@ -764,8 +720,7 @@ export default new Vuex.Store({
           token: state.loginToken
         }
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           dispatch("setMonthRecord");
 
         })
@@ -786,8 +741,7 @@ export default new Vuex.Store({
           record_ex_num: recordForm.record_ex_num,
         }
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           dispatch("setMonthRecord");
         })
         .catch((err) => {
@@ -802,8 +756,7 @@ export default new Vuex.Store({
         url: API_URL,
 
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           dispatch("setMonthRecord");
 
         })
@@ -952,7 +905,6 @@ export default new Vuex.Store({
         data: challenge_id,
       })
         .then((res) => {
-          console.log(res.data)
           commit("SET_MESSAGES", res.data); 
         })
         .catch((err) => {
@@ -997,14 +949,12 @@ export default new Vuex.Store({
 
     getMyInformation: function ({ commit ,state}) {
       const API_URL = `http://localhost:9999/ssafit/user/myInformation`;
-      console.log(state.loginToken)
       axios({
         method: 'POST',
         url: API_URL,
         data: {token : state.loginToken},
       })
         .then((res) => {
-          // console.log(res.data)
           commit("SET_MY_INFO", res.data); 
           
         })
@@ -1016,7 +966,6 @@ export default new Vuex.Store({
 
     checkUserReal: function ({ commit ,state},user_pw) {
       const API_URL = `http://localhost:9999/ssafit/user/checkUserReal`;
-      console.log(user_pw)
       axios({
         method: 'POST',
         url: API_URL,
@@ -1026,7 +975,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          // console.log(res.data)
           commit("SET_MY_INFO", res.data); 
           
         })
@@ -1038,19 +986,12 @@ export default new Vuex.Store({
 
     getChat: function ({ commit},challenge_id) {
       const API_URL = `http://localhost:9999/getchat/${challenge_id}`;
-      console.log(challenge_id)
-      console.log(challenge_id)
-      console.log(challenge_id)
-      console.log(challenge_id)
-      console.log(challenge_id)
-      console.log(challenge_id)
       axios({
         method: 'GET',
         url: API_URL,
         
       })
         .then((res) => {
-          // console.log(res.data)
           commit("GET_CHAT",res.data) 
 
         })
