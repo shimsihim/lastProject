@@ -13,19 +13,27 @@
           <div>작성일: {{ post.post_created_at.substring(0,16) }}</div>
           <div>조회수: {{ post.post_view_cnt }}</div>
         </div>
-        <div class="col-2">
+        <div class="col-2 justify-content-end">
           <!-- 좋아요 표시 아이콘 위치 -->
           <span class="h2 mb-6" @click="changeLike">
-            <b-button v-if="likeChk" size="md" style="width: 80px;color: black; background-color: transparent; " variant="outline-info" >
+            <b-button v-if="likeChk" style="width: 80px; color: black; background-color: transparent; " variant="outline-info" >
               <i style="font-size: 1.23rem;" class="bi bi-heart-fill custom-icon"></i><br/>좋아요
               <!-- <b-icon icon="heart-fill" style="color:red" aria-hidden="true" ></b-icon><br> 좋아요 -->
             </b-button>
-            <b-button v-else size="md" style=" width: 80px; color: black; background-color: transparent; " variant="outline-info" >
+            <b-button v-else style=" width: 80px; color: black; background-color: transparent; " variant="outline-info" >
               <i class="bi bi-heart" style="font-size: 1.23rem;" aria-hidden="true"></i><br> 좋아요
             </b-button>
           </span>
         </div>
       </div>
+      <!-- 작성자면 수정 삭제버튼 보이게 해줌 -->
+      <div class="d-flex justify-content-center m-2">
+      <div v-if="loginUserId === post.post_writer_id">
+        <router-link to="/board/regist" class="btn btn-custom-modify text-dark">수정</router-link>
+        <!-- 현재 store의 post는 해당 게시글로 저장되어있음 , regist페이지로 넘어가서 그대로 바인딩 시켜 현재의 글 내용 보여줌 -->
+        <button class="btn btn-custom-delete text-dark" @click="deletePost">삭제</button>
+      </div>
+    </div>
     </div>
 
     <!-- 좋아요 표시 아이콘 위치
@@ -38,14 +46,6 @@
       </b-button>
     </span> -->
 
-    <!-- 작성자면 수정 삭제버튼 보이게 해줌 -->
-    <div class="d-flex justify-content-center m-2">
-      <div v-if="loginUserId === post.post_writer_id">
-        <router-link to="/board/regist" class="btn btn-secondary text-dark">수정</router-link>
-        <!-- 현재 store의 post는 해당 게시글로 저장되어있음 , regist페이지로 넘어가서 그대로 바인딩 시켜 현재의 글 내용 보여줌 -->
-        <button class="btn btn-secondary text-dark" @click="deletePost">삭제</button>
-      </div>
-    </div>
 
     <comment-regist :post="post"></comment-regist>
     <h2>댓글 상세</h2>
@@ -101,17 +101,23 @@ export default {
 <style scoped>
 
 .board-detail-card {
-  background-color: #EDF5FF;
+  background-color: #77c2ee83;
 }
 .custom-icon {
   color: red; /* 원하는 색상으로 변경 */
 }
-.btn-secondary {
+.btn-custom-modify {
+  width : 100px;
+  height : 40px;
+  background-color:rgba(84, 161, 224, 0.606);;
+}
+.btn-custom-delete {
   width : 100px;
   height : 40px;
   background-color:#EDF5FF;
 }
-.btn-secondary:hover {
-  background-color: rgba(84, 161, 224, 0.606);
+.btn-custom-modify:hover,
+.btn-custom-delete:hover {
+  background-color: rgba(84, 161, 224, 0.901);
 }
 </style>

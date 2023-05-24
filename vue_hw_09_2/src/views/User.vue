@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+    <div class="container-xxl bg-primary position-relative p-0" id="home">
+            <div class="container-xxl hero-header">
+                <div class="container">
+                  <router-view />
+                </div>
+            </div>
+          </div>
 </template>
 
 <script>

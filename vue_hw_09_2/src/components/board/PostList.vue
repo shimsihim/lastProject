@@ -1,7 +1,7 @@
 <template>
-  <div class="container text-center mt-5">
-    <h2>{{boardTitle[boardIdx-1]}}</h2>
-    <h4 class="mb-3">등록된 게시글 : {{ postCnt }}개</h4>
+  <div class="container text-center pt-5">
+    <!-- <h2>{{boardTitle[boardIdx-1]}}</h2>
+    <h4 class="mb-3">등록된 게시글 : {{ postCnt }}개</h4> -->
     <div class="d-flex justify-content-end mb-2">
       <button v-if="loginToken" class="btn btn-secondary text-dark" @click="registPost">등록하기</button>
       </div>

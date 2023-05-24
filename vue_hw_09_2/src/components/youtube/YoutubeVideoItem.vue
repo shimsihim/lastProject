@@ -1,6 +1,6 @@
 <template>
-  <div class="col-4"> 
-    <div class="card m-2 search-result-card" @click="clickVideo" style="width: 18rem;">
+  <div class="col-3"> 
+    <div class="card mb-4 feature-item search-result-card" @click="clickVideo" style="width: 18rem;">
         <router-link class="no-style-link" :to="`/video/detail/${video.id.videoId}`">
     <img :src="video.snippet.thumbnails.high.url" class="card-img-top" >
     <div class="card-body">

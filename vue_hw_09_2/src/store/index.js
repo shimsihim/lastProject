@@ -565,7 +565,7 @@ export default new Vuex.Store({
           q: "운동 " + keyword + " 운동",
           regionCode: "KR",
           type: "video",
-          maxResults: 9,
+          maxResults: 12,
         },
       })
         .then((res) => {

@@ -1,5 +1,11 @@
 <template>
-    <div>
+        <div class="bg-light">
+    <div class="container-xxl bg-primary position-relative p-0" id="home">
+            <div class="container-xxl hero-header">
+                <div class="container">
+
+                <!-- ================원본 데이터==================== --> 
+
         <page-title :title="`이력관리`" :msg="`운동도 체계적으로`"></page-title>
         <header class="site-header d-flex flex-column justify-content-center align-items-center">
             <div class="container">
@@ -13,10 +19,13 @@
                 </div>
             </div>
         </header>
-        <!-- <board-nav></board-nav> -->
-        <router-view></router-view>
-        <hr />
-    </div>
+
+                      <!-- ===============원본 데이터===================== -->
+                    </div>
+              </div>
+            </div>
+            <router-view></router-view>
+        </div> 
 </template>
   
 <script>

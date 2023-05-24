@@ -229,8 +229,8 @@ h6,
 
 /*** Hero Header ***/
 .hero-header {
-    margin-bottom: 6rem;
-    padding: 9rem 0;
+    margin-bottom: 0rem;
+    padding: 6rem 0;
     background: url(../img/bg-bottom.png) center bottom no-repeat;
 }
 

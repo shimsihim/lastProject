@@ -3,8 +3,15 @@
     <h2 class="mt-5">댓글등록</h2>
     <div class="row">
       <div class="col-10">
-        //바꿀거..//
-                                  <fieldset class="text-center">
+                        <div class="col-12 text-center">
+                            <div class="position-relative w-100 mt-3 comment_content">
+                                <input v-if="loginToken" id="comment_content" v-model="comment_content" class="view form-control border-0 w-100 ps-4 pe-5" type="text" placeholder="댓글을 등록하실 수 있습니다." style="height: 58px;">
+                                <input v-else readonly id="comment_content" v-model="comment_none" class="view form-control border-0 w-100 ps-4 pe-5" type="text" style="height: 58px;">
+                            </div>
+                        </div>
+
+
+                                  <!-- <fieldset class="text-center">
                                       <textarea v-if="loginToken"
                                         id="comment_content"
                                         v-model="comment_content"
@@ -17,7 +24,7 @@
                                         class="view"
                                         readonly
                                       />
-                                    </fieldset>
+                                    </fieldset> -->
         </div>
         <div class="col-2">
           <button class="btn btn-secondary text-dark" @click="regist">등록</button>

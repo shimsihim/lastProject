@@ -1,7 +1,6 @@
 <template>
   <div>
-    <hr class="my-5">
-    <div class="youtube-list row">
+    <div class="youtube-list my-5 row">
       <youtube-video-item
         v-for="video in this.search_videos"
         :key="video.id.videoId"
