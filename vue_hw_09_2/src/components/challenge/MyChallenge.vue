@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    참여중인 챌린지 : {{ this.challenge_groupList.length }}
+    <!-- 참여중인 챌린지 : {{ this.challenge_groupList.length }} -->
 
-    <div class="container">
+    <div class="container m-5">
       <div class="row">
         <div class="col-4">
           <div
@@ -11,7 +11,7 @@
             :key="index"
           >
             <div class="col-12 p-2">
-              <div class="card p-2">
+              <div class="card p-2 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="card-body">
                   <h5 class="card-title">{{ challenge.challenge_title }}</h5>
                   <span class="card-text"

@@ -48,14 +48,14 @@
 
 
     <comment-regist :post="post"></comment-regist>
-    <h2>댓글 상세</h2>
 
-    <ul class="post-comment-list">
-      <post-comment-item v-for="postComment in this.postComments" :key="postComment.comment_num"
-        :postComment="postComment"></post-comment-item>
-    </ul>
-    
+    <div class="card mt-5 p-4 board-comment-card">
 
+      <ul class="post-comment-list">
+        <post-comment-item v-for="postComment in this.postComments" :key="postComment.comment_num"
+          :postComment="postComment"></post-comment-item>
+      </ul>
+    </div>
 
   </div>
 </template>
@@ -105,6 +105,9 @@ export default {
 }
 .custom-icon {
   color: red; /* 원하는 색상으로 변경 */
+}
+.board-comment-card{
+  background-color: #77c2ee83;
 }
 
 </style>

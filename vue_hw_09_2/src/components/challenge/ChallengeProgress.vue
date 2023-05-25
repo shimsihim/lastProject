@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h4 class="text-center m-5">참여중인 챌린지 : {{this.challenge_eventList.length}}</h4>
-    
-    <div class="container">
+    <!-- <h4 class="text-center m-5">참여중인 챌린지 : {{this.challenge_eventList.length}}</h4>
+     -->
+    <div class="container m-5">
       <div class="row">
         <div class="col-12">
           <div class="row" v-for="(challenge, index) in challenge_eventList" :key="index">

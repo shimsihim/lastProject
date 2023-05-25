@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>글등록</h2>
+    <h2 class="text-center">게시글 등록하기</h2>
     <fieldset class="text-center">
       <select name="post_board_id" v-model="post.post_board_id">
         <option :value="1">공지</option>

@@ -8,7 +8,7 @@
               <option>경기</option>
               <option>강원</option>
             </select><br />
-            <h4>등록된 챌린지의 수 : {{ challengeCnt }}</h4>
+            <!-- <h4>등록된 챌린지의 수 : {{ challengeCnt }}</h4> -->
           <!-- </div> -->
           
           <challenge-create-form></challenge-create-form>

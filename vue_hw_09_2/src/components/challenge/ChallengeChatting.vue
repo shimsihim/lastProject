@@ -1,72 +1,74 @@
 <template>
   <div id="app">
-    <div class="card p-2" style="min-height:745px; max-height: 745px;">
-      <div class="card-body" style="overflow-y: auto" ref="chatBody">
-        <div class="d-flex justify-content-flex-end align-items-center"></div>
+    <div class="container">
+      <div class="card animated zoomIn" data-wow-delay="0.1s" style="min-height:745px; max-height: 745px;">
+        <div class="card-body" style="overflow-y: auto" ref="chatBody">
+          <div class="d-flex justify-content-flex-end align-items-center"></div>
+          <b-container>
+            <div v-for="(pastChat, idx) in pastChat" :key="idx">
+              <b-row>
+
+                <div v-if="pastChat.userName === `${loginUserId}`" class="message-left align">
+                  <b-col md="6">
+                    <b-card class="myCard card" style="background-color: #fafa5ab3; padding : 0px"> <!-- 내가 쓴 글은 노란색 -->
+                      <div class="message-content myContent">{{ pastChat.content }}</div>
+                    </b-card>
+                    <div class="message-username myName">{{ pastChat.userName }}</div>
+                  </b-col>
+                </div>
+
+                <div v-else class="message-right align">
+                  <b-col md="6" offset-md="6">
+                    <b-card class="yourCard card">
+                      <div class="message-content yourContent">{{ pastChat.content }}</div>
+                    </b-card>
+                    <div class="message-username yourName">{{ pastChat.userName }}</div>
+
+                  </b-col>
+                </div>
+              </b-row>
+            </div>
+            <!-- 기존 작성된 문자들은 이 위에 -->
+            <!--  -->
+            <!--  -->
+            <!--  -->
+            <div v-for="(item, idx) in recvList" :key="idx">
+              <b-row>
+
+                <div v-if="item.userName === `${loginUserId}`" class="message-left align">
+                  <b-col md="6">
+                    <b-card class="myCard card" style="background-color: #fafa5ab3;">
+                      <div class="myContent message-content">{{ item.content }}</div>
+                    </b-card>
+                    <div class="message-username myName">{{ item.userName }}</div>
+                  </b-col>
+                </div>
+                <div v-else class="message-right align">
+                  <b-col md="6" offset-md="6">
+                    <b-card class="yourCard card">
+                      <div class="message-content yourContent">{{ item.content }}</div>
+                    </b-card>
+                    <div class="message-username yourName">{{ item.userName }}</div>
+                  </b-col>
+                </div>
+              </b-row>
+            </div>
+          </b-container>
+        </div>
         <b-container>
-          <div v-for="(pastChat, idx) in pastChat" :key="idx">
-            <b-row>
-
-              <div v-if="pastChat.userName === `${loginUserId}`" class="message-left align">
-                <b-col md="6">
-                  <b-card class="myCard card" style="background-color: #fafa5ab3; padding : 0px"> <!-- 내가 쓴 글은 노란색 -->
-                    <div class="message-content myContent">{{ pastChat.content }}</div>
-                  </b-card>
-                  <div class="message-username myName">{{ pastChat.userName }}</div>
-                </b-col>
-              </div>
-
-              <div v-else class="message-right align">
-                <b-col md="6" offset-md="6">
-                  <b-card class="yourCard card">
-                    <div class="message-content yourContent">{{ pastChat.content }}</div>
-                  </b-card>
-                  <div class="message-username yourName">{{ pastChat.userName }}</div>
-
-                </b-col>
-              </div>
-            </b-row>
-          </div>
-          <!-- 기존 작성된 문자들은 이 위에 -->
-          <!--  -->
-          <!--  -->
-          <!--  -->
-          <div v-for="(item, idx) in recvList" :key="idx">
-            <b-row>
-
-              <div v-if="item.userName === `${loginUserId}`" class="message-left align">
-                <b-col md="6">
-                  <b-card class="myCard card" style="background-color: #fafa5ab3;">
-                    <div class="myContent message-content">{{ item.content }}</div>
-                  </b-card>
-                  <div class="message-username myName">{{ item.userName }}</div>
-                </b-col>
-              </div>
-              <div v-else class="message-right align">
-                <b-col md="6" offset-md="6">
-                  <b-card class="yourCard card">
-                    <div class="message-content yourContent">{{ item.content }}</div>
-                  </b-card>
-                  <div class="message-username yourName">{{ item.userName }}</div>
-                </b-col>
-              </div>
-            </b-row>
-          </div>
+          <b-row>
+            <b-col md="7">
+              <div style="margin-top: 9px;">
+              <b-form-input v-model="message" placeholder="채팅을 입력하세요" @keyup.enter="send"></b-form-input>
+            </div>
+              
+            </b-col>
+            <b-col md="3" offset-md="1">
+              <a class="btnJoin btn btn-primary text-nowrap btn-block" @click="send">보내기</a>
+            </b-col>
+          </b-row>
         </b-container>
       </div>
-      <b-container>
-        <b-row>
-          <b-col md="7">
-            <div style="margin-top: 9px;">
-            <b-form-input v-model="message" placeholder="채팅을 입력하세요" @keyup.enter="send"></b-form-input>
-          </div>
-            
-          </b-col>
-          <b-col md="3" offset-md="1">
-            <a class="btnJoin btn btn-primary text-nowrap btn-block" @click="send">보내기</a>
-          </b-col>
-        </b-row>
-      </b-container>
     </div>
   </div>
 </template>
