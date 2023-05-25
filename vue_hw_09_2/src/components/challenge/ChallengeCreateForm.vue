@@ -5,7 +5,8 @@
         </div>
         
         <div class="collapse mb-5" id="showRegistForm">
-          <div>
+          <div class="d-flex justify-content-center">
+          <div class="col-8">
             <div class="row">
                 <label class="form-label col-2" for="challenge_location">지역</label>
               <div class="col-10">
@@ -47,6 +48,7 @@
               <button class="btn btn-custom-regist text-dark"  @click="registChallenge">등록</button>
               <button class="btn btn-custom text-dark"   @click="cancelModal">초기화</button>
             </div>
+          </div>
           </div>
         </div>
 
