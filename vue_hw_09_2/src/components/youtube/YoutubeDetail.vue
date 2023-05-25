@@ -1,26 +1,26 @@
 <template>
   <div class="container">
 
-  <h2>영상 상세</h2>
-    <div>제목: {{ video.snippet.title }}</div>
-    <div>채널명: {{ video.snippet.channelTitle }}</div>
+  <div class="card mt-4">
     <b-card-body>
       <b-card-title>{{ video.snippet.title }}</b-card-title>
+      <div>채널명: {{ video.snippet.channelTitle }}</div>
       <div>
         <b-embed type="iframe" aspect="16by9" :src="`https://youtube.com/embed/${video.id.videoId}`" allowfullscreen></b-embed>
       </div>
     </b-card-body>
+  </div>
     <youtube-comment-regist :video="video"></youtube-comment-regist>
 
-    <h2>댓글 목록</h2>
-    <ul class="youtube-comment-list">
-      <youtube-video-comment-item
-        v-for="videoComment in this.videoComments"
-        :key="videoComment.videocomment_num"
-        :videoComment="videoComment"
-      ></youtube-video-comment-item>
-    </ul> 
-
+      <div class="card mt-5 p-4 youtube-comment-card">
+        <div class="youtube-comment-list">
+          <youtube-video-comment-item
+            v-for="videoComment in this.videoComments"
+            :key="videoComment.videocomment_num"
+            :videoComment="videoComment"
+          ></youtube-video-comment-item>
+        </div> 
+      </div>
   </div>
 </template>
 
@@ -52,3 +52,8 @@ export default {
     }
 };
 </script>
+<style>
+.youtube-comment-card{
+  background-color: #afd7eeb9;
+}
+</style>

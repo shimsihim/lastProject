@@ -1,6 +1,5 @@
 package com.ssafy.ssafit.model.dto;
 
-import java.sql.Timestamp;
 
 public class VideoComment {
 	private String loginToken;
@@ -9,8 +8,8 @@ public class VideoComment {
 	private String videocomment_writer_id;
 	private String videocomment_content;
 	private String videocomment_user_nickname;
-	private Timestamp videocomment_created_at;
-	private Timestamp videocomment_modified_at;
+	private String videocomment_created_at;
+	private String videocomment_modified_at;
 
 	public VideoComment() {
 		super();
@@ -19,7 +18,7 @@ public class VideoComment {
 
 	public VideoComment(String loginToken, String videocomment_video_id, int videocomment_num,
 			String videocomment_writer_id, String videocomment_content, String videocomment_user_nickname,
-			Timestamp videocomment_created_at, Timestamp videocomment_modified_at) {
+			String videocomment_created_at, String videocomment_modified_at) {
 		super();
 		this.loginToken = loginToken;
 		this.videocomment_video_id = videocomment_video_id;
@@ -83,19 +82,19 @@ public class VideoComment {
 		this.videocomment_user_nickname = videocomment_user_nickname;
 	}
 
-	public Timestamp getVideocomment_created_at() {
+	public String getVideocomment_created_at() {
 		return videocomment_created_at;
 	}
 
-	public void setVideocomment_created_at(Timestamp videocomment_created_at) {
+	public void setVideocomment_created_at(String videocomment_created_at) {
 		this.videocomment_created_at = videocomment_created_at;
 	}
 
-	public Timestamp getVideocomment_modified_at() {
+	public String getVideocomment_modified_at() {
 		return videocomment_modified_at;
 	}
 
-	public void setVideocomment_modified_at(Timestamp videocomment_modified_at) {
+	public void setVideocomment_modified_at(String videocomment_modified_at) {
 		this.videocomment_modified_at = videocomment_modified_at;
 	}
 

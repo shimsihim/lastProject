@@ -1,9 +1,12 @@
 <template>
-  <li>
-    <p>작성자:{{ postComment.comment_writer_id}}</p>
-    <p>작성일자:{{ postComment.comment_created_at}}</p>
-    <p>내용:{{ postComment.comment_content}}</p>
-
+  <div class="card m-2 px-4 py-3 youtube-comment-card-item">
+    
+    <div class="row">
+      <span class="col-9 h5">{{ postComment.comment_writer_id}}</span>
+      <span class="col-3 text-end">{{ postComment.comment_created_at.substring(2,16)}}</span>
+  </div>
+  <div class="row">
+  <div class="p-3">{{ postComment.comment_content}}</div>
     <div v-if="loginUserId === postComment.comment_writer_id">
       
       <div v-if="showUpdateForm">
@@ -18,11 +21,13 @@
     </form>
     </div>
 
+    <div class="d-flex justify-content-end">
     <button class="btn" @click="showForm" >수정</button>
       <button class="btn" @click="deleteComment">삭제</button>
     </div>
-    
-  </li>
+  </div>
+</div> 
+  </div>
 </template>
 
 <script>

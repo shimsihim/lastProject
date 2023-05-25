@@ -2,15 +2,10 @@
 
 
 <template>
-    <div >
-
+    <div>
         <div style="text-align:start;">
             <button class="btn btn-custom-ex-regist text-light" @click="addRecord">기록하기</button>
         </div>
-        <!-- <div style="text-align:start;">
-            <button class="btn btn-secondary btn-secondary btn-secondary:hover registBtn"
-                style="background-color: #2c3e507a;height: 50px;width: 200px;letter-spacing :10px;text-align: center;padding-left: 20px;padding-top: 10px;font-weight: bold;color: #ffffffc3;border-color: transparent;" @click="addRecord">기록하기</button>
-        </div> -->
         <FullCalendar :options='calendarOptions' />
         <DayDetailModal ref="eventModal" @selectEvent="convertModal" @registEvent="addRecord"></DayDetailModal>
         <AddRecordModal ref="add"></AddRecordModal>

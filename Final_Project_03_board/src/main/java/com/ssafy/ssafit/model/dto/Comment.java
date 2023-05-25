@@ -8,14 +8,14 @@ public class Comment {
 	private String comment_writer_id;//직접 넣을 값
 	private String comment_content;//직접 넣을 값
 	private String user_nickname;
-	private Timestamp comment_created_at;
-	private Timestamp comment_modified_at;
+	private String comment_created_at;
+	private String comment_modified_at;
 
 	public Comment() {
 	}
 
 	public Comment(int comment_num, int post_num, String comment_writer_id, String comment_content,
-			Timestamp comment_created_at, Timestamp comment_modified_at,String user_nickname) {
+			String comment_created_at, String comment_modified_at,String user_nickname) {
 		super();
 		this.comment_num = comment_num;
 		this.post_num = post_num;
@@ -65,21 +65,21 @@ public class Comment {
 		this.comment_content = comment_content;
 	}
 
-	public Timestamp getComment_created_at() {
+	public String getComment_created_at() {
 		return comment_created_at;
 	}
 
-	public void setComment_created_at(Timestamp comment_created_at) {
+	public void setComment_created_at(String comment_created_at) {
 		this.comment_created_at = comment_created_at;
 	}
 	
 	
 
-	public Timestamp getComment_modified_at() {
+	public String getComment_modified_at() {
 		return comment_modified_at;
 	}
 
-	public void setComment_modified_at(Timestamp comment_modified_at) {
+	public void setComment_modified_at(String comment_modified_at) {
 		this.comment_modified_at = comment_modified_at;
 	}
 

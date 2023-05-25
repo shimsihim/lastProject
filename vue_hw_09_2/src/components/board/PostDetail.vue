@@ -36,25 +36,15 @@
     </div>
     </div>
 
-    <!-- 좋아요 표시 아이콘 위치
-    <span class="h2 mb-6" @click="changeLike">
-      <b-button v-if="likeChk" size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
-        <b-icon icon="heart-fill" aria-hidden="true" ></b-icon><br> 좋아요
-      </b-button>
-      <b-button v-else size="sm" style="color: black; background-color: transparent; " variant="outline-info" >
-        <b-icon icon="heart" aria-hidden="true"></b-icon><br> 좋아요
-      </b-button>
-    </span> -->
-
 
     <comment-regist :post="post"></comment-regist>
 
     <div class="card mt-5 p-4 board-comment-card">
 
-      <ul class="post-comment-list">
+      <div class="post-comment-list">
         <post-comment-item v-for="postComment in this.postComments" :key="postComment.comment_num"
           :postComment="postComment"></post-comment-item>
-      </ul>
+      </div>
     </div>
 
   </div>

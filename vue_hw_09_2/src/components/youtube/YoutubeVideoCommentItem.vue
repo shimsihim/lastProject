@@ -1,28 +1,34 @@
 <template>
-  <li>
-    <span>작성자:{{ videoComment.videocomment_writer_id}}</span>
-    <span>작성일자:{{ videoComment.videocomment_created_at}}</span>
-    <span>내용:{{ videoComment.videocomment_content}}</span>
-  
-    <div v-if="loginUserId === videoComment.videocomment_writer_id">
+    <div class="card m-2 px-4 py-3 youtube-comment-card-item">
+      <div class="row">
+        <span class="col-9 h5">{{ videoComment.videocomment_writer_id}}</span>
+        <span class="col-3 text-end">{{ videoComment.videocomment_created_at.substring(2,16)}}</span>
+      </div>
+      <div class="row">
+        <div class="p-3">{{ videoComment.videocomment_content}}</div>
+      
+        <div v-if="loginUserId === videoComment.videocomment_writer_id">
 
-      <div v-if="showUpdateForm">
-        <form>
-        <label for="videocomment_content">내용</label>
-        <textarea
-          id="videocomment_content"
-          v-model="videocomment_content"
-          class="view"
-        ></textarea>
-        <button @click="updateComment">수정완료</button>
-      </form>
+          <div v-if="showUpdateForm">
+            <form>
+            <label for="videocomment_content">내용</label>
+            <textarea
+              id="videocomment_content"
+              v-model="videocomment_content"
+              class="view"
+            ></textarea>
+            <button @click="updateComment">수정완료</button>
+          </form>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn" @click="showForm">수정</button>
+            <button class="btn" @click="deleteComment">삭제</button>
+          </div>
+        </div>
       </div>
 
-      <button class="btn" @click="showForm">수정</button>
-      <button class="btn" @click="deleteComment">삭제</button>
-    </div>
+  </div>
 
-  </li>
 </template>
 
 <script>
@@ -66,4 +72,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.youtube-comment-card-item{
+  background-color: #b5ddf4ee;
+}
+</style>
