@@ -145,7 +145,8 @@ const routes = [
         path: "mypage",
         name: "MyPage",
         component: MyPage,
-      },{
+      },
+      {
         path: "usercheck",
         name: "UserCheck",
         component: UserCheck,
