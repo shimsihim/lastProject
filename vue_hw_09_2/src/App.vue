@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="margin-bottom: 100px;">
     <div class="container-xxl bg-white p-0">
     <header-nav />
    <!-- <div class="container-xxl bg-primary position-relative p-0" id="home">
