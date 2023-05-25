@@ -42,7 +42,9 @@
                     :id="parseInt(id_for_callMsg)"
                   ></challenge-chatting>
           </div>
-          <div v-else>메시지 이력을 확인하는 창</div>
+          <div v-else class="col-12 p-2 m-2 animated zoomIn" style="height:745px;">
+            <img src="../../assets/Creative Chatting App Logo2.png">
+          </div>
         </div>
       </div>
     </div>

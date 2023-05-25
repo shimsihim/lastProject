@@ -8,7 +8,7 @@
               <p class="text-white pb-3 animated slideInDown">같이 운동하시죠</p>
             </div>
             <div class="col-lg-6 text-center text-lg-start">
-              <img class="img-fluid rounded animated zoomIn" src="img/mainpage-text.jpg" alt="">
+              <img class="img-fluid rounded animated zoomIn" src="../assets/mainpage-text.jpg" alt="">
             </div>
           </div>
         </div>

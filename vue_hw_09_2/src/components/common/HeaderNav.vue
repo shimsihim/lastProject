@@ -13,7 +13,7 @@
         <a class="nav-item nav-link"><router-link to="/">홈</router-link></a>
         <a class="nav-item nav-link"><router-link to="/video/main">운동영상</router-link></a>
         <a class="nav-item nav-link"><router-link to="/board/list/1">게시판</router-link></a>
-        <a class="nav-item nav-link"><router-link to="/challenge/main/1">챌린지</router-link></a>
+        <a class="nav-item nav-link"><router-link to="/challenge/main/1">모임</router-link></a>
         <a class="nav-item nav-link"><router-link to="/record">이력관리</router-link></a>
       </div>
 

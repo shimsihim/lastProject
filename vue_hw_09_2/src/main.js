@@ -25,6 +25,7 @@ router.beforeEach((to, from, next) => {
     // 이전 페이지로의 이동을 막음
     if (from.path !== '/user/usercheck') {
       next(false);
+      this.$router.push("/");
       return;
     }
   }

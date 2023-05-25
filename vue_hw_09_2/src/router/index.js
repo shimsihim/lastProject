@@ -131,16 +131,6 @@ const routes = [
         name: "Regist",
         component: UserRegist,
       },
-      // {
-      //   path: "",
-      //   name: "List",
-      //   component: UserList,
-      // },
-      // {
-      //   path: "/:id",
-      //   name: "Detail",
-      //   component: UserDetail,
-      // },
       {
         path: "mypage",
         name: "MyPage",

@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="d-flex justify-content-center">
-                              <button class="btn btn-custom-regist" @click="login">로그인</button>
+                              <button class="btn btn-custom-regist text-light" @click="login">로그인</button>
                             </div>
 
                           </div>
