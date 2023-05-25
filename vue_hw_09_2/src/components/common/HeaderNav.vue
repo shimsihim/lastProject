@@ -19,7 +19,7 @@
 
       <b-dropdown v-if="getUser" no-caret > <!--NO CARET은 드롭다운 사용 시 +모양 표시를 제거  -->
         <template #button-content>
-          <b-icon-person-circle scale="1.4"> </b-icon-person-circle>
+          <b-icon-person-circle scale="1.4" class="m-0 p-0"> </b-icon-person-circle>
         </template>
         <b-dropdown-item>
           <router-link to="/user/usercheck">마이페이지</router-link>
@@ -80,6 +80,11 @@ header {
   background-color: #ffffff;
   color: #77CEEE;
   border-color: #ffffff;
+}
+
+.custom-dropdown{
+  width:100px;
+  height:50px;
 }
 
 .row.g-5 {
