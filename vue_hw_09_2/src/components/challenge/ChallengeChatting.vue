@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="card p-2" style="height: 780px">
+    <div class="card p-2" style="min-height:745px; max-height: 745px;">
       <div class="card-body" style="overflow-y: auto" ref="chatBody">
         <div class="d-flex justify-content-flex-end align-items-center"></div>
         <b-container>
