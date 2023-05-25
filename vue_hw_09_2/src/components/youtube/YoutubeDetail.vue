@@ -10,10 +10,6 @@
         <b-embed type="iframe" aspect="16by9" :src="`https://youtube.com/embed/${video.id.videoId}`" allowfullscreen></b-embed>
       </div>
     </b-card-body>
-    <!-- <div>링크: {{ video.video_url }}</div> 
-    <div>조회수 : {{ video.video_viewCnt }}</div>
-    <div>좋아요 수: {{ video.video_zzimCnt }}</div> -->
-
     <youtube-comment-regist :video="video"></youtube-comment-regist>
 
     <h2>댓글 목록</h2>

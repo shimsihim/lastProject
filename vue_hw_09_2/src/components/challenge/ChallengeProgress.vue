@@ -4,9 +4,9 @@
      -->
     <div class="container m-5">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-2">
           <div class="row" v-for="(challenge, index) in challenge_eventList" :key="index">
-              <div class="card p-2">
+              <div class="card p-2 mb-3">
               <div class="card-body">
                 <h5 class="card-title"> {{challenge.challenge_title}}</h5>
                 <p class="card-text">진행기간 : {{ challenge.challenge_startDate }} ~ {{ challenge.challenge_endDate }}</p>

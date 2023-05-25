@@ -555,7 +555,7 @@ export default new Vuex.Store({
     // ==================================
     searchYoutube: function ({ commit }, keyword) {
       const URL = `https://www.googleapis.com/youtube/v3/search`;
-      const API_KEY = "AIzaSyCP7xN-lqoG-sSS9dvmCOxybIK3W2aey3A";
+      const API_KEY = "AIzaSyBPjASjPEVn2nAnZmot1JBf6Tr8tdr-x-w";
       axios({
         url: URL,
         method: "GET",

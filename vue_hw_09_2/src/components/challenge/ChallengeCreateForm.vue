@@ -45,7 +45,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-              <button class="btn btn-custom-regist text-dark"  @click="registChallenge">등록</button>
+              <button class="btn btn-custom-regist text-dark" @click="registChallenge">등록</button>
               <button class="btn btn-custom text-dark"   @click="cancelModal">초기화</button>
             </div>
           </div>
@@ -90,8 +90,8 @@ export default {
           challenge_endDate : this.challenge_endDate,
           loginToken: this.loginToken,
       };
+      this.showRegistForm = !this.showRegistForm;
       this.$store.dispatch("registChallenge",new_challenge);
-      this.showRegistForm = false;
     },
     cancelModal() {
       this.challenge_sort = "";
@@ -101,7 +101,7 @@ export default {
       this.challenge_cnt = "";
       this.challenge_startDate = "";
       this.challenge_endDate = "";
-      this.showRegistForm = false;
+      this.showRegistForm = !this.showRegistForm;
     },
   },
   computed: {

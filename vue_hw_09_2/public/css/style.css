@@ -78,7 +78,7 @@ h6,
 .btn.btn-custom-regist {
     width : 100px;
     height : 40px;
-    background-color: rgba(91, 167, 229, 0.615);;
+    background-color: rgba(91, 167, 229, 0.615);
 }
 .btn.btn-custom-regist:hover {
     background-color:  rgba(84, 161, 224, 0.901);
@@ -102,6 +102,20 @@ h6,
     color: #c7dbf4;
     background-color: rgba(188, 211, 235, 0.606);
 }
+
+.btn.btn-custom-ex-regist{
+    margin-left: 0px;
+    margin-top:60px;
+    margin-bottom: 20px;
+    width : 150px;
+    height : 40px;
+    background-color: #2c3e5094;
+}
+.btn.btn-custom-ex-regist:hover {
+    background-color: #2c3e5094;
+}
+
+
 
 /*** Navbar ***/
 .navbar .dropdown-toggle::after {
