@@ -1,20 +1,72 @@
 <template>
-  <!--  this.id  가 들어있는 공간에 현재 선택된 챌린지가 들어가야 함  -->
   <div id="app">
     <div class="card p-2" style="height: 780px">
-      <div class="card-body" style="overflow-y: auto">
+      <div class="card-body" style="overflow-y: auto" ref="chatBody">
         <div class="d-flex justify-content-flex-end align-items-center"></div>
-        <div v-for="(pastChat, idx) in pastChat" :key="idx">
-          <h3>유저이름: {{ pastChat.userName }}</h3>
-          <h3>내용: {{ pastChat.content }}</h3>
-        </div>
-        <div v-for="(item, idx) in recvList" :key="idx">
-          <h3>유저이름: {{ item.userName }}</h3>
-          <h3>내용: {{ item.content }}</h3>
-        </div>
+        <b-container>
+          <div v-for="(pastChat, idx) in pastChat" :key="idx">
+            <b-row>
+
+              <div v-if="pastChat.userName === `${loginUserId}`" class="message-left align">
+                <b-col md="6">
+                  <b-card class="myCard card" style="background-color: #fafa5ab3; padding : 0px"> <!-- 내가 쓴 글은 노란색 -->
+                    <div class="message-content myContent">{{ pastChat.content }}</div>
+                  </b-card>
+                  <div class="message-username myName">{{ pastChat.userName }}</div>
+                </b-col>
+              </div>
+
+              <div v-else class="message-right align">
+                <b-col md="6" offset-md="6">
+                  <b-card class="yourCard card">
+                    <div class="message-content yourContent">{{ pastChat.content }}</div>
+                  </b-card>
+                  <div class="message-username yourName">{{ pastChat.userName }}</div>
+
+                </b-col>
+              </div>
+            </b-row>
+          </div>
+          <!-- 기존 작성된 문자들은 이 위에 -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <div v-for="(item, idx) in recvList" :key="idx">
+            <b-row>
+
+              <div v-if="item.userName === `${loginUserId}`" class="message-left align">
+                <b-col md="6">
+                  <b-card class="myCard card" style="background-color: #fafa5ab3;">
+                    <div class="myContent message-content">{{ item.content }}</div>
+                  </b-card>
+                  <div class="message-username myName">{{ item.userName }}</div>
+                </b-col>
+              </div>
+              <div v-else class="message-right align">
+                <b-col md="6" offset-md="6">
+                  <b-card class="yourCard card">
+                    <div class="message-content yourContent">{{ item.content }}</div>
+                  </b-card>
+                  <div class="message-username yourName">{{ item.userName }}</div>
+                </b-col>
+              </div>
+            </b-row>
+          </div>
+        </b-container>
       </div>
-      내용: <input v-model="message" type="text" @keyup.enter="send" />
-      <a class="btnJoin btn btn-primary" @click="send">보내기</a>
+      <b-container>
+        <b-row>
+          <b-col md="7">
+            <div style="margin-top: 9px;">
+            <b-form-input v-model="message" placeholder="채팅을 입력하세요" @keyup.enter="send"></b-form-input>
+          </div>
+            
+          </b-col>
+          <b-col md="3" offset-md="1">
+            <a class="btnJoin btn btn-primary text-nowrap btn-block" @click="send">보내기</a>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
@@ -42,6 +94,9 @@ export default {
       this.$store.dispatch("getChat", val);
       this.connect();
     },
+    recvList() {
+      this.scrollToBottom();
+    },
   },
   computed: {
     ...mapState(["loginUserId", "pastChat"]),
@@ -51,6 +106,12 @@ export default {
     this.connect();
   },
   methods: {
+    scrollToBottom() {
+      this.$nextTick(() => {
+        const chatBody = this.$refs.chatBody;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      });
+    },
     send() {
       if (this.loginUserId !== "" && this.message !== "") {
         console.log("챌린지 아이디는" + this.id);
@@ -98,3 +159,57 @@ export default {
   },
 };
 </script>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+
+.message-left {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.message-right {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.message-content {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 5px;
+  font-size: 25px;
+  font-family: 'Gaegu', cursive;
+}
+
+.message-username {
+  font-size: 16px;
+  color: #888;
+  margin-top: 4px;
+  margin-bottom: 7px;
+}
+
+.align {
+  display: flex;
+  flex-direction: column
+}
+
+.myName {
+  margin-left: 7px;
+}
+
+.yourName {
+  margin-right: 7px;
+}
+
+.card {
+  padding: 0.1rem;
+}
+
+.card-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+</style>
